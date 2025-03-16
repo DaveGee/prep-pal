@@ -1,0 +1,62 @@
+[
+    {
+        "productType": "Mineral water",
+        "description": "1.5 liter bottles, for drinking and cooking!",
+        "quantity": 75
+    },
+    {
+        "productType": "Other drinks",
+        "description": "Fruit and vegetable juices, 1 liter sweetened drinks",
+        "quantity": 8
+    },
+    {
+        "productType": "Tea",
+        "description": "approx. 100 g",
+        "quantity": 4
+    },
+    {
+        "productType": "Coffee",
+        "description": "1 kg",
+        "quantity": 1
+    },
+    {
+        "productType": "Milk or milk alternative",
+        "description": "1 liter",
+        "quantity": 8
+    },
+    {
+        "productType": "Vegetables",
+        "description": "Canned vegetables e.g. (corn, tomatoes, mushrooms, peas and carrots) (approx. 300 g)",
+        "quantity": 34
+    },
+    {
+        "productType": "Fruits",
+        "description": "Apple sauce, canned pineapple or dried fruit, e.g. (approx. 300 g)",
+        "quantity": 27
+    },
+    {
+        "productType": "Sauces",
+        "description": "Tomato sauce, pesto, ketchup, mayonnaise, mustard, e.g. (approx. 200 g)",
+        "quantity": 12
+    },
+    {
+        "productType": "Soups",
+        "description": "Bouillon cubes, ready-to-eat and freeze-dried soups with tomatoes, vermicelli, e.g. (approx. 200 g)",
+        "quantity": 12
+    },
+    {
+        "productType": "Cereals",
+        "description": "Pasta, rice, rice cakes, muesli, e.g., or gluten-free alternative (approx. 500 g)",
+        "quantity": 15
+    },
+    {
+        "productType": "Ready meals",
+        "description": "Ready-to-eat risotto, rösti, e.g. (approx. 250 g)",
+        "quantity": 19
+    },
+    {
+        "productType": "Legumes",
+        "description": "Chickpeas, beans in tomato sauce, canned or dried lentils, e.g. (approx. 400 g)",
+        "quantity": 23
+    }
+]
