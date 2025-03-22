@@ -1,36 +1,38 @@
 import React, { useState, useEffect } from 'react'
-import { Table } from '@mantine/core'
-import recommendations from '../data/recommendation.json'
+import { Container, Table, Title } from '@mantine/core'
+import recommendations from '../data/productCategories.json'
 
 function RecommendedScreen() {
   const [data, setData] = useState([])
 
   useEffect(() => {
-    setData(recommendations)
+    setData(recommendations.baseCategories)
   }, [])
 
   const rows = data.map((item) => (
-    <tr key={item.productType}>
-      <td>{item.productType}</td>
-      <td>{item.description}</td>
-      <td>{item.quantity}</td>
-    </tr>
+    <Table.Tr key={item.productType}>
+      <Table.Td>{item.productType}</Table.Td>
+      <Table.Td>{item.description}</Table.Td>
+      <Table.Td>{item.quantity}</Table.Td>
+      <Table.Td></Table.Td>
+    </Table.Tr>
   ))
 
   return (
-    <div>
-      <h1>Recommended</h1>
+    <Container fluid>
+      <Title order="1">Recommended product to have stored</Title>
       <Table striped>
-        <thead>
-          <tr>
-            <th>Product Type</th>
-            <th>Description</th>
-            <th>Quantity</th>
-          </tr>
-        </thead>
-        <tbody>{rows}</tbody>
+        <Table.Thead>
+          <Table.Tr>
+            <Table.Th>Product type</Table.Th>
+            <Table.Th>Description</Table.Th>
+            <Table.Th>Quantity</Table.Th>
+            <Table.Th>Override</Table.Th>
+          </Table.Tr>
+        </Table.Thead>
+        <Table.Tbody>{rows}</Table.Tbody>
       </Table>
-    </div>
+    </Container>
   )
 }
 

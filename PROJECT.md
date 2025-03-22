@@ -2,7 +2,7 @@
 
 ## Recommendation
 
-- [] Stock item type model
+- [] Stock item type model + recommended model
 - [] Recommended screen from static file
 - [] Calculator (simple, or based on confederation)
 
