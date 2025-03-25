@@ -1,9 +1,14 @@
 # Tasks
 
+## Misc
+
+- [] better error display management
+
 ## Recommendation
 
-- [] Stock item type model + recommended model
-- [] Recommended screen from static file
+- [x] Stock item type model + recommended model
+- [x] Recommended screen from static file
+- [x] Load and save to disk / localstorage
 - [] Calculator (simple, or based on confederation)
 
 ## Current stock
