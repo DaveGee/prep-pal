@@ -3,8 +3,12 @@ const path = require('path')
 const fs = require('fs')
 const isDev = require('electron-is-dev')
 
+// Get the app's user data directory (specific to your app)
+const userDataPath = app.getPath('userData')
+console.log('User Data Directory:', userDataPath)
+
 // Path to the product categories JSON file
-const productCategoriesPath = path.join(__dirname, '../src/data/productCategories.json')
+const productCategoriesPath = path.join(userDataPath, 'productCategories.json')
 
 // IPC handler for reading product categories
 ipcMain.handle('read-product-categories', async () => {

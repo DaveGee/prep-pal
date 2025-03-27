@@ -10,6 +10,7 @@
 - [x] Recommended screen from static file
 - [x] Load and save to disk / localstorage
 - [] Calculator (simple, or based on confederation)
+- [] Instead of creating the recommendation file by default, add a "wizard" type of module to create it (with the calculator)
 
 ## Current stock
 
