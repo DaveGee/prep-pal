@@ -1,7 +1,7 @@
 import React from 'react'
-import { AppShell, Burger, Group, NavLink, Title, Image } from '@mantine/core'
+import { AppShell, Burger, Group, Title, Image, NavLink } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
-import { BrowserRouter } from 'react-router-dom'
+import { HashRouter, useLocation } from 'react-router-dom'
 import AppRoutes from './Routes'
 import { ProductProvider } from './context/ProductContext'
 
@@ -21,13 +21,16 @@ const routes = [
   { label: 'Shopping list', icon: ShoppingCart, link: '/shopping-list', component: ShoppingListScreen }
 ]
 
-function App() {
-
-  const [opened, { toggle }] = useDisclosure();
+function AppContent() {
+  const [opened, { toggle, close }] = useDisclosure()
+  const location = useLocation()
+  
+  // Close the burger menu when the location changes
+  React.useEffect(() => {
+    close()
+  }, [location, close])
 
   return (
-    <ProductProvider>
-      <BrowserRouter>
         <AppShell
           header={{ height: 100 }}
           navbar={{ width: 200, breakpoint: 'sm', collapsed: { mobile: !opened } }}
@@ -47,11 +50,11 @@ function App() {
             {
               routes.map((route) => (
                 <NavLink
-                  href={route.link}
+                  href={"#" + route.link}
                   key={route.label}
                   label={route.label}
                   leftSection={<route.icon size={16} stroke={1.5} />}
-                  active={window.location.pathname === route.link}
+                  active={location.pathname === route.link}
                 />
               ))
             }
@@ -60,7 +63,15 @@ function App() {
             <AppRoutes routes={routes} />
           </AppShell.Main>
         </AppShell>
-      </BrowserRouter>
+  )
+}
+
+function App() {
+  return (
+    <ProductProvider>
+      <HashRouter>
+        <AppContent />
+      </HashRouter>
     </ProductProvider>
   )
 }
