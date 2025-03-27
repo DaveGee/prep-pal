@@ -1,5 +1,5 @@
 import React from 'react'
-import { AppShell, Burger, Group, NavLink, Title } from '@mantine/core'
+import { AppShell, Burger, Group, NavLink, Title, Image } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { BrowserRouter } from 'react-router-dom'
 import AppRoutes from './Routes'
@@ -12,12 +12,14 @@ import ShoppingListScreen from './screens/ShoppingListScreen'
 
 import { Gear, Star, List, ShoppingCart } from '@phosphor-icons/react'
 
+import logo from './assets/logo.png'
+
 const routes = [
   { label: 'Setup', icon: Gear, link: '/setup', component: SetupScreen },
   { label: 'Recommended', icon: Star, link: '/recommended', component: RecommendedScreen },
   { label: 'Current', icon: List, link: '/current', component: CurrentScreen },
   { label: 'Shopping list', icon: ShoppingCart, link: '/shopping-list', component: ShoppingListScreen }
-];
+]
 
 function App() {
 
@@ -33,9 +35,12 @@ function App() {
         >
           <AppShell.Header>
             <Group h="100%" px="md">
-              <Title order={2}>Manage my stock</Title>
-              
               <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
+              <Image fit="contain" w="60" src={logo} alt="Logo" style={{ verticalAlign: "middle", width: "60px" }} />
+              <Title order={2}>                
+                Manage my stock
+              </Title>
+
             </Group>
           </AppShell.Header>
           <AppShell.Navbar p="md">
