@@ -3,11 +3,33 @@ import { Container, NumberInput, Table, Title, Text, Button, Group, Loader, Aler
 import { useProductContext } from '../context/ProductContext'
 import { useDebouncedCallback } from '@mantine/hooks'
 import classes from './RecommendedScreen.module.css'
+import { notifications } from '@mantine/notifications'
+
+const setSaveStatus = ({ saving, success, message }) => {
+  if (saving) {
+    notifications.show({
+      id: 'save-status',
+      title: 'Saving',
+      message: message,
+      color: 'blue',
+      withCloseButton: false,
+      autoClose: false,
+    })
+  } else {
+    notifications.update({
+      id: 'save-status',
+      title: (success ? 'Saved' : 'Error') + ' at ' + new Date().toLocaleTimeString(),
+      message: message,
+      color: success ? 'green' : 'red',
+      withCloseButton: true,
+      autoClose: 5000,
+    })
+  }
+}
 
 function RecommendedScreen() {
   const { productData, loading, error, updateCategory } = useProductContext()
   const [data, setData] = useState([])
-  const [saveStatus, setSaveStatus] = useState({ saving: false, success: null, message: '' })
 
   // Update local state when productData changes
   useEffect(() => {
@@ -27,17 +49,13 @@ function RecommendedScreen() {
   const saveChanges = async (index, value, item) => {
     try {
       setSaveStatus({ saving: true, success: null, message: 'Saving changes...' })
+      
       const success = await updateCategory(item.id, { quantityOverride: value })
       setSaveStatus({ 
         saving: false, 
         success: success, 
         message: success ? 'Changes saved successfully' : 'Failed to save changes' 
       })
-      
-      // Clear status message after 3 seconds
-      setTimeout(() => {
-        setSaveStatus({ saving: false, success: null, message: '' })
-      }, 3000)
     } catch (err) {
       setSaveStatus({ saving: false, success: false, message: 'Error saving changes' })
     }
@@ -75,19 +93,8 @@ function RecommendedScreen() {
       
       {/* Show error message if there's an error */}
       {error && (
-        <Alert color="red" title="Error" mb="md">
+        <Alert color="red" title="Error saving file" mb="md">
           {error}
-        </Alert>
-      )}
-      
-      {/* Show save status message */}
-      {saveStatus.message && (
-        <Alert 
-          color={saveStatus.success ? "green" : saveStatus.success === false ? "red" : "blue"} 
-          title={saveStatus.success ? "Success" : saveStatus.success === false ? "Error" : "Saving"} 
-          mb="md"
-        >
-          {saveStatus.message}
         </Alert>
       )}
       
