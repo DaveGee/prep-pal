@@ -1,0 +1,28 @@
+{
+    "products": [
+        {
+            "typeId": 1,
+            "description": "Bouteilles d'Evian",
+            "quantity": 12,
+            "onlineStoreLink": "",
+            "checkedDate": "2025-03-15",
+            "nextCheck": "2025-06-15"
+        },
+        {
+            "typeId": 19,
+            "description": "Farmers",
+            "quantity": 10,
+            "onlineStoreLink": "",
+            "checkedDate": "2025-02-20",
+            "nextCheck": "2025-03-20"
+        },
+        {
+            "typeId": 1,
+            "description": "Bouteilles d'eau gazeuse",
+            "quantity": 6,
+            "onlineStoreLink": "",
+            "checkedDate": "2025-01-02",
+            "nextCheck": "2025-04-02"
+        }
+    ]
+}

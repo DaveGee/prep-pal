@@ -7,8 +7,9 @@ const isDev = require('electron-is-dev')
 const userDataPath = app.getPath('userData')
 console.log('User Data Directory:', userDataPath)
 
-// Path to the product categories JSON file
+// Paths to JSON files
 const productCategoriesPath = path.join(userDataPath, 'productCategories.json')
+const stockPath = path.join(userDataPath, 'stock.json')
 
 // IPC handler for reading product categories
 ipcMain.handle('read-product-categories', async () => {
@@ -29,6 +30,29 @@ ipcMain.handle('write-product-categories', async (event, data) => {
     return true
   } catch (error) {
     console.error('Error writing product categories:', error)
+    throw error
+  }
+})
+
+// IPC handler for reading stock
+ipcMain.handle('read-stock', async () => {
+  try {
+    const data = await fs.promises.readFile(stockPath, 'utf8')
+    return JSON.parse(data)
+  } catch (error) {
+    console.error('Error reading stock:', error)
+    throw error
+  }
+})
+
+// IPC handler for writing stock
+ipcMain.handle('write-stock', async (event, data) => {
+  try {
+    const jsonData = JSON.stringify(data, null, 4)
+    await fs.promises.writeFile(stockPath, jsonData, 'utf8')
+    return true
+  } catch (error) {
+    console.error('Error writing stock:', error)
     throw error
   }
 })

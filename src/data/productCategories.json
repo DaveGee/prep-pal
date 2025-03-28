@@ -6,7 +6,8 @@
             "productType": "Mineral water",
             "description": "1.5 liter bottles, for drinking and cooking!",
             "quantity": 75,
-            "preferences": []
+            "preferences": [],
+            "usualExpiryCheckDays": 90
         },
         {
             "id": 2,
@@ -132,7 +133,8 @@
             "productType": "Snacks",
             "description": "Cereal bars, sweet foods, chocolate",
             "quantity": 15,
-            "preferences": []
+            "preferences": [],
+            "usualExpiryCheckDay": 30
         },
         {
             "id": 20,
@@ -253,6 +255,5 @@
             "quantity": 1,
             "preferences": []
         }
-    ],
-    "customCategories": []
+    ]
 }

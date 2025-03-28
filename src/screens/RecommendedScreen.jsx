@@ -105,14 +105,12 @@ function RecommendedScreen() {
         </div>
       ) : (
         <>
-          {/* Last update info */}
-          {productData.lastUpdate && (
+          {productData.lastCategoriesUpdate && (
             <Text size="sm" color="dimmed" mb="md">
               Last updated: {productData.lastUpdate}
             </Text>
           )}
           
-          {/* Data table */}
           <Table striped highlightOnHover>
             <Table.Thead>
               <Table.Tr>

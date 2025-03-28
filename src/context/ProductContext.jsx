@@ -1,5 +1,10 @@
 import React, { createContext, useState, useEffect, useContext } from 'react'
-import { readProductCategories, writeProductCategories } from '../utils/fileUtils'
+import { 
+  readProductCategories, 
+  writeProductCategories,
+  readStock,
+  writeStock
+} from '../utils/fileUtils'
 
 // Create the context
 const ProductContext = createContext()
@@ -10,9 +15,9 @@ export const useProductContext = () => useContext(ProductContext)
 // Provider component
 export const ProductProvider = ({ children }) => {
   const [productData, setProductData] = useState({
-    lastUpdate: '',
+    lastCategoriesUpdate: '',
     baseCategories: [],
-    customCategories: []
+    stock: []
   })
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -27,7 +32,13 @@ export const ProductProvider = ({ children }) => {
     try {
       setLoading(true)
       const data = await readProductCategories()
-      setProductData(data)
+      const stock = await readStock()
+      
+      setProductData({
+        baseCategories: data.baseCategories,
+        lastCategoriesUpdate: data.lastUpdate,
+        stock
+      })
       setError(null)
     } catch (err) {
       console.error('Failed to load product data:', err)
@@ -38,7 +49,7 @@ export const ProductProvider = ({ children }) => {
   }
 
   // Function to save product data to disk
-  const saveProductData = async (newData) => {
+  const saveProductCategoriesData = async (newData) => {
     try {
       setLoading(true)
       // Update the lastUpdate field
@@ -48,7 +59,10 @@ export const ProductProvider = ({ children }) => {
       }
       
       await writeProductCategories(updatedData)
-      setProductData(updatedData)
+      setProductData({
+        ...updatedData
+        //stock
+      })
       setError(null)
       return true
     } catch (err) {
@@ -60,41 +74,49 @@ export const ProductProvider = ({ children }) => {
     }
   }
 
-  // Function to update a specific category
+  // const saveStockData = async (newData) => {
+  //   try {
+  //     setLoading(true)
+
+  //     await writeStockData(newData)
+
+  //     setProductData({
+  //       ...productData,
+  //       stock: newData
+  //     })
+  //     setError(null)
+
+  //     return true
+  //   } catch (err) {
+  //     console.error('Failed to save product data:', err)
+  //     setError('Failed to save product data')
+  //     return false
+  //   } finally {
+  //     setLoading(false)
+  //   }
+  // }
+
   const updateCategory = async (categoryId, updatedCategory) => {
     const newData = { ...productData }
     
-    // Find and update in baseCategories
     const baseIndex = newData.baseCategories.findIndex(cat => cat.id === categoryId)
     if (baseIndex !== -1) {
       newData.baseCategories[baseIndex] = {
         ...newData.baseCategories[baseIndex],
         ...updatedCategory
       }
-      return await saveProductData(newData)
+      return await saveProductCategoriesData(newData)
     }
-    
-    // Find and update in customCategories
-    const customIndex = newData.customCategories.findIndex(cat => cat.id === categoryId)
-    if (customIndex !== -1) {
-      newData.customCategories[customIndex] = {
-        ...newData.customCategories[customIndex],
-        ...updatedCategory
-      }
-      return await saveProductData(newData)
-    }
-    
+
     return false
   }
 
-  // Value object to be provided to consumers
   const value = {
     productData,
     loading,
     error,
     loadProductData,
-    saveProductData,
-    updateCategory
+    updateCategory,
   }
 
   return (
