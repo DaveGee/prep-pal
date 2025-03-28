@@ -7,7 +7,8 @@
             "description": "1.5 liter bottles, for drinking and cooking!",
             "quantity": 75,
             "preferences": [],
-            "usualExpiryCheckDays": 90
+            "usualExpiryCheckDays": 90,
+            "quantityOverride": ""
         },
         {
             "id": 2,
@@ -225,7 +226,8 @@
             "productType": "Battery or solar radio",
             "description": "",
             "quantity": 1,
-            "preferences": []
+            "preferences": [],
+            "usualExpiryCheckDays": 365
         },
         {
             "id": 33,
