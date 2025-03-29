@@ -1,13 +1,15 @@
-import React, { useMemo } from 'react'
-import { Container, Title, Table, Loader, Tooltip, useMantineTheme } from '@mantine/core'
+import React, { useMemo, useState } from 'react'
+import { Container, Title, Table, Loader, Tooltip, useMantineTheme, ActionIcon } from '@mantine/core'
 import { useProductContext } from '../context/ProductContext'
-import { Biohazard, CalendarCheck, Trash, Info, Warning } from '@phosphor-icons/react'
+import { Biohazard, CalendarCheck, Trash, Info, Warning, PlusCircle } from '@phosphor-icons/react'
 import { isTodayAfter } from '../utils/dateUtils'
-
+import AddStockItemModal from '../components/AddStockItemModal'
 
 function CurrentScreen() {
   const theme = useMantineTheme()
   const { productData, loading } = useProductContext()
+  const [modalOpen, setModalOpen] = useState(false)
+  const [selectedCategory, setSelectedCategory] = useState(null)
   
   // Group stock items by typeId
   const groupedStockItems = useMemo(() => {
@@ -37,6 +39,11 @@ function CurrentScreen() {
     return Object.values(grouped).sort((a, b) => a.category.id - b.category.id)
   }, [productData.stock, productData.baseCategories])
   
+  const handleAddItem = (category) => {
+    setSelectedCategory(category)
+    setModalOpen(true)
+  }
+  
   // Generate table rows
   const rows = useMemo(() => {
     const tableRows = []
@@ -53,6 +60,16 @@ function CurrentScreen() {
             </Tooltip>
           </Table.Td>
           <Table.Td>{group.category.quantityOverride || group.category.quantity}</Table.Td>
+          <Table.Td>
+            <Tooltip label={`Add item to ${group.category.productType}`}>
+              <ActionIcon 
+                variant="transparent"
+                onClick={() => handleAddItem(group.category)}
+              >
+                <PlusCircle size={24} />
+              </ActionIcon>
+            </Tooltip>
+          </Table.Td>
         </Table.Tr>
       )
       
@@ -85,13 +102,14 @@ function CurrentScreen() {
               )}
             </Table.Td>
             <Table.Td>{item.quantity}</Table.Td>
+            <Table.Td></Table.Td>
           </Table.Tr>
         )
       })
     })
     
     return tableRows
-  }, [groupedStockItems])
+  }, [groupedStockItems, theme.colors])
 
   return (
     <Container fluid>
@@ -106,13 +124,23 @@ function CurrentScreen() {
           <Table.Thead>
             <Table.Tr>
               <Table.Th>Product</Table.Th>
-              <Table.Th></Table.Th>
-              <Table.Th></Table.Th>
+              <Table.Th>Description</Table.Th>
+              <Table.Th>Status</Table.Th>
               <Table.Th>Quantity</Table.Th>
+              <Table.Th>Actions</Table.Th>
             </Table.Tr>
           </Table.Thead>
           <Table.Tbody>{rows}</Table.Tbody>
         </Table>
+      )}
+      
+      {selectedCategory && (
+        <AddStockItemModal
+          opened={modalOpen}
+          onClose={() => setModalOpen(false)}
+          categoryId={selectedCategory.id}
+          categoryName={selectedCategory.productType}
+        />
       )}
     </Container>
   )

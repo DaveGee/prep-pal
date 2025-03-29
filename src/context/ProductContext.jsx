@@ -60,8 +60,9 @@ export const ProductProvider = ({ children }) => {
       
       await writeProductCategories(updatedData)
       setProductData({
-        ...updatedData
-        //stock
+        ...productData,
+        baseCategories: updatedData.baseCategories,
+        lastCategoriesUpdate: updatedData.lastUpdate
       })
       setError(null)
       return true
@@ -74,27 +75,27 @@ export const ProductProvider = ({ children }) => {
     }
   }
 
-  // const saveStockData = async (newData) => {
-  //   try {
-  //     setLoading(true)
+  const saveStockData = async (newData) => {
+    try {
+      setLoading(true)
 
-  //     await writeStockData(newData)
+      await writeStock(newData)
 
-  //     setProductData({
-  //       ...productData,
-  //       stock: newData
-  //     })
-  //     setError(null)
+      setProductData({
+        ...productData,
+        stock: newData
+      })
+      setError(null)
 
-  //     return true
-  //   } catch (err) {
-  //     console.error('Failed to save product data:', err)
-  //     setError('Failed to save product data')
-  //     return false
-  //   } finally {
-  //     setLoading(false)
-  //   }
-  // }
+      return true
+    } catch (err) {
+      console.error('Failed to save stock data:', err)
+      setError('Failed to save stock data')
+      return false
+    } finally {
+      setLoading(false)
+    }
+  }
 
   const updateCategory = async (categoryId, updatedCategory) => {
     const newData = { ...productData }
@@ -117,6 +118,7 @@ export const ProductProvider = ({ children }) => {
     error,
     loadProductData,
     updateCategory,
+    saveStockData
   }
 
   return (
