@@ -11,29 +11,43 @@ function CurrentScreen() {
   const [modalOpen, setModalOpen] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState(null)
   
-  // Group stock items by typeId
+  // Group stock items by typeId and include categories with non-zero quantity
   const groupedStockItems = useMemo(() => {
-    if (!productData.stock || !productData.stock.products || !productData.baseCategories) {
+    if (!productData.baseCategories) {
       return []
     }
     
-    // Create a map of typeId to category
-    const categoryMap = {}
-    productData.baseCategories.forEach(category => {
-      categoryMap[category.id] = category
-    })
-    
-    // Group stock items by typeId
+    // Create a map of all categories with non-zero quantity or override
     const grouped = {}
-    productData.stock.products.forEach(item => {
-      if (!grouped[item.typeId]) {
-        grouped[item.typeId] = {
-          category: categoryMap[item.typeId] || { productType: 'Unknown Category', id: item.typeId },
+    
+    // First, add all categories with non-zero quantity or override
+    productData.baseCategories.forEach(category => {
+      const quantity = category.quantityOverride || category.quantity
+      if (quantity > 0) {
+        grouped[category.id] = {
+          category,
           items: []
         }
       }
-      grouped[item.typeId].items.push(item)
     })
+    
+    // Then, add stock items to their respective categories
+    if (productData.stock && productData.stock.products) {
+      productData.stock.products.forEach(item => {
+        // If the category doesn't exist yet (could be zero quantity), create it
+        if (!grouped[item.typeId]) {
+          const category = productData.baseCategories.find(cat => cat.id === item.typeId) || 
+                          { productType: 'Unknown Category', id: item.typeId }
+          grouped[item.typeId] = {
+            category,
+            items: []
+          }
+        }
+        
+        // Add the item to its category
+        grouped[item.typeId].items.push(item)
+      })
+    }
     
     // Convert to array and sort by category id
     return Object.values(grouped).sort((a, b) => a.category.id - b.category.id)
@@ -55,9 +69,11 @@ function CurrentScreen() {
           <Table.Td>{group.category.productType}</Table.Td>
           <Table.Td c="dimmed">{group.category.description}</Table.Td>
           <Table.Td>
-            <Tooltip label={"Average days to expire: " + group.category.usualExpiryCheckDays}>
-              <Info size={24} color={theme.colors.blue[9]} />
-            </Tooltip>
+            {group.category.usualExpiryCheckDays && (
+              <Tooltip label={"Average days to expire: " + (group.category.usualExpiryCheckDays || 'Not set')}>
+                <Info size={24} color={theme.colors.blue[9]} />
+              </Tooltip>
+            )}
           </Table.Td>
           <Table.Td>{group.category.quantityOverride || group.category.quantity}</Table.Td>
           <Table.Td>
@@ -85,21 +101,21 @@ function CurrentScreen() {
                 </a>
               )}
             </Table.Td>
-            <Table.Td>
-              {isTodayAfter(item.computedExpiry) && (
-                <Tooltip label={"Check expiration date! (" + item.computedExpiry + ")"}>
-                  <Biohazard size={24} color={theme.colors.orange[9]} />
-                </Tooltip>
-              )}
-              {isTodayAfter(item.computedNextCheck) ? (
-                <Tooltip label={"Check stock! (" + item.computedNextCheck + ")"}>
-                  <Warning size={24} color={theme.colors.yellow[7]} />
-                </Tooltip>
-              ) : (
-                <Tooltip label={"Next recommended check: " + item.computedNextCheck}>
-                  <CalendarCheck size={24} color={theme.colors.teal[9]} />
-                </Tooltip>
-              )}
+            <Table.Td style={{ whiteSpace: 'nowrap' }}>
+                {isTodayAfter(item.computedExpiry) && (
+                  <Tooltip label={"Check expiration date! (" + item.computedExpiry + ")"}>
+                    <Biohazard size={24} color={theme.colors.orange[9]} />
+                  </Tooltip>
+                )}
+                {isTodayAfter(item.computedNextCheck) ? (
+                  <Tooltip label={"Check stock! (" + item.computedNextCheck + ")"}>
+                    <Warning size={24} color={theme.colors.yellow[7]} />
+                  </Tooltip>
+                ) : (
+                  <Tooltip label={"Next recommended check: " + item.computedNextCheck}>
+                    <CalendarCheck size={24} color={theme.colors.teal[9]} />
+                  </Tooltip>
+                )}
             </Table.Td>
             <Table.Td>{item.quantity}</Table.Td>
             <Table.Td></Table.Td>

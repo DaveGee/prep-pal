@@ -54,7 +54,7 @@ export const ProductProvider = ({ children }) => {
       setLoading(true)
       // Update the lastUpdate field
       const updatedData = {
-        ...newData,
+        baseCategories: newData.baseCategories,
         lastUpdate: new Date().toISOString().split('T')[0] // Format: YYYY-MM-DD
       }
       
