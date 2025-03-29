@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react'
-import { Container, Title, Table, Loader, Tooltip, useMantineTheme, ActionIcon } from '@mantine/core'
+import { Container, Title, Table, Loader, Tooltip, useMantineTheme, ActionIcon, Group } from '@mantine/core'
 import { useProductContext } from '../context/ProductContext'
-import { Biohazard, CalendarCheck, Trash, Info, Warning, PlusCircle } from '@phosphor-icons/react'
+import { Biohazard, CalendarCheck, Trash, Info, Warning, PlusCircle, WarningDiamond } from '@phosphor-icons/react'
 import { isTodayAfter } from '../utils/dateUtils'
 import AddStockItemModal from '../components/AddStockItemModal'
 
@@ -49,6 +49,16 @@ function CurrentScreen() {
       })
     }
     
+    // Calculate total quantity for each category
+    Object.values(grouped).forEach(group => {
+      group.totalQuantity = group.items.reduce((sum, item) => sum + (item.quantity || 0), 0)
+      
+      const categoryQuantity = group.category.quantityOverride || group.category.quantity
+      group.stockPercentage = categoryQuantity > 0 
+        ? Math.round((group.totalQuantity / categoryQuantity) * 100) 
+        : 100
+    })
+    
     // Convert to array and sort by category id
     return Object.values(grouped).sort((a, b) => a.category.id - b.category.id)
   }, [productData.stock, productData.baseCategories])
@@ -63,19 +73,30 @@ function CurrentScreen() {
     const tableRows = []
     
     groupedStockItems.forEach(group => {
+      const categoryQuantity = group.category.quantityOverride || group.category.quantity
+      const hasLowStock = group.totalQuantity < categoryQuantity
+
       // Add category row
       tableRows.push(
-        <Table.Tr key={`category-${group.category.id}`} style={{ backgroundColor: theme.colors.gray[1] }} fw={500} tt="uppercase">
+        <Table.Tr key={`category-${group.category.id}`} style={{ backgroundColor: hasLowStock ? theme.colors.orange[0] : theme.colors.gray[1] }} fw={500} tt="uppercase">
           <Table.Td>{group.category.productType}</Table.Td>
           <Table.Td c="dimmed">{group.category.description}</Table.Td>
           <Table.Td>
-            {group.category.usualExpiryCheckDays && (
-              <Tooltip label={"Average days to expire: " + (group.category.usualExpiryCheckDays || 'Not set')}>
-                <Info size={24} color={theme.colors.blue[9]} />
-              </Tooltip>
-            )}
+            <Group gap="xs" wrap='nowrap'>
+              {group.category.usualExpiryCheckDays && (
+                <Tooltip label={"Average days to expire: " + (group.category.usualExpiryCheckDays || 'Not set')}>
+                  <Info size={24} color={theme.colors.blue[9]} />
+                </Tooltip>
+              )}
+              
+              {hasLowStock && (
+                <Tooltip label={`Stock level: ${group.stockPercentage}% (${group.totalQuantity}/${categoryQuantity})`}>
+                  <WarningDiamond size={24} color={theme.colors.red[9]} weight="fill" />
+                </Tooltip>
+              )}
+            </Group>
           </Table.Td>
-          <Table.Td>{group.category.quantityOverride || group.category.quantity}</Table.Td>
+          <Table.Td>{categoryQuantity}</Table.Td>
           <Table.Td>
             <Tooltip label={`Add item to ${group.category.productType}`}>
               <ActionIcon 
@@ -101,7 +122,8 @@ function CurrentScreen() {
                 </a>
               )}
             </Table.Td>
-            <Table.Td style={{ whiteSpace: 'nowrap' }}>
+            <Table.Td>
+              <Group gap="xs" wrap='nowrap'>
                 {isTodayAfter(item.computedExpiry) && (
                   <Tooltip label={"Check expiration date! (" + item.computedExpiry + ")"}>
                     <Biohazard size={24} color={theme.colors.orange[9]} />
@@ -116,6 +138,7 @@ function CurrentScreen() {
                     <CalendarCheck size={24} color={theme.colors.teal[9]} />
                   </Tooltip>
                 )}
+              </Group>
             </Table.Td>
             <Table.Td>{item.quantity}</Table.Td>
             <Table.Td></Table.Td>
