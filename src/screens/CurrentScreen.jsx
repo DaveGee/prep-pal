@@ -1,13 +1,14 @@
 import React, { useMemo, useState } from 'react'
-import { Container, Title, Table, Loader, Tooltip, useMantineTheme, ActionIcon, Group } from '@mantine/core'
+import { Container, Title, Table, Loader, Tooltip, useMantineTheme, ActionIcon, Group, Anchor, Text } from '@mantine/core'
 import { useProductContext } from '../context/ProductContext'
 import { Biohazard, CalendarCheck, Trash, Info, Warning, PlusCircle, WarningDiamond } from '@phosphor-icons/react'
 import { isTodayAfter } from '../utils/dateUtils'
 import AddStockItemModal from '../components/AddStockItemModal'
+import { setSaveStatus } from '../utils/notificationUtils'
 
 function CurrentScreen() {
   const theme = useMantineTheme()
-  const { productData, loading } = useProductContext()
+  const { productData, loading, saveStockData } = useProductContext()
   const [modalOpen, setModalOpen] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState(null)
   
@@ -68,6 +69,51 @@ function CurrentScreen() {
     setModalOpen(true)
   }
   
+  const handleDeleteItem = async (item, categoryName) => {
+    try {
+      setSaveStatus({ 
+        saving: true, 
+        success: null, 
+        message: `Deleting ${item.description} from ${categoryName}...`,
+        id: 'save-stock-item'
+      })
+      
+      // Filter out the item to delete
+      const updatedProducts = productData.stock.products.filter(
+        stockItem => !(
+          stockItem.typeId === item.typeId && 
+          stockItem.description === item.description &&
+          stockItem.checkedDate === item.checkedDate
+        )
+      )
+      
+      // Create updated stock object
+      const updatedStock = {
+        ...productData.stock,
+        products: updatedProducts
+      }
+      
+      // Save the updated stock
+      const success = await saveStockData(updatedStock)
+      
+      setSaveStatus({ 
+        saving: false, 
+        success: success, 
+        message: success 
+          ? `${item.description} was successfully deleted from ${categoryName}` 
+          : `Failed to delete ${item.description} from ${categoryName}`,
+        id: 'save-stock-item'
+      })
+    } catch (error) {
+      setSaveStatus({ 
+        saving: false, 
+        success: false, 
+        message: `Error deleting item: ${error.message}`,
+        id: 'save-stock-item'
+      })
+    }
+  }
+  
   // Generate table rows
   const rows = useMemo(() => {
     const tableRows = []
@@ -78,9 +124,11 @@ function CurrentScreen() {
 
       // Add category row
       tableRows.push(
-        <Table.Tr key={`category-${group.category.id}`} style={{ backgroundColor: hasLowStock ? theme.colors.orange[0] : theme.colors.gray[1] }} fw={500} tt="uppercase">
-          <Table.Td>{group.category.productType}</Table.Td>
-          <Table.Td c="dimmed">{group.category.description}</Table.Td>
+        <Table.Tr key={`category-${group.category.id}`} style={{ borderTop: `1px solid var(--mantine-color-blue-1)` }}>
+          <Table.Td colSpan={2}>
+            <Text fw={700} c="blue.4">{group.category.productType}</Text>
+            <Text c="dimmed" size='xs'>{group.category.description}</Text>
+          </Table.Td>
           <Table.Td>
             <Group gap="xs" wrap='nowrap'>
               {group.category.usualExpiryCheckDays && (
@@ -117,9 +165,9 @@ function CurrentScreen() {
             <Table.Td>{item.description}</Table.Td>
             <Table.Td>
               {item.onlineStoreLink && (
-                <a href={item.onlineStoreLink} target="_blank" rel="noopener noreferrer">
-                  Buy Online
-                </a>
+                <Anchor size="sm" href={item.onlineStoreLink} target="_blank" rel="noopener noreferrer">
+                  {item.onlineStoreLink}
+                </Anchor>
               )}
             </Table.Td>
             <Table.Td>
@@ -141,7 +189,17 @@ function CurrentScreen() {
               </Group>
             </Table.Td>
             <Table.Td>{item.quantity}</Table.Td>
-            <Table.Td></Table.Td>
+            <Table.Td>
+              <Tooltip label={`Delete ${item.description}`}>
+                <ActionIcon 
+                  variant="transparent"
+                  onClick={() => handleDeleteItem(item, group.category.productType)}
+                  color="gray"
+                >
+                  <Trash size={20} />
+                </ActionIcon>
+              </Tooltip>
+            </Table.Td>
           </Table.Tr>
         )
       })
@@ -159,7 +217,7 @@ function CurrentScreen() {
           <Loader size="xl" />
         </div>
       ) : (
-        <Table highlightOnHover>
+        <Table withRowBorders={false}>
           <Table.Thead>
             <Table.Tr>
               <Table.Th>Product</Table.Th>

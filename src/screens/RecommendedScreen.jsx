@@ -3,29 +3,7 @@ import { Container, NumberInput, Table, Title, Text, Button, Group, Loader, Aler
 import { useProductContext } from '../context/ProductContext'
 import { useDebouncedCallback } from '@mantine/hooks'
 import classes from './RecommendedScreen.module.css'
-import { notifications } from '@mantine/notifications'
-
-const setSaveStatus = ({ saving, success, message }) => {
-  if (saving) {
-    notifications.show({
-      id: 'save-status',
-      title: 'Saving',
-      message: message,
-      color: 'blue',
-      withCloseButton: false,
-      autoClose: false,
-    })
-  } else {
-    notifications.update({
-      id: 'save-status',
-      title: (success ? 'Saved' : 'Error') + ' at ' + new Date().toLocaleTimeString(),
-      message: message,
-      color: success ? 'green' : 'red',
-      withCloseButton: true,
-      autoClose: 5000,
-    })
-  }
-}
+import { setSaveStatus } from '../utils/notificationUtils'
 
 function RecommendedScreen() {
   const { productData, loading, error, updateCategory } = useProductContext()
@@ -48,16 +26,17 @@ function RecommendedScreen() {
   // Handle quantity override change with debounce for saving to disk
   const saveChanges = async (index, value, item) => {
     try {
-      setSaveStatus({ saving: true, success: null, message: 'Saving changes...' })
+      setSaveStatus({ saving: true, success: null, message: 'Saving changes...', id: 'save-status' })
       
       const success = await updateCategory(item.id, { quantityOverride: value })
       setSaveStatus({ 
         saving: false, 
         success: success, 
-        message: success ? 'Changes saved successfully' : 'Failed to save changes' 
+        message: success ? 'Changes saved successfully' : 'Failed to save changes',
+        id: 'save-status'
       })
     } catch (err) {
-      setSaveStatus({ saving: false, success: false, message: 'Error saving changes' })
+      setSaveStatus({ saving: false, success: false, message: 'Error saving changes', id: 'save-status' })
     }
   }
   

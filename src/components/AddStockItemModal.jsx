@@ -10,29 +10,7 @@ import {
 } from '@mantine/core'
 import { useProductContext } from '../context/ProductContext'
 import { getTodayFormatted, addDays } from '../utils/dateUtils'
-import { notifications } from '@mantine/notifications'
-
-const setSaveStatus = ({ saving, success, message }) => {
-  if (saving) {
-    notifications.show({
-      id: 'save-stock-item',
-      title: 'Saving',
-      message: message,
-      color: 'blue',
-      withCloseButton: false,
-      autoClose: false,
-    })
-  } else {
-    notifications.update({
-      id: 'save-stock-item',
-      title: (success ? 'Saved' : 'Error') + ' at ' + new Date().toLocaleTimeString(),
-      message: message,
-      color: success ? 'green' : 'red',
-      withCloseButton: true,
-      autoClose: 5000,
-    })
-  }
-}
+import { setSaveStatus } from '../utils/notificationUtils'
 
 function AddStockItemModal({ opened, onClose, categoryId, categoryName }) {
   const [description, setDescription] = useState('')
@@ -45,7 +23,8 @@ function AddStockItemModal({ opened, onClose, categoryId, categoryName }) {
       setSaveStatus({ 
         saving: true, 
         success: null, 
-        message: `Adding ${description} to ${categoryName}...` 
+        message: `Adding ${description} to ${categoryName}...`,
+        id: 'save-stock-item'
       })
       
       // Get the category to determine check days
@@ -78,7 +57,8 @@ function AddStockItemModal({ opened, onClose, categoryId, categoryName }) {
         success: success, 
         message: success 
           ? `${description} was successfully added to ${categoryName}` 
-          : `Failed to add ${description} to ${categoryName}`
+          : `Failed to add ${description} to ${categoryName}`,
+        id: 'save-stock-item'
       })
       
       if (success) {
@@ -92,7 +72,8 @@ function AddStockItemModal({ opened, onClose, categoryId, categoryName }) {
       setSaveStatus({ 
         saving: false, 
         success: false, 
-        message: `Error adding item: ${error.message}`
+        message: `Error adding item: ${error.message}`,
+        id: 'save-stock-item'
       })
     }
   }
