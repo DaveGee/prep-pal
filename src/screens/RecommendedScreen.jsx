@@ -59,6 +59,8 @@ function RecommendedScreen() {
       <Table.Td>{item.quantity}</Table.Td>
       <Table.Td className={classes.overrideColumn}>
         <NumberInput
+          variant="unstyled"
+          size="xs"
           value={item.quantityOverride || ''}
           onChange={(value) => handleQuantityChange(index, value, item)}
         />
@@ -90,7 +92,7 @@ function RecommendedScreen() {
             </Text>
           )}
           
-          <Table striped highlightOnHover>
+          <Table>
             <Table.Thead>
               <Table.Tr>
                 <Table.Th>Product type</Table.Th>
