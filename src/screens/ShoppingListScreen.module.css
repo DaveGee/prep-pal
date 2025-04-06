@@ -5,10 +5,61 @@
   table-layout: fixed; */
 }
 
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.printButton {
+  margin-top: 0.5rem;
+}
+
+/* Print styles */
+@media print {
+  .printButton {
+    display: none;
+  }
+  
+  .hiddenRow {
+    display: none;
+  }
+  
+  /* Hide any other elements that shouldn't be printed */
+  :global(header),
+  :global(nav),
+  :global(footer),
+  :global(.mantine-AppShell-navbar),
+  :global(.mantine-AppShell-aside),
+  :global(.mantine-AppShell-header) {
+    display: none !important;
+  }
+  
+  /* Ensure the table is fully visible */
+  :global(body),
+  :global(html),
+  :global(.mantine-AppShell-main) {
+    background-color: white !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  
+  /* Make the container take full width for printing */
+  :global(.mantine-Container-root) {
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+}
+
 .shoppingListTable svg {
   vertical-align: middle;
   width: 18px;
   margin-right: 5px;
+}
+
+.hiddenRow {
+  opacity: 0.5;
 }
 
 .shoppingListTable td, .shoppingListTable th {
