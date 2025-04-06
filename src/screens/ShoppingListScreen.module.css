@@ -1,0 +1,21 @@
+
+
+.shoppingListTable {
+  /* width: 100%;
+  table-layout: fixed; */
+}
+
+.shoppingListTable svg {
+  vertical-align: middle;
+  width: 18px;
+  margin-right: 5px;
+}
+
+.shoppingListTable td, .shoppingListTable th {
+  white-space: nowrap;
+}
+
+.shoppingListTable tr td:last-child {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}

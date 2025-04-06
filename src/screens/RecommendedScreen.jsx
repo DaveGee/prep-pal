@@ -88,7 +88,7 @@ function RecommendedScreen() {
         <>
           {productData.lastCategoriesUpdate && (
             <Text size="sm" color="dimmed" mb="md">
-              Last updated: {productData.lastUpdate}
+              Last updated: {productData.lastCategoriesUpdate}
             </Text>
           )}
           
