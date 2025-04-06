@@ -283,7 +283,7 @@ function CurrentScreen() {
 
   return (
     <Container fluid>
-      <Title order={1} mb="md">My current stock</Title>
+      <Title order={1} mb="md">Current stock</Title>
       
       {loading ? (
         <div style={{ display: 'flex', justifyContent: 'center', padding: '2rem' }}>

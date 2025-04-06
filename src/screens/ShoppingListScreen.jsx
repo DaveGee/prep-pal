@@ -83,7 +83,7 @@ function ShoppingListScreen() {
     <Container fluid>
       <div className={classes.headerContainer}>
         <div>
-          <Title order={1} mb="md">Shopping List</Title>
+          <Title order={1} mb="md">Shopping list</Title>
           <Text c="dimmed" mb="md">{
             new Date().toLocaleDateString('fr-CH')
           }</Text>

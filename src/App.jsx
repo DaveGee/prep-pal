@@ -16,8 +16,8 @@ import logo from './assets/logo.png'
 
 const routes = [
   { label: 'Setup', icon: Gear, link: '/setup', component: SetupScreen },
-  { label: 'Recommended', icon: Star, link: '/recommended', component: RecommendedScreen },
-  { label: 'Current', icon: List, link: '/current', component: CurrentScreen },
+  { label: 'Categories', icon: Star, link: '/recommended', component: RecommendedScreen },
+  { label: 'Manage stock', icon: List, link: '/current', component: CurrentScreen },
   { label: 'Shopping list', icon: ShoppingCart, link: '/shopping-list', component: ShoppingListScreen }
 ]
 

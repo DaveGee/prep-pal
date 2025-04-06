@@ -1,9 +1,5 @@
 # Tasks
 
-## Misc
-
-- [] better error display management
-
 ## Recommendation
 
 - [x] Stock item type model + recommended model
@@ -11,6 +7,7 @@
 - [x] Load and save to disk / localstorage
 - [] Calculator (simple, or based on confederation) -> generate default category list
 - [] Instead of creating the recommendation file by default, add a "wizard" type of module to create it (with the calculator)
+- [] Enable category edits (delete, add)
 
 ## Current stock
 
@@ -22,24 +19,35 @@
 - [] Differentiate products for consumptions (expiry date) and for usage (check date)
     - [] Check expiry date for consumption products that might be expired according to `lastCheck + avg expiry = expired potentially`
     - [] Check date for items without expiry (`lastCheck + avg expiry = recheck!`)
-
-
-### Phase 2
-
-- [] QR Code for mobile version?
-    - [] How will mobile sync back info? Online?
-
+- [] Check if it works well on tablet (interactions)
+- [] Follow link to buy online
 
 ## Shopping list
 
 - [x] Compute a shopping list from category
-- [] Make it printable
+- [x] Make it printable
 - [x] Add default units to each item
-- [] QR Code to get shopping list on Mobile 
-    - [] Very simple mobile app? https://capacitorjs.com/
 
 ## Setup screen
 
-- [] Configure notifications
-- [] Shopping setup. Eg links or specific products for specific categories
-- [] Category setup -> add override categories that can be used on Recommendation
+- [] Shopping setup. Eg default links for categories, to replenish stock buying online
+- [] Generate default files wizard (categories)
+- [] Export + import files (categories + stock)
+
+## Misc
+
+- [] better error display management
+- [] Add a profile ID (prepare for login)
+
+## Later 
+
+### Mobile app
+
+- [] Very simple mobile app? https://capacitorjs.com/
+- [] QR Code to get shopping list on Mobile 
+- [] QR code to be able to manage stock on mobile
+
+### Cloud only
+
+- [] Notifications (mobile? SMS? Email?) -> check stock and expiry
+- [] Social recommendation: what other are buying for default categories (require unique ID of categories)

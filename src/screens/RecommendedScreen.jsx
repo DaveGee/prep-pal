@@ -70,7 +70,7 @@ function RecommendedScreen() {
 
   return (
     <Container fluid>
-      <Title order={1} mb="md">Recommended product to have stored</Title>
+      <Title order={1} mb="md">Recommended products and quantities</Title>
       
       {/* Show error message if there's an error */}
       {error && (
