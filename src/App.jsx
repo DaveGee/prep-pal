@@ -12,7 +12,7 @@ import ShoppingListScreen from './screens/ShoppingListScreen'
 
 import { Gear, Star, List, ShoppingCart } from '@phosphor-icons/react'
 
-import logo from './assets/logo.png'
+import logo from './assets/PrepPal.png'
 
 const routes = [
   { label: 'Setup', icon: Gear, link: '/setup', component: SetupScreen },
