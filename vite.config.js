@@ -33,7 +33,7 @@ export default defineConfig({
   },
   base: './', // Set base path for the entire application
   build: {
-    outDir: 'dist',
+    outDir: 'dist/app',
     assetsDir: 'assets',
   },
 })
