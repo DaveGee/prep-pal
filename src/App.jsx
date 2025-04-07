@@ -40,8 +40,8 @@ function AppContent() {
             <Group h="100%" px="md">
               <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
               <Image fit="contain" w="60" src={logo} alt="Logo" style={{ verticalAlign: "middle", width: "60px" }} />
-              <Title order={2}>                
-                Manage my stock
+              <Title order={3}>
+                My stock
               </Title>
 
             </Group>

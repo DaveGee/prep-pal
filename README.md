@@ -1,6 +1,6 @@
-# MyStock App
+# Prep pal
 
-A desktop application built with Electron and React.
+A desktop and web application built with Electron and React.
 
 ## INSTALLATION
 
