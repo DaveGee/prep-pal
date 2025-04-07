@@ -16,7 +16,7 @@
   },
   "scripts": {
     "start": "vite",
-    "build": "vite build",
+    "build": "vite build && cp -r landing/* dist/",
     "serve": "vite preview",
     "electron:serve": "concurrently -k \"cross-env BROWSER=none npm start\" \"npm run electron:start\"",
     "electron:build": "npm run build && npx electron-builder -c.extraMetadata.main=build/electron/main.js",
