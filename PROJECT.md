@@ -39,7 +39,7 @@
 
 ## Misc
 
-- [] Multi-language (FR, DE, EN)
+- [x] Multi-language (FR, DE, EN)
 - [] better error display management
 - [] Add a profile ID (prepare for login)
 - [] Complete redesign
