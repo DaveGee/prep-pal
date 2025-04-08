@@ -14,11 +14,11 @@ import { setSaveStatus } from '../utils/notificationUtils'
 import { useLittera } from '@assembless/react-littera'
 
 const translations = {
-  addItemToStock: {
-    fr_CH: (categoryName) => `Ajouter un nouvel article à votre stock dans la catégorie ${categoryName}.`,
-    de_CH: (categoryName) => `Fügen Sie einen neuen Artikel zu Ihrem Bestand in der Kategorie ${categoryName} hinzu.`,
-    en_US: (categoryName) => `Add a new item to your stock in the ${categoryName} category.`
-  },
+  addItemToStock: (categoryName) => ({
+    fr_CH: `Ajouter un nouvel article à votre stock dans la catégorie ${categoryName}.`,
+    de_CH: `Fügen Sie einen neuen Artikel zu Ihrem Bestand in der Kategorie ${categoryName} hinzu.`,
+    en_US: `Add a new item to your stock in the ${categoryName} category.`
+  }),
   productName: {
     fr_CH: "Nom du produit",
     de_CH: "Produktname",
@@ -34,11 +34,11 @@ const translations = {
     de_CH: "Menge",
     en_US: "Quantity"
   },
-  addToCategory: {
-    fr_CH: (categoryName) => `Ajouter un article à ${categoryName}`,
-    de_CH: (categoryName) => `Artikel zu ${categoryName} hinzufügen`,
-    en_US: (categoryName) => `Add item to ${categoryName}`
-  },
+  addToCategory: (categoryName) => ({
+    fr_CH: `Ajouter un article à ${categoryName}`,
+    de_CH: `Artikel zu ${categoryName} hinzufügen`,
+    en_US: `Add item to ${categoryName}`
+  }),
   save: {
     fr_CH: "Enregistrer",
     de_CH: "Speichern",
@@ -49,26 +49,26 @@ const translations = {
     de_CH: "Abbrechen",
     en_US: "Cancel"
   },
-  errorAddingItem: {
-    fr_CH: (message) => `Erreur lors de l'ajout de l'article : ${message}`,
-    de_CH: (message) => `Fehler beim Hinzufügen des Artikels: ${message}`,
-    en_US: (message) => `Error adding item: ${message}`
-  },
-  itemAdded: {
-    fr_CH: (description, categoryName) => `Ajout de ${description} à ${categoryName}...`,
-    de_CH: (description, categoryName) => `Hinzufügen von ${description} zu ${categoryName}...`,
-    en_US: (description, categoryName) => `Adding ${description} to ${categoryName}...`
-  },
-  itemAddFailed: {
-    fr_CH: (description, categoryName) => `Échec de l'ajout de ${description} à ${categoryName}`,
-    de_CH: (description, categoryName) => `Fehler beim Hinzufügen von ${description} zu ${categoryName}`,
-    en_US: (description, categoryName) => `Failed to add ${description} to ${categoryName}`
-  },
-  itemAddedToCategory: {
-    fr_CH: (description, categoryName) => `${description} a été ajouté avec succès à ${categoryName}`,
-    de_CH: (description, categoryName) => `${description} wurde erfolgreich zu ${categoryName} hinzugefügt`,
-    en_US: (description, categoryName) => `${description} was successfully added to ${categoryName}` 
-  },
+  errorAddingItem: (message) => ({
+    fr_CH: `Erreur lors de l'ajout de l'article : ${message}`,
+    de_CH: `Fehler beim Hinzufügen des Artikels: ${message}`,
+    en_US: `Error adding item: ${message}`
+  }),
+  itemAdded: (description, categoryName) => ({
+    fr_CH: `Ajout de ${description} à ${categoryName}...`,
+    de_CH: `Hinzufügen von ${description} zu ${categoryName}...`,
+    en_US: `Adding ${description} to ${categoryName}...`
+  }),
+  itemAddFailed: (description, categoryName) => ({
+    fr_CH: `Échec de l'ajout de ${description} à ${categoryName}`,
+    de_CH: `Fehler beim Hinzufügen von ${description} zu ${categoryName}`,
+    en_US: `Failed to add ${description} to ${categoryName}`
+  }),
+  itemAddedToCategory: (description, categoryName) => ({
+    fr_CH: `${description} a été ajouté avec succès à ${categoryName}`,
+    de_CH: `${description} wurde erfolgreich zu ${categoryName} hinzugefügt`,
+    en_US: `${description} was successfully added to ${categoryName}` 
+  }),
   productNamePlaceholder: {
     fr_CH: "Entrez le nom du produit",
     de_CH: "Produktname eingeben",

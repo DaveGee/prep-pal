@@ -14,81 +14,81 @@ const translations = {
     de_CH: "Aktueller Bestand",
     en_US: "Current stock"
   },
-  updatingQuantity: {
-    fr_CH: (itemDescription) => `Mise à jour de la quantité pour ${itemDescription}...`,
-    de_CH: (itemDescription) => `Aktualisierung der Menge für ${itemDescription}...`,
-    en_US: (itemDescription) => `Updating quantity for ${itemDescription}...`,
-  },
-  quantityUpdated: {
-    fr_CH: (itemDescription) => `Quantité pour ${itemDescription} mise à jour avec succès`,
-    de_CH: (itemDescription) => `Menge für ${itemDescription} erfolgreich aktualisiert`,
-    en_US: (itemDescription) => `Quantity for ${itemDescription} updated successfully` ,
-  },
-  quantityNotUpdated: {
-    fr_CH: (itemDescription) => `Échec de la mise à jour de la quantité pour ${itemDescription}`,
-    de_CH: (itemDescription) => `Fehler beim Aktualisieren der Menge für ${itemDescription}`,
-    en_US: (itemDescription) => `Failed to update quantity for ${itemDescription}`,
-  },
-  errorUpdatingQuantity: {
-    fr_CH: (errorMessage) => `Erreur lors de la mise à jour de la quantité : ${errorMessage}`,
-    de_CH: (errorMessage) => `Fehler beim Aktualisieren der Menge: ${errorMessage}`,
-    en_US: (errorMessage) => `Error updating quantity: ${errorMessage}`,
-  },
+  updatingQuantity: (itemDescription) => ({
+    fr_CH: `Mise à jour de la quantité pour ${itemDescription}...`,
+    de_CH: `Aktualisierung der Menge für ${itemDescription}...`,
+    en_US: `Updating quantity for ${itemDescription}...`,
+  }),
+  quantityUpdated: (itemDescription) => ({
+    fr_CH: `Quantité pour ${itemDescription} mise à jour avec succès`,
+    de_CH: `Menge für ${itemDescription} erfolgreich aktualisiert`,
+    en_US: `Quantity for ${itemDescription} updated successfully`,
+  }),
+  quantityNotUpdated: (itemDescription) => ({
+    fr_CH: `Échec de la mise à jour de la quantité pour ${itemDescription}`,
+    de_CH: `Fehler beim Aktualisieren der Menge für ${itemDescription}`,
+    en_US: `Failed to update quantity for ${itemDescription}`,
+  }),
+  errorUpdatingQuantity: (errorMessage) => ({
+    fr_CH: `Erreur lors de la mise à jour de la quantité : ${errorMessage}`,
+    de_CH: `Fehler beim Aktualisieren der Menge: ${errorMessage}`,
+    en_US: `Error updating quantity: ${errorMessage}`,
+  }),
   unknownCategory: {
     fr_CH: "Catégorie inconnue",
     de_CH: "Unbekannte Kategorie",
     en_US: "Unknown category"
   },
-  deletingItem: {
-    fr_CH: (itemDescription, categoryName) => `Suppression de ${itemDescription} de ${categoryName}...`,
-    de_CH: (itemDescription, categoryName) => `Löschen von ${itemDescription} aus ${categoryName}...`,
-    en_US: (itemDescription, categoryName) => `Deleting ${itemDescription} from ${categoryName}...`,
-  },
-  itemDeleted: {
-    fr_CH: (itemDescription, categoryName) => `${itemDescription} supprimé de ${categoryName} avec succès`,
-    de_CH: (itemDescription, categoryName) => `${itemDescription} erfolgreich aus ${categoryName} gelöscht`,
-    en_US: (itemDescription, categoryName) => `${itemDescription} deleted from ${categoryName} successfully`,
-  },
-  itemNotDeleted: {
-    fr_CH: (itemDescription, categoryName) => `Échec de la suppression de ${itemDescription} de ${categoryName}`,
-    de_CH: (itemDescription, categoryName) => `Fehler beim Löschen von ${itemDescription} aus ${categoryName}`,
-    en_US: (itemDescription, categoryName) => `Failed to delete ${itemDescription} from ${categoryName}`,
-  },
-  errorDeleting: {
-    fr_CH: (errorMessage) => `Erreur lors de la suppression de l'élément : ${errorMessage}`,
-    de_CH: (errorMessage) => `Fehler beim Löschen des Elements: ${errorMessage}`,
-    en_US: (errorMessage) => `Error deleting item: ${errorMessage}`,
-  },
-  stockLevel: {
-    fr_CH: (stockPercentage, totalQuantity, categoryQuantity) => `Niveau de stock : ${stockPercentage}% (${totalQuantity}/${categoryQuantity})`,
-    de_CH: (stockPercentage, totalQuantity, categoryQuantity) => `Bestandsniveau: ${stockPercentage}% (${totalQuantity}/${categoryQuantity})`,
-    en_US: (stockPercentage, totalQuantity, categoryQuantity) => `Stock level: ${stockPercentage}% (${totalQuantity}/${categoryQuantity})`,
-  },
-  averageExpiration: {
-    fr_CH: (days) => "Moyenne des jours avant expiration : " + (days || 'Non défini'),
-    de_CH: (days) => "Durchschnittliche Tage bis zum Ablauf: " + (days || 'Nicht festgelegt'),
-    en_US: (days) => "Average days to expire: " + (days || 'Not set'),
-  },
-  addItem: {
-    fr_CH: (productType) => `Ajouter un article à ${productType}`,
-    de_CH: (productType) => `Artikel zu ${productType} hinzufügen`,
-    en_US: (productType) => `Add item to ${productType}`
-  },
-  checkExpiration: {
-    fr_CH: (computedExpiry) => `Vérifier l'expiration (${computedExpiry})`,
-    de_CH: (computedExpiry) => `Ablaufdatum überprüfen (${computedExpiry})`,
-    en_US: (computedExpiry) => `Check expiration (${computedExpiry})`,
-  },
-  checkStock: {
-    fr_CH: (computedNextCheck) => `Vérifier le stock (${computedNextCheck})`,
-    de_CH: (computedNextCheck) => `Bestand überprüfen (${computedNextCheck})`,
-    en_US: (computedNextCheck) => `Check stock (${computedNextCheck})`
-  },
-  nextCheck: {
-    fr_CH: (computedNextCheck) => `Prochain contrôle recommandé (${computedNextCheck})`,
-    de_CH: (computedNextCheck) => `Nächste empfohlene Überprüfung (${computedNextCheck})`,
-    en_US: (computedNextCheck) => `Next recommened check (${computedNextCheck})`
-  },
+  deletingItem: (itemDescription, categoryName) => ({
+    fr_CH: `Suppression de ${itemDescription} de ${categoryName}...`,
+    de_CH: `Löschen von ${itemDescription} aus ${categoryName}...`,
+    en_US: `Deleting ${itemDescription} from ${categoryName}...`,
+  }),
+  itemDeleted: (itemDescription, categoryName) => ({
+    fr_CH: `${itemDescription} supprimé de ${categoryName} avec succès`,
+    de_CH: `${itemDescription} erfolgreich aus ${categoryName} gelöscht`,
+    en_US: `${itemDescription} deleted from ${categoryName} successfully`,
+  }),
+  itemNotDeleted: (itemDescription, categoryName) => ({
+    fr_CH: `Échec de la suppression de ${itemDescription} de ${categoryName}`,
+    de_CH: `Fehler beim Löschen von ${itemDescription} aus ${categoryName}`,
+    en_US: `Failed to delete ${itemDescription} from ${categoryName}`,
+  }),
+  errorDeleting: (errorMessage) => ({
+    fr_CH: `Erreur lors de la suppression de l'élément : ${errorMessage}`,
+    de_CH: `Fehler beim Löschen des Elements: ${errorMessage}`,
+    en_US: `Error deleting item: ${errorMessage}`,
+  }),
+  stockLevel: (stockPercentage, totalQuantity, categoryQuantity) => ({
+    fr_CH: `Niveau de stock : ${stockPercentage}% (${totalQuantity}/${categoryQuantity})`,
+    de_CH: `Bestandsniveau: ${stockPercentage}% (${totalQuantity}/${categoryQuantity})`,
+    en_US: `Stock level: ${stockPercentage}% (${totalQuantity}/${categoryQuantity})`,
+  }),
+  averageExpiration: (days) => ({
+    fr_CH: "Moyenne des jours avant expiration : " + (days || 'Non défini'),
+    de_CH: "Durchschnittliche Tage bis zum Ablauf: " + (days || 'Nicht festgelegt'),
+    en_US: "Average days to expire: " + (days || 'Not set'),
+  }),
+  addItem: (productType) => ({
+    fr_CH: `Ajouter un article à ${productType}`,
+    de_CH: `Artikel zu ${productType} hinzufügen`,
+    en_US: `Add item to ${productType}`
+  }),
+  checkExpiration: (computedExpiry) => ({
+    fr_CH: `Vérifier l'expiration (${computedExpiry})`,
+    de_CH: `Ablaufdatum überprüfen (${computedExpiry})`,
+    en_US: `Check expiration (${computedExpiry})`,
+  }),
+  checkStock: (computedNextCheck) => ({
+    fr_CH: `Vérifier le stock (${computedNextCheck})`,
+    de_CH: `Bestand überprüfen (${computedNextCheck})`,
+    en_US: `Check stock (${computedNextCheck})`
+  }),
+  nextCheck: (computedNextCheck) => ({
+    fr_CH: `Prochain contrôle recommandé (${computedNextCheck})`,
+    de_CH: `Nächste empfohlene Überprüfung (${computedNextCheck})`,
+    en_US: `Next recommened check (${computedNextCheck})`
+  }),
   product: {
     fr_CH: "Produit",
     de_CH: "Produkt",
@@ -99,11 +99,11 @@ const translations = {
     de_CH: "Menge",
     en_US: "Quantity"
   },
-  delete: {
-    fr_CH: (itemDescription) => `Supprimer ${itemDescription}`,
-    de_CH: (itemDescription) => `Löschen ${itemDescription}`,
-    en_US: (itemDescription) => `Delete ${itemDescription}`,
-  },
+  delete: (itemDescription) => ({
+    fr_CH: `Supprimer ${itemDescription}`,
+    de_CH: `Löschen ${itemDescription}`,
+    en_US: `Delete ${itemDescription}`,
+  }),
 }
 
 const LOW_STOCK_THRESHOLD = 65

@@ -14,16 +14,16 @@ const translations = {
     de_CH: "Dateien",
     en_US: "Databases"
   },
-  categoriesFile: {
-    fr_CH: (date, count) => `Fichier des catégories (${date}, ${count} catégories)`,
-    de_CH: (date, count) => `Kategorien-Datei (${date}, ${count} Kategorien)`,
-    en_US: (date, count) => `Categories file (${date}, ${count} categories)`
-  },
-  productsFile: {
-    fr_CH: (date, count) => `Fichier des produits (${date}, ${count} produits)`,
-    de_CH: (date, count) => `Produktdatei (${date}, ${count} Produkte)`,
-    en_US: (date, count) => `Products file (${date}, ${count} products)`
-  },
+  categoriesFile: (date, count) => ({
+    fr_CH: `Fichier des catégories (${date}, ${count} catégories)`,
+    de_CH: `Kategorien-Datei (${date}, ${count} Kategorien)`,
+    en_US: `Categories file (${date}, ${count} categories)`
+  }),
+  productsFile: (date, count) => ({
+    fr_CH: `Fichier des produits (${date}, ${count} produits)`,
+    de_CH: `Produktdatei (${date}, ${count} Produkte)`,
+    en_US: `Products file (${date}, ${count} products)`
+  }),
   reset: {
     fr_CH: "Supprimer les bases de données",
     de_CH: "Datenbanken löschen",
