@@ -5,8 +5,8 @@
 - [x] Stock item type model + recommended model
 - [x] Recommended screen from static file
 - [x] Load and save to disk / localstorage
-- [] Calculator (simple, or based on confederation) -> generate default category list
-- [] Instead of creating the recommendation file by default, add a "wizard" type of module to create it (with the calculator)
+- [] Empty screen with wizard to setup if no file
+    - [] Instead of creating the recommendation file by default, add a "wizard" type of module to create it (with the calculator)
 - [] Enable category edits (delete, add)
 
 ## Current stock
@@ -32,6 +32,9 @@
 
 - [] Shopping setup. Eg default links for categories, to replenish stock buying online
 - [] Generate default files wizard (categories)
+    - [] Calculator (simple, or based on confederation) -> generate default category list
+    - [] first version is in the language chosen "now" -> categories and product names are not translated afterwards.
+- [] Add possibility to delete the file to restart from scratch
 - [] Export + import files (categories + stock)
 
 ## Misc
