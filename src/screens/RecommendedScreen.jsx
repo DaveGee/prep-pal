@@ -56,11 +56,16 @@ const translations = {
     fr_CH: "Ajuster",
     de_CH: "Überschreiben",
     en_US: "Override"
+  },
+  noCategoriesMessage: {
+    fr_CH: "Veuillez créer une base de données de catégories dans l'écran de configuration pour utiliser cette fonctionnalité.",
+    de_CH: "Bitte erstellen Sie eine Datenbank mit Kategorien im Setup-Bildschirm, um diese Funktion zu nutzen.",
+    en_US: "Create a database of categories in Setup screen to use this feature."
   }
 }
 
 function RecommendedScreen() {
-  const { productData, loading, error, updateCategory } = useProductContext()
+  const { filesExist, productData, loading, error, updateCategory } = useProductContext()
   const [data, setData] = useState([])
 
   const translated = useLittera(translations)
@@ -134,32 +139,39 @@ function RecommendedScreen() {
           {error}
         </Alert>
       )}
-      
-      {/* Show loading indicator */}
-      {loading ? (
-        <div style={{ display: 'flex', justifyContent: 'center', padding: '2rem' }}>
-          <Loader size="xl" />
-        </div>
-      ) : (
+
+      {filesExist.categories ? (
         <>
-          {productData.lastCategoriesUpdate && (
-            <Text size="sm" color="dimmed" mb="md">
-              {translated.lastUpdated} {productData.lastCategoriesUpdate}
-            </Text>
+          {loading ? (
+            <div style={{ display: 'flex', justifyContent: 'center', padding: '2rem' }}>
+              <Loader size="xl" />
+            </div>
+          ) : (
+            <>
+              {productData.lastCategoriesUpdate && (
+                <Text size="sm" color="dimmed" mb="md">
+                  {translated.lastUpdated} {productData.lastCategoriesUpdate}
+                </Text>
+              )}
+              
+              <Table>
+                <Table.Thead>
+                  <Table.Tr>
+                    <Table.Th>{translated.productType}</Table.Th>
+                    <Table.Th>{translated.description}</Table.Th>
+                    <Table.Th>{translated.quantity}</Table.Th>
+                    <Table.Th className={classes.overrideColumn}>{translated.override}</Table.Th>
+                  </Table.Tr>
+                </Table.Thead>
+                <Table.Tbody>{rows}</Table.Tbody>
+              </Table>
+            </>
           )}
-          
-          <Table>
-            <Table.Thead>
-              <Table.Tr>
-                <Table.Th>{translated.productType}</Table.Th>
-                <Table.Th>{translated.description}</Table.Th>
-                <Table.Th>{translated.quantity}</Table.Th>
-                <Table.Th className={classes.overrideColumn}>{translated.override}</Table.Th>
-              </Table.Tr>
-            </Table.Thead>
-            <Table.Tbody>{rows}</Table.Tbody>
-          </Table>
         </>
+      ) : (
+        <Text size="sm" c="red" mb="md">
+          {translated.noCategoriesMessage}
+        </Text>
       )}
     </Container>
   )

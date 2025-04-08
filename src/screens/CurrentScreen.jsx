@@ -104,6 +104,11 @@ const translations = {
     de_CH: `Löschen ${itemDescription}`,
     en_US: `Delete ${itemDescription}`,
   }),
+  noProductsMessage: {
+    fr_CH: "Veuillez créer une base de données de stock dans la configuration pour utiliser cette fonctionnalité.",
+    de_CH: "Bitte erstellen Sie eine Bestandsdatenbank in der Konfiguration, um diese Funktion zu nutzen.",
+    en_US: "Create a stock database in Setup to use this feature."
+  },
 }
 
 const LOW_STOCK_THRESHOLD = 65
@@ -111,7 +116,7 @@ const CRITICAL_STOCK_THRESHOLD_ = 35
 
 function CurrentScreen() {
   const theme = useMantineTheme()
-  const { productData, loading, saveStockData } = useProductContext()
+  const { filesExist, productData, loading, saveStockData } = useProductContext()
   const [modalOpen, setModalOpen] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState(null)
 
@@ -386,32 +391,40 @@ function CurrentScreen() {
     <Container fluid>
       <Title order={1} mb="md">{translated.title}</Title>
       
-      {loading ? (
-        <div style={{ display: 'flex', justifyContent: 'center', padding: '2rem' }}>
-          <Loader size="xl" />
-        </div>
+      {filesExist.categories ? (
+        <>
+          {loading ? (
+            <div style={{ display: 'flex', justifyContent: 'center', padding: '2rem' }}>
+              <Loader size="xl" />
+            </div>
+          ) : (
+            <Table withRowBorders={false}>
+              <Table.Thead>
+                <Table.Tr>
+                  <Table.Th></Table.Th>
+                  <Table.Th>{translated.product}</Table.Th>
+                  <Table.Th></Table.Th>
+                  <Table.Th>{translated.quantity}</Table.Th>
+                  <Table.Th></Table.Th>
+                </Table.Tr>
+              </Table.Thead>
+              <Table.Tbody>{rows}</Table.Tbody>
+            </Table>
+          )}
+          
+          {selectedCategory && (
+            <AddStockItemModal
+              opened={modalOpen}
+              onClose={() => setModalOpen(false)}
+              categoryId={selectedCategory.id}
+              categoryName={selectedCategory.productType}
+            />
+          )}
+        </>
       ) : (
-        <Table withRowBorders={false}>
-          <Table.Thead>
-            <Table.Tr>
-              <Table.Th></Table.Th>
-              <Table.Th>{translated.product}</Table.Th>
-              <Table.Th></Table.Th>
-              <Table.Th>{translated.quantity}</Table.Th>
-              <Table.Th></Table.Th>
-            </Table.Tr>
-          </Table.Thead>
-          <Table.Tbody>{rows}</Table.Tbody>
-        </Table>
-      )}
-      
-      {selectedCategory && (
-        <AddStockItemModal
-          opened={modalOpen}
-          onClose={() => setModalOpen(false)}
-          categoryId={selectedCategory.id}
-          categoryName={selectedCategory.productType}
-        />
+        <Text size="sm" c="red" mb="md">
+          {translated.noProductsMessage}
+        </Text>
       )}
     </Container>
   )
