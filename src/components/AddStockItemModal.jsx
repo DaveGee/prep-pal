@@ -11,19 +11,90 @@ import {
 import { useProductContext } from '../context/ProductContext'
 import { getTodayFormatted, addDays } from '../utils/dateUtils'
 import { setSaveStatus } from '../utils/notificationUtils'
+import { useLittera } from '@assembless/react-littera'
+
+const translations = {
+  addItemToStock: {
+    fr_CH: (categoryName) => `Ajouter un nouvel article à votre stock dans la catégorie ${categoryName}.`,
+    de_CH: (categoryName) => `Fügen Sie einen neuen Artikel zu Ihrem Bestand in der Kategorie ${categoryName} hinzu.`,
+    en_US: (categoryName) => `Add a new item to your stock in the ${categoryName} category.`
+  },
+  productName: {
+    fr_CH: "Nom du produit",
+    de_CH: "Produktname",
+    en_US: "Product name"
+  },
+  onlineStoreLink: {
+    fr_CH: "Lien vers la boutique en ligne (facultatif)",
+    de_CH: "Link zum Online-Shop (optional)",
+    en_US: "Online store link (optional)"
+  },
+  quantity: {
+    fr_CH: "Quantité",
+    de_CH: "Menge",
+    en_US: "Quantity"
+  },
+  addToCategory: {
+    fr_CH: (categoryName) => `Ajouter un article à ${categoryName}`,
+    de_CH: (categoryName) => `Artikel zu ${categoryName} hinzufügen`,
+    en_US: (categoryName) => `Add item to ${categoryName}`
+  },
+  save: {
+    fr_CH: "Enregistrer",
+    de_CH: "Speichern",
+    en_US: "Save"
+  },
+  cancel: {
+    fr_CH: "Annuler",
+    de_CH: "Abbrechen",
+    en_US: "Cancel"
+  },
+  errorAddingItem: {
+    fr_CH: (message) => `Erreur lors de l'ajout de l'article : ${message}`,
+    de_CH: (message) => `Fehler beim Hinzufügen des Artikels: ${message}`,
+    en_US: (message) => `Error adding item: ${message}`
+  },
+  itemAdded: {
+    fr_CH: (description, categoryName) => `Ajout de ${description} à ${categoryName}...`,
+    de_CH: (description, categoryName) => `Hinzufügen von ${description} zu ${categoryName}...`,
+    en_US: (description, categoryName) => `Adding ${description} to ${categoryName}...`
+  },
+  itemAddFailed: {
+    fr_CH: (description, categoryName) => `Échec de l'ajout de ${description} à ${categoryName}`,
+    de_CH: (description, categoryName) => `Fehler beim Hinzufügen von ${description} zu ${categoryName}`,
+    en_US: (description, categoryName) => `Failed to add ${description} to ${categoryName}`
+  },
+  itemAddedToCategory: {
+    fr_CH: (description, categoryName) => `${description} a été ajouté avec succès à ${categoryName}`,
+    de_CH: (description, categoryName) => `${description} wurde erfolgreich zu ${categoryName} hinzugefügt`,
+    en_US: (description, categoryName) => `${description} was successfully added to ${categoryName}` 
+  },
+  productNamePlaceholder: {
+    fr_CH: "Entrez le nom du produit",
+    de_CH: "Produktname eingeben",
+    en_US: "Enter product name"
+  },
+  quantityPlaceholder: {
+    fr_CH: "Entrez la quantité",
+    de_CH: "Menge eingeben",
+    en_US: "Enter quantity"
+  }
+}
 
 function AddStockItemModal({ opened, onClose, categoryId, categoryName }) {
   const [description, setDescription] = useState('')
   const [onlineStoreLink, setOnlineStoreLink] = useState('')
   const [quantity, setQuantity] = useState(1)
   const { productData, saveStockData } = useProductContext()
+  
+  const translated = useLittera(translations)
 
   const handleSubmit = async () => {
     try {
       setSaveStatus({ 
         saving: true, 
         success: null, 
-        message: `Adding ${description} to ${categoryName}...`,
+        message: translated.itemAdded(description, categoryName),
         id: 'save-stock-item'
       })
       
@@ -56,8 +127,8 @@ function AddStockItemModal({ opened, onClose, categoryId, categoryName }) {
         saving: false, 
         success: success, 
         message: success 
-          ? `${description} was successfully added to ${categoryName}` 
-          : `Failed to add ${description} to ${categoryName}`,
+          ? translated.itemAddedToCategory(description, categoryName)
+          : translated.itemAddFailed(description, categoryName),
         id: 'save-stock-item'
       })
       
@@ -72,7 +143,7 @@ function AddStockItemModal({ opened, onClose, categoryId, categoryName }) {
       setSaveStatus({ 
         saving: false, 
         success: false, 
-        message: `Error adding item: ${error.message}`,
+        message: translated.errorAddingItem(error.message),
         id: 'save-stock-item'
       })
     }
@@ -82,32 +153,32 @@ function AddStockItemModal({ opened, onClose, categoryId, categoryName }) {
     <Modal 
       opened={opened} 
       onClose={onClose} 
-      title={`Add item to ${categoryName}`}
+      title={translated.addToCategory(categoryName)}
       size="md"
     >
       <Stack spacing="md">
         <Text size="sm" c="dimmed">
-          Add a new item to your stock in the {categoryName} category.
+          {translated.addItemToStock(categoryName)}
         </Text>
         
         <TextInput
-          label="Product Name"
-          placeholder="Enter product name"
+          label={translated.productName}
+          placeholder={translated.productNamePlaceholder}
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           required
         />
         
         <TextInput
-          label="Online Store Link (optional)"
+          label={translated.onlineStoreLink}
           placeholder="https://..."
           value={onlineStoreLink}
           onChange={(e) => setOnlineStoreLink(e.target.value)}
         />
         
         <NumberInput
-          label="Quantity"
-          placeholder="Enter quantity"
+          label={translated.quantity}
+          placeholder={translated.quantityPlaceholder}
           value={quantity}
           onChange={setQuantity}
           min={1}
@@ -115,9 +186,9 @@ function AddStockItemModal({ opened, onClose, categoryId, categoryName }) {
         />
         
         <Group position="right" mt="md">
-          <Button variant="outline" onClick={onClose}>Cancel</Button>
+          <Button variant="outline" onClick={onClose}>{translated.cancel}</Button>
           <Button onClick={handleSubmit} disabled={!description || quantity < 1}>
-            Save
+            {translated.save}
           </Button>
         </Group>
       </Stack>

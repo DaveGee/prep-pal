@@ -6,6 +6,105 @@ import { Biohazard, CalendarCheck, Trash, Info, Warning, PlusCircle, WarningDiam
 import { isTodayAfter } from '../utils/dateUtils'
 import AddStockItemModal from '../components/AddStockItemModal'
 import { setSaveStatus } from '../utils/notificationUtils'
+import { useLittera } from '@assembless/react-littera'
+
+const translations = {
+  title: {
+    fr_CH: "Stock actuel",
+    de_CH: "Aktueller Bestand",
+    en_US: "Current stock"
+  },
+  updatingQuantity: {
+    fr_CH: (itemDescription) => `Mise à jour de la quantité pour ${itemDescription}...`,
+    de_CH: (itemDescription) => `Aktualisierung der Menge für ${itemDescription}...`,
+    en_US: (itemDescription) => `Updating quantity for ${itemDescription}...`,
+  },
+  quantityUpdated: {
+    fr_CH: (itemDescription) => `Quantité pour ${itemDescription} mise à jour avec succès`,
+    de_CH: (itemDescription) => `Menge für ${itemDescription} erfolgreich aktualisiert`,
+    en_US: (itemDescription) => `Quantity for ${itemDescription} updated successfully` ,
+  },
+  quantityNotUpdated: {
+    fr_CH: (itemDescription) => `Échec de la mise à jour de la quantité pour ${itemDescription}`,
+    de_CH: (itemDescription) => `Fehler beim Aktualisieren der Menge für ${itemDescription}`,
+    en_US: (itemDescription) => `Failed to update quantity for ${itemDescription}`,
+  },
+  errorUpdatingQuantity: {
+    fr_CH: (errorMessage) => `Erreur lors de la mise à jour de la quantité : ${errorMessage}`,
+    de_CH: (errorMessage) => `Fehler beim Aktualisieren der Menge: ${errorMessage}`,
+    en_US: (errorMessage) => `Error updating quantity: ${errorMessage}`,
+  },
+  unknownCategory: {
+    fr_CH: "Catégorie inconnue",
+    de_CH: "Unbekannte Kategorie",
+    en_US: "Unknown category"
+  },
+  deletingItem: {
+    fr_CH: (itemDescription, categoryName) => `Suppression de ${itemDescription} de ${categoryName}...`,
+    de_CH: (itemDescription, categoryName) => `Löschen von ${itemDescription} aus ${categoryName}...`,
+    en_US: (itemDescription, categoryName) => `Deleting ${itemDescription} from ${categoryName}...`,
+  },
+  itemDeleted: {
+    fr_CH: (itemDescription, categoryName) => `${itemDescription} supprimé de ${categoryName} avec succès`,
+    de_CH: (itemDescription, categoryName) => `${itemDescription} erfolgreich aus ${categoryName} gelöscht`,
+    en_US: (itemDescription, categoryName) => `${itemDescription} deleted from ${categoryName} successfully`,
+  },
+  itemNotDeleted: {
+    fr_CH: (itemDescription, categoryName) => `Échec de la suppression de ${itemDescription} de ${categoryName}`,
+    de_CH: (itemDescription, categoryName) => `Fehler beim Löschen von ${itemDescription} aus ${categoryName}`,
+    en_US: (itemDescription, categoryName) => `Failed to delete ${itemDescription} from ${categoryName}`,
+  },
+  errorDeleting: {
+    fr_CH: (errorMessage) => `Erreur lors de la suppression de l'élément : ${errorMessage}`,
+    de_CH: (errorMessage) => `Fehler beim Löschen des Elements: ${errorMessage}`,
+    en_US: (errorMessage) => `Error deleting item: ${errorMessage}`,
+  },
+  stockLevel: {
+    fr_CH: (stockPercentage, totalQuantity, categoryQuantity) => `Niveau de stock : ${stockPercentage}% (${totalQuantity}/${categoryQuantity})`,
+    de_CH: (stockPercentage, totalQuantity, categoryQuantity) => `Bestandsniveau: ${stockPercentage}% (${totalQuantity}/${categoryQuantity})`,
+    en_US: (stockPercentage, totalQuantity, categoryQuantity) => `Stock level: ${stockPercentage}% (${totalQuantity}/${categoryQuantity})`,
+  },
+  averageExpiration: {
+    fr_CH: (days) => "Moyenne des jours avant expiration : " + (days || 'Non défini'),
+    de_CH: (days) => "Durchschnittliche Tage bis zum Ablauf: " + (days || 'Nicht festgelegt'),
+    en_US: (days) => "Average days to expire: " + (days || 'Not set'),
+  },
+  addItem: {
+    fr_CH: (productType) => `Ajouter un article à ${productType}`,
+    de_CH: (productType) => `Artikel zu ${productType} hinzufügen`,
+    en_US: (productType) => `Add item to ${productType}`
+  },
+  checkExpiration: {
+    fr_CH: (computedExpiry) => `Vérifier l'expiration (${computedExpiry})`,
+    de_CH: (computedExpiry) => `Ablaufdatum überprüfen (${computedExpiry})`,
+    en_US: (computedExpiry) => `Check expiration (${computedExpiry})`,
+  },
+  checkStock: {
+    fr_CH: (computedNextCheck) => `Vérifier le stock (${computedNextCheck})`,
+    de_CH: (computedNextCheck) => `Bestand überprüfen (${computedNextCheck})`,
+    en_US: (computedNextCheck) => `Check stock (${computedNextCheck})`
+  },
+  nextCheck: {
+    fr_CH: (computedNextCheck) => `Prochain contrôle recommandé (${computedNextCheck})`,
+    de_CH: (computedNextCheck) => `Nächste empfohlene Überprüfung (${computedNextCheck})`,
+    en_US: (computedNextCheck) => `Next recommened check (${computedNextCheck})`
+  },
+  product: {
+    fr_CH: "Produit",
+    de_CH: "Produkt",
+    en_US: "Product"
+  },
+  quantity: {
+    fr_CH: "Quantité",
+    de_CH: "Menge",
+    en_US: "Quantity"
+  },
+  delete: {
+    fr_CH: (itemDescription) => `Supprimer ${itemDescription}`,
+    de_CH: (itemDescription) => `Löschen ${itemDescription}`,
+    en_US: (itemDescription) => `Delete ${itemDescription}`,
+  },
+}
 
 const LOW_STOCK_THRESHOLD = 65
 const CRITICAL_STOCK_THRESHOLD_ = 35
@@ -15,6 +114,8 @@ function CurrentScreen() {
   const { productData, loading, saveStockData } = useProductContext()
   const [modalOpen, setModalOpen] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState(null)
+
+  const translated = useLittera(translations)
   
   // Handle quantity change with debounce
   const handleQuantityChange = (item, newQuantity) => {
@@ -22,7 +123,7 @@ function CurrentScreen() {
       setSaveStatus({ 
         saving: true, 
         success: null, 
-        message: `Updating quantity for ${item.description}...`,
+        message: translated.updatingQuantity(item.description),
         id: 'save-stock-item'
       })
       
@@ -50,8 +151,8 @@ function CurrentScreen() {
           saving: false, 
           success: success, 
           message: success 
-            ? `Quantity for ${item.description} updated successfully` 
-            : `Failed to update quantity for ${item.description}`,
+            ? translated.quantityUpdated(item.description)
+            : translated.quantityNotUpdated(item.description),
           id: 'save-stock-item'
         })
       })
@@ -59,7 +160,7 @@ function CurrentScreen() {
       setSaveStatus({ 
         saving: false, 
         success: false, 
-        message: `Error updating quantity: ${error.message}`,
+        message: translated.errorUpdatingQuantity(error.message),
         id: 'save-stock-item'
       })
     }
@@ -94,7 +195,7 @@ function CurrentScreen() {
         // If the category doesn't exist yet (could be zero quantity), create it
         if (!grouped[item.typeId]) {
           const category = productData.baseCategories.find(cat => cat.id === item.typeId) || 
-                          { productType: 'Unknown Category', id: item.typeId }
+                          { productType: translated.unknownCategory, id: item.typeId }
           grouped[item.typeId] = {
             category,
             items: []
@@ -118,7 +219,7 @@ function CurrentScreen() {
     
     // Convert to array and sort by category id
     return Object.values(grouped).sort((a, b) => a.category.id - b.category.id)
-  }, [productData.stock, productData.baseCategories])
+  }, [productData.stock, productData.baseCategories, translated])
   
   const handleAddItem = (category) => {
     setSelectedCategory(category)
@@ -130,7 +231,7 @@ function CurrentScreen() {
       setSaveStatus({ 
         saving: true, 
         success: null, 
-        message: `Deleting ${item.description} from ${categoryName}...`,
+        message: translated.deletingItem(item.description, categoryName),
         id: 'save-stock-item'
       })
       
@@ -156,15 +257,15 @@ function CurrentScreen() {
         saving: false, 
         success: success, 
         message: success 
-          ? `${item.description} was successfully deleted from ${categoryName}` 
-          : `Failed to delete ${item.description} from ${categoryName}`,
+          ? translated.itemDeleted(item.description, categoryName) 
+          : translated.itemNotDeleted(item.description, categoryName), 
         id: 'save-stock-item'
       })
     } catch (error) {
       setSaveStatus({ 
         saving: false, 
         success: false, 
-        message: `Error deleting item: ${error.message}`,
+        message: translated.errorDeleting(error.message),//`Error deleting item: ${error.message}`,
         id: 'save-stock-item'
       })
     }
@@ -189,7 +290,7 @@ function CurrentScreen() {
           <Table.Td>
             <Group gap="xs" wrap='nowrap'>
               {hasLowStock && (
-                <Tooltip label={`Stock level: ${group.stockPercentage}% (${group.totalQuantity}/${categoryQuantity})`}>
+                <Tooltip label={translated.stockLevel(group.stockPercentage, group.totalQuantity, categoryQuantity)}>
                   <WarningDiamond size={24} color={stockLevelColor} weight="fill" />
                 </Tooltip>
               )}
@@ -199,7 +300,7 @@ function CurrentScreen() {
             <Group gap="xs">
             <Text fw={700} c="blue.4">{group.category.productType}</Text>
               {group.category.usualExpiryCheckDays && (
-                <Tooltip label={"Average days to expire: " + (group.category.usualExpiryCheckDays || 'Not set')}>
+                <Tooltip label={translated.averageExpiration(group.category.usualExpiryCheckDays)}>
                   <Info color={theme.colors.blue[9]} size={18} />
                 </Tooltip>
               )}
@@ -208,7 +309,7 @@ function CurrentScreen() {
           </Table.Td>
           <Table.Td>{categoryQuantity}</Table.Td>
           <Table.Td>
-            <Tooltip label={`Add item to ${group.category.productType}`}>
+            <Tooltip label={translated.addItem(group.category.productType)}>
               <ActionIcon 
                 variant="transparent"
                 onClick={() => handleAddItem(group.category)}
@@ -228,16 +329,16 @@ function CurrentScreen() {
             <Table.Td>
               <Group gap="xs" wrap='nowrap'>
                 {isTodayAfter(item.computedExpiry) && (
-                  <Tooltip label={"Check expiration date! (" + item.computedExpiry + ")"}>
+                  <Tooltip label={translated.checkExpiration(item.computedExpiry)}>
                     <Biohazard size={24} color={theme.colors.orange[9]} />
                   </Tooltip>
                 )}
                 {isTodayAfter(item.computedNextCheck) ? (
-                  <Tooltip label={"Check stock expiry! (" + item.computedNextCheck + ")"}>
+                  <Tooltip label={translated.checkStock(item.computedNextCheck)}>
                     <Warning size={24} color={theme.colors.yellow[7]} />
                   </Tooltip>
                   ) : (
-                  <Tooltip label={"Next recommended check: " + item.computedNextCheck}>
+                  <Tooltip label={translated.nextCheck(item.computedNextCheck)}>
                     <CalendarCheck size={24} color={theme.colors.teal[9]} />
                   </Tooltip>
                 )}
@@ -262,7 +363,7 @@ function CurrentScreen() {
               />
             </Table.Td>
             <Table.Td>
-              <Tooltip label={`Delete ${item.description}`}>
+              <Tooltip label={translated.delete(item.description)}>
                 <ActionIcon 
                   variant="transparent"
                   onClick={() => handleDeleteItem(item, group.category.productType)}
@@ -279,11 +380,11 @@ function CurrentScreen() {
     })
     
     return tableRows
-  }, [groupedStockItems, theme.colors])
+  }, [groupedStockItems, theme.colors, translated])
 
   return (
     <Container fluid>
-      <Title order={1} mb="md">Current stock</Title>
+      <Title order={1} mb="md">{translated.title}</Title>
       
       {loading ? (
         <div style={{ display: 'flex', justifyContent: 'center', padding: '2rem' }}>
@@ -294,9 +395,9 @@ function CurrentScreen() {
           <Table.Thead>
             <Table.Tr>
               <Table.Th></Table.Th>
-              <Table.Th>Product</Table.Th>
+              <Table.Th>{translated.product}</Table.Th>
               <Table.Th></Table.Th>
-              <Table.Th>Quantity</Table.Th>
+              <Table.Th>{translated.quantity}</Table.Th>
               <Table.Th></Table.Th>
             </Table.Tr>
           </Table.Thead>

@@ -7,7 +7,7 @@ function AppRoutes({ routes }) {
     <Routes>
       <Route index element={<SetupScreen />} />
       {routes.map((route) => (
-        <Route key={route.label} path={route.link} element={<route.component />} />
+        <Route key={route.id} path={route.link} element={<route.component />} />
       ))}
     </Routes>
   )

@@ -5,6 +5,25 @@ import {
   readStock,
   writeStock
 } from '../utils/fileUtils'
+import { useLittera } from '@assembless/react-littera'
+
+const translations = {
+  failedLoadingData: {
+    fr_CH: "Échec du chargement des données produit",
+    de_CH: "Fehler beim Laden der Produktdaten",
+    en_US: "Failed to load product data"
+  },
+  failedSavingData: {
+    fr_CH: "Échec de l'enregistrement des données produit",
+    de_CH: "Fehler beim Speichern der Produktdaten",
+    en_US: "Failed to save product data"
+  },
+  failedSavingStockData: {
+    fr_CH: "Échec de l'enregistrement des données de stock",
+    de_CH: "Fehler beim Speichern der Bestandsdaten",
+    en_US: "Failed to save stock data"
+  }
+}
 
 // Create the context
 const ProductContext = createContext()
@@ -21,6 +40,8 @@ export const ProductProvider = ({ children }) => {
   })
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+
+  const translated = useLittera(translations)
 
   // Load data from disk on component mount
   useEffect(() => {
@@ -42,7 +63,7 @@ export const ProductProvider = ({ children }) => {
       setError(null)
     } catch (err) {
       console.error('Failed to load product data:', err)
-      setError('Failed to load product data')
+      setError(translated.failedLoadingData)
     } finally {
       setLoading(false)
     }
@@ -68,7 +89,7 @@ export const ProductProvider = ({ children }) => {
       return true
     } catch (err) {
       console.error('Failed to save product data:', err)
-      setError('Failed to save product data')
+      setError(translated.failedSavingData)
       return false
     } finally {
       setLoading(false)
@@ -90,7 +111,7 @@ export const ProductProvider = ({ children }) => {
       return true
     } catch (err) {
       console.error('Failed to save stock data:', err)
-      setError('Failed to save stock data')
+      setError(translated.failedSavingStockData)
       return false
     } finally {
       setLoading(false)

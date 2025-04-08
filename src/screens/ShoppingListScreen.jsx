@@ -1,13 +1,54 @@
 import React, { useState, useEffect } from 'react'
-import { Container, Table, Title, Loader, Alert, Text, Button, UnstyledButton } from '@mantine/core'
+import { Container, Table, Title, Loader, Alert, Text, Button, UnstyledButton, Tooltip } from '@mantine/core'
 import { Square, StackPlus, Tag, Hash, Printer, Eye, EyeClosed } from '@phosphor-icons/react'
 import { useProductContext } from '../context/ProductContext'
 import classes from './ShoppingListScreen.module.css'
+import { useLittera } from '@assembless/react-littera'
+
+const translations = {
+  title: {
+    fr_CH: "Liste de courses",
+    de_CH: "Einkaufsliste",
+    en_US: "Shopping list"
+  },
+  print: {
+    fr_CH: "Imprimer",
+    de_CH: "Drucken",
+    en_US: "Print"
+  },
+  errorLoadingData: {
+    fr_CH: "Erreur lors du chargement des données",
+    de_CH: "Fehler beim Laden der Daten",
+    en_US: "Error loading data"
+  },
+  category: {
+    fr_CH: "Catégorie",
+    de_CH: "Kategorie",
+    en_US: "Category"
+  },
+  unit: {
+    fr_CH: "Unité",
+    de_CH: "Einheit",
+    en_US: "Unit"
+  },
+  description: {
+    fr_CH: "Description",
+    de_CH: "Beschreibung",
+    en_US: "Description"
+  },
+  includeWhenPrinting: {
+    fr_CH: "Inclure lors de l'impression",
+    de_CH: "Beim Drucken einfügen",
+    en_US: "Include when printing"
+  }
+}
 
 function ShoppingListScreen() {
   const { productData, loading, error } = useProductContext()
   const [shoppingListData, setShoppingListData] = useState([])
   const [hiddenItems, setHiddenItems] = useState({})
+
+  const translated = useLittera(translations)
 
   // Calculate shopping list data when productData changes
   useEffect(() => {
@@ -62,9 +103,11 @@ function ShoppingListScreen() {
         className={isHidden ? classes.hiddenRow : ''}
       >
         <Table.Td>
-          <UnstyledButton onClick={() => toggleItemVisibility(item.id)}>
-            {isHidden ? <EyeClosed size="24" /> : <Eye size="24" />}
-          </UnstyledButton>
+          <Tooltip label={translated.includeWhenPrinting}>
+            <UnstyledButton onClick={() => toggleItemVisibility(item.id)}>
+              {isHidden ? <EyeClosed size="24" /> : <Eye size="24" />}
+            </UnstyledButton>
+          </Tooltip>
         </Table.Td>
         <Table.Td><Square size="24" /></Table.Td>
         <Table.Td><strong>{item.quantityToBuy}</strong></Table.Td>
@@ -83,7 +126,7 @@ function ShoppingListScreen() {
     <Container fluid>
       <div className={classes.headerContainer}>
         <div>
-          <Title order={1} mb="md">Shopping list</Title>
+          <Title order={1} mb="md">{translated.title}</Title>
           <Text c="dimmed" mb="md">{
             new Date().toLocaleDateString('fr-CH')
           }</Text>
@@ -93,13 +136,13 @@ function ShoppingListScreen() {
           onClick={handlePrint}
           className={classes.printButton}
         >
-          Print
+          {translated.print}
         </Button>
       </div>
       
       {/* Show error message if there's an error */}
       {error && (
-        <Alert color="red" title="Error loading data" mb="md">
+        <Alert color="red" title={translated.errorLoadingData} mb="md">
           {error}
         </Alert>
       )}
@@ -116,9 +159,9 @@ function ShoppingListScreen() {
               <Table.Th><Printer size="18" weight='fill' /></Table.Th>
               <Table.Th></Table.Th>
               <Table.Th><StackPlus size="18" weight='fill' /></Table.Th>
-              <Table.Th><Tag size="18" weight='fill' /> Category</Table.Th>
-              <Table.Th c="dimmed"><Hash size="18" /> Unit</Table.Th>
-              <Table.Th c="dimmed">Description</Table.Th>
+              <Table.Th><Tag size="18" weight='fill' /> {translated.category}</Table.Th>
+              <Table.Th c="dimmed"><Hash size="18" /> {translated.unit}</Table.Th>
+              <Table.Th c="dimmed">{translated.description}</Table.Th>
             </Table.Tr>
           </Table.Thead>
           <Table.Tbody>{rows}</Table.Tbody>

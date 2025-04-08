@@ -4,6 +4,7 @@
   "private": true,
   "main": "electron/main.js",
   "dependencies": {
+    "@assembless/react-littera": "^2.4.0",
     "@electron/remote": "^2.0.1",
     "@mantine/core": "^7.17.2",
     "@mantine/hooks": "^7.17.2",
