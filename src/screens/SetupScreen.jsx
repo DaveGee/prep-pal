@@ -61,7 +61,7 @@ function SetupScreen() {
   
   // Get the actual counts from the context
   const categoriesCount = productData.baseCategories.length
-  const productsCount = productData.stock.length
+  const productsCount = productData.stock.products.length
 
   // Handler for initializing databases
   const handleInitDatabases = async () => {
