@@ -1,6 +1,7 @@
 import React from 'react'
 import { useLittera } from '@assembless/react-littera'
 import { Container, Divider, Title, Box, Button, Text } from '@mantine/core'
+import { useProductContext } from '../context/ProductContext'
 
 const translations = {
   title: {
@@ -24,9 +25,9 @@ const translations = {
     en_US: (date, count) => `Products file (${date}, ${count} products)`
   },
   reset: {
-    fr_CH: "Réinitialiser les bases de données",
-    de_CH: "Datenbanken zurücksetzen",
-    en_US: "Reset databases"
+    fr_CH: "Supprimer les bases de données",
+    de_CH: "Datenbanken löschen",
+    en_US: "Delete databases"
   },
   noFileFound: {
     fr_CH: "Aucun fichier trouvé",
@@ -42,27 +43,66 @@ const translations = {
 
 function SetupScreen() {
   const translated = useLittera(translations)
+  const { 
+    productData, 
+    loading, 
+    filesExist, 
+    initializeData, 
+    resetDatabases 
+  } = useProductContext()
 
-  const filesExist = true // Placeholder for actual file existence check
-  const fileDate = new Date().toLocaleDateString()
-  const categoriesCount = 10 // Placeholder for actual count
-  const productsCount = 20 // Placeholder for actual count
+  // Both files need to exist for the setup to be considered complete
+  const bothFilesExist = filesExist.categories && filesExist.stock
+  
+  // Get the date from the context or use current date as fallback
+  const fileDate = productData.lastCategoriesUpdate 
+    ? new Date(productData.lastCategoriesUpdate).toLocaleDateString() 
+    : new Date().toLocaleDateString()
+  
+  // Get the actual counts from the context
+  const categoriesCount = productData.baseCategories.length
+  const productsCount = productData.stock.length
+
+  // Handler for initializing databases
+  const handleInitDatabases = async () => {
+    await initializeData()
+  }
+
+  // Handler for resetting databases
+  const handleResetDatabases = async () => {
+    // Only delete the databases, don't initialize
+    await resetDatabases()
+  }
+
+  // If still loading, show a loading message
+  if (loading) {
+    return (
+      <Container fluid>
+        <Title order={1} mb="md">{translated.title}</Title>
+        <Text>Loading...</Text>
+      </Container>
+    )
+  }
 
   return (
     <Container fluid>
       <Title order={1} mb="md">{translated.title}</Title>
       <Divider />
       <Title order={3} mt="md">{translated.files}</Title>
-      {filesExist ? (
+      {bothFilesExist ? (
         <Box>
           <Text my="xs">{translated.categoriesFile(fileDate, categoriesCount)}</Text>
           <Text my="xs">{translated.productsFile(fileDate, productsCount)}</Text>
-          <Button my="xs" color="red">{translated.reset}</Button>
+          <Button my="xs" color="red" onClick={handleResetDatabases}>
+            {translated.reset}
+          </Button>
         </Box>
       ) : (
         <Box>
           <Text my="xs">{translated.noFileFound}</Text>
-          <Button my="xs" color="blue">{translated.initDatabases}</Button>
+          <Button my="xs" color="blue" onClick={handleInitDatabases}>
+            {translated.initDatabases}
+          </Button>
         </Box>
       )}
     </Container>

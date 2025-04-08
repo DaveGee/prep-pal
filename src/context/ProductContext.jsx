@@ -3,7 +3,11 @@ import {
   readProductCategories, 
   writeProductCategories,
   readStock,
-  writeStock
+  writeStock,
+  checkProductCategoriesExist,
+  checkStockExists,
+  initializeDatabases,
+  deleteDatabases
 } from '../utils/fileUtils'
 import { useLittera } from '@assembless/react-littera'
 
@@ -22,6 +26,11 @@ const translations = {
     fr_CH: "Échec de l'enregistrement des données de stock",
     de_CH: "Fehler beim Speichern der Bestandsdaten",
     en_US: "Failed to save stock data"
+  },
+  failedDeletingData: {
+    fr_CH: "Échec de la suppression des données",
+    de_CH: "Fehler beim Löschen der Daten",
+    en_US: "Failed to delete data"
   }
 }
 
@@ -40,32 +49,136 @@ export const ProductProvider = ({ children }) => {
   })
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [filesExist, setFilesExist] = useState({
+    categories: false,
+    stock: false
+  })
 
   const translated = useLittera(translations)
 
-  // Load data from disk on component mount
+  // Check if files exist and load data on component mount
   useEffect(() => {
-    loadProductData()
+    checkFilesAndLoadData()
   }, [])
+
+  // Function to check if files exist
+  const checkFilesAndLoadData = async () => {
+    try {
+      setLoading(true)
+      
+      // Check if files exist
+      const categoriesExist = await checkProductCategoriesExist()
+      const stockExists = await checkStockExists()
+      
+      console.log('File existence check:', { categoriesExist, stockExists })
+      
+      setFilesExist({
+        categories: categoriesExist,
+        stock: stockExists
+      })
+      
+      // Only load data if both files exist
+      if (categoriesExist && stockExists) {
+        await loadProductData()
+      } else {
+        // Files don't exist, keep data empty
+        setLoading(false)
+      }
+    } catch (err) {
+      console.error('Failed to check files:', err)
+      setError(translated.failedLoadingData)
+      setLoading(false)
+    }
+  }
 
   // Function to load product data from disk
   const loadProductData = async () => {
     try {
       setLoading(true)
+      
+      console.log('Loading product data from disk')
+      
       const data = await readProductCategories()
       const stock = await readStock()
+      
+      console.log('Loaded data:', { categories: data, stock })
       
       setProductData({
         baseCategories: data.baseCategories,
         lastCategoriesUpdate: data.lastUpdate,
         stock
       })
+      
       setError(null)
     } catch (err) {
       console.error('Failed to load product data:', err)
       setError(translated.failedLoadingData)
     } finally {
       setLoading(false)
+    }
+  }
+
+  // Function to initialize databases with default data
+  const initializeData = async () => {
+    try {
+      setLoading(true)
+      
+      console.log('Initializing databases with default data')
+      
+      // Initialize databases with default data
+      await initializeDatabases()
+      
+      console.log('Databases initialized, updating state')
+      
+      // Update filesExist state
+      setFilesExist({
+        categories: true,
+        stock: true
+      })
+      
+      // Load the data from the newly created files
+      await loadProductData()
+      
+      return true
+    } catch (err) {
+      console.error('Failed to initialize databases:', err)
+      setError(translated.failedSavingData)
+      return false
+    }
+  }
+
+  // Function to reset databases (delete only, no initialization)
+  const resetDatabases = async () => {
+    try {
+      setLoading(true)
+      
+      console.log('Deleting databases')
+      
+      // Delete all database files
+      await deleteDatabases()
+      
+      // Update filesExist state
+      setFilesExist({
+        categories: false,
+        stock: false
+      })
+      
+      // Reset product data
+      setProductData({
+        lastCategoriesUpdate: '',
+        baseCategories: [],
+        stock: []
+      })
+      
+      setError(null)
+      setLoading(false)
+      
+      return true
+    } catch (err) {
+      console.error('Failed to reset databases:', err)
+      setError(translated.failedDeletingData)
+      setLoading(false)
+      return false
     }
   }
 
@@ -85,6 +198,13 @@ export const ProductProvider = ({ children }) => {
         baseCategories: updatedData.baseCategories,
         lastCategoriesUpdate: updatedData.lastUpdate
       })
+      
+      // Update filesExist state
+      setFilesExist({
+        ...filesExist,
+        categories: true
+      })
+      
       setError(null)
       return true
     } catch (err) {
@@ -106,6 +226,13 @@ export const ProductProvider = ({ children }) => {
         ...productData,
         stock: newData
       })
+      
+      // Update filesExist state
+      setFilesExist({
+        ...filesExist,
+        stock: true
+      })
+      
       setError(null)
 
       return true
@@ -137,9 +264,13 @@ export const ProductProvider = ({ children }) => {
     productData,
     loading,
     error,
+    filesExist,
     loadProductData,
     updateCategory,
-    saveStockData
+    saveStockData,
+    initializeData,
+    resetDatabases,
+    checkFilesAndLoadData
   }
 
   return (

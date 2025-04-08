@@ -12,8 +12,49 @@ const PRODUCT_CATEGORIES_STORAGE_KEY = 'mystock_product_categories'
 const STOCK_STORAGE_KEY = 'mystock_stock'
 
 /**
+ * Check if product categories file exists
+ * @returns {Promise<boolean>} True if the file exists
+ */
+export const checkProductCategoriesExist = async () => {
+  try {
+    if (isElectron()) {
+      const { ipcRenderer } = window.require('electron')
+      const data = await ipcRenderer.invoke('read-product-categories')
+      return data && Object.keys(data).length > 0
+    } else {
+      const storedData = localStorage.getItem(PRODUCT_CATEGORIES_STORAGE_KEY)
+      return !!storedData
+    }
+  } catch (error) {
+    console.warn('Product categories file does not exist')
+    return false
+  }
+}
+
+/**
+ * Check if stock file exists
+ * @returns {Promise<boolean>} True if the file exists
+ */
+export const checkStockExists = async () => {
+  try {
+    if (isElectron()) {
+      const { ipcRenderer } = window.require('electron')
+      const data = await ipcRenderer.invoke('read-stock')
+      return data && Object.keys(data).length > 0
+    } else {
+      const storedData = localStorage.getItem(STOCK_STORAGE_KEY)
+      return !!storedData
+    }
+  } catch (error) {
+    console.warn('Stock file does not exist')
+    return false
+  }
+}
+
+/**
  * Read product categories from disk using Electron IPC or localStorage in browser
  * @returns {Promise<Object>} The product categories data
+ * @throws {Error} If the file doesn't exist or can't be read
  */
 export const readProductCategories = async () => {
   try {
@@ -25,37 +66,28 @@ export const readProductCategories = async () => {
         
         // Check if data exists and is valid
         if (!data || Object.keys(data).length === 0) {
-          console.log('No data from Electron IPC, using default data')
-          // Save the default data for future use
-          await writeProductCategories(defaultProductCategories)
-          return defaultProductCategories
+          throw new Error('No product categories data found')
         }
         
         return data
       } catch (ipcError) {
         console.error('Error with Electron IPC:', ipcError)
-        console.log('IPC error, using default data')
-        return defaultProductCategories
+        throw new Error('Failed to read product categories file')
       }
     } else {
-      // In browser, try to get from localStorage first
+      // In browser, try to get from localStorage
       const storedData = localStorage.getItem(PRODUCT_CATEGORIES_STORAGE_KEY)
       
       if (storedData) {
         console.log('Reading data from localStorage')
         return JSON.parse(storedData)
       } else {
-        // If no data in localStorage, use the default data and save it
-        console.log('No data in localStorage, using default data')
-        localStorage.setItem(PRODUCT_CATEGORIES_STORAGE_KEY, JSON.stringify(defaultProductCategories))
-        return defaultProductCategories
+        throw new Error('No product categories data found in localStorage')
       }
     }
   } catch (error) {
     console.error('Error reading product categories:', error)
-    // Fallback to imported JSON in case of error
-    console.log('Error occurred, falling back to imported JSON data')
-    return defaultProductCategories
+    throw error
   }
 }
 
@@ -85,6 +117,7 @@ export const writeProductCategories = async (data) => {
 /**
  * Read stock data from disk using Electron IPC or localStorage in browser
  * @returns {Promise<Object>} The stock data
+ * @throws {Error} If the file doesn't exist or can't be read
  */
 export const readStock = async () => {
   try {
@@ -96,37 +129,28 @@ export const readStock = async () => {
         
         // Check if data exists and is valid
         if (!data || Object.keys(data).length === 0) {
-          console.log('No stock data from Electron IPC, using default data')
-          // Save the default data for future use
-          await writeStock(defaultStock)
-          return defaultStock
+          throw new Error('No stock data found')
         }
         
         return data
       } catch (ipcError) {
         console.error('Error with Electron IPC:', ipcError)
-        console.log('IPC error, using default stock data')
-        return defaultStock
+        throw new Error('Failed to read stock file')
       }
     } else {
-      // In browser, try to get from localStorage first
+      // In browser, try to get from localStorage
       const storedData = localStorage.getItem(STOCK_STORAGE_KEY)
       
       if (storedData) {
         console.log('Reading stock data from localStorage')
         return JSON.parse(storedData)
       } else {
-        // If no data in localStorage, use the default data and save it
-        console.log('No stock data in localStorage, using default data')
-        localStorage.setItem(STOCK_STORAGE_KEY, JSON.stringify(defaultStock))
-        return defaultStock
+        throw new Error('No stock data found in localStorage')
       }
     }
   } catch (error) {
     console.error('Error reading stock data:', error)
-    // Fallback to imported JSON in case of error
-    console.log('Error occurred, falling back to imported stock JSON data')
-    return defaultStock
+    throw error
   }
 }
 
@@ -149,6 +173,74 @@ export const writeStock = async (data) => {
     }
   } catch (error) {
     console.error('Error writing stock data:', error)
+    throw error
+  }
+}
+
+/**
+ * Delete product categories file
+ * @returns {Promise<boolean>} True if successful
+ */
+export const deleteProductCategories = async () => {
+  try {
+    if (isElectron()) {
+      const { ipcRenderer } = window.require('electron')
+      return await ipcRenderer.invoke('delete-product-categories')
+    } else {
+      localStorage.removeItem(PRODUCT_CATEGORIES_STORAGE_KEY)
+      return true
+    }
+  } catch (error) {
+    console.error('Error deleting product categories:', error)
+    throw error
+  }
+}
+
+/**
+ * Delete stock file
+ * @returns {Promise<boolean>} True if successful
+ */
+export const deleteStock = async () => {
+  try {
+    if (isElectron()) {
+      const { ipcRenderer } = window.require('electron')
+      return await ipcRenderer.invoke('delete-stock')
+    } else {
+      localStorage.removeItem(STOCK_STORAGE_KEY)
+      return true
+    }
+  } catch (error) {
+    console.error('Error deleting stock:', error)
+    throw error
+  }
+}
+
+/**
+ * Delete all database files
+ * @returns {Promise<boolean>} True if successful
+ */
+export const deleteDatabases = async () => {
+  try {
+    await deleteProductCategories()
+    await deleteStock()
+    return true
+  } catch (error) {
+    console.error('Error deleting databases:', error)
+    throw error
+  }
+}
+
+/**
+ * Initialize databases with default data
+ * @returns {Promise<boolean>} True if successful
+ */
+export const initializeDatabases = async () => {
+  try {
+    await writeProductCategories(defaultProductCategories)
+    await writeStock(defaultStock)
+    return true
+  } catch (error) {
+    console.error('Error initializing databases:', error)
     throw error
   }
 }

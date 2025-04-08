@@ -57,6 +57,42 @@ ipcMain.handle('write-stock', async (event, data) => {
   }
 })
 
+// IPC handler for deleting product categories
+ipcMain.handle('delete-product-categories', async () => {
+  try {
+    // Check if file exists before attempting to delete
+    if (fs.existsSync(productCategoriesPath)) {
+      // Use synchronous delete instead of promises
+      fs.unlinkSync(productCategoriesPath)
+      console.log('Product categories file deleted successfully')
+    } else {
+      console.log('Product categories file does not exist, nothing to delete')
+    }
+    return true
+  } catch (error) {
+    console.error('Error deleting product categories:', error)
+    throw error
+  }
+})
+
+// IPC handler for deleting stock
+ipcMain.handle('delete-stock', async () => {
+  try {
+    // Check if file exists before attempting to delete
+    if (fs.existsSync(stockPath)) {
+      // Use synchronous delete instead of promises
+      fs.unlinkSync(stockPath)
+      console.log('Stock file deleted successfully')
+    } else {
+      console.log('Stock file does not exist, nothing to delete')
+    }
+    return true
+  } catch (error) {
+    console.error('Error deleting stock:', error)
+    throw error
+  }
+})
+
 function createWindow() {
   const win = new BrowserWindow({
     width: 1200,
