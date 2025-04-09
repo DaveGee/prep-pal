@@ -34,7 +34,14 @@ const translations = {
   }
 }
 
-// Create the context
+const emptyData = () => ({
+  lastCategoriesUpdate: '',
+  baseCategories: [],
+  stock: {
+    products: []
+  }
+})
+
 const ProductContext = createContext()
 
 // Custom hook to use the product context
@@ -42,13 +49,7 @@ export const useProductContext = () => useContext(ProductContext)
 
 // Provider component
 export const ProductProvider = ({ children }) => {
-  const [productData, setProductData] = useState({
-    lastCategoriesUpdate: '',
-    baseCategories: [],
-    stock: {
-      products: []
-    }
-  })
+  const [productData, setProductData] = useState(emptyData())
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [filesExist, setFilesExist] = useState({
@@ -162,13 +163,7 @@ export const ProductProvider = ({ children }) => {
         stock: false
       })
       
-      setProductData({
-        lastCategoriesUpdate: '',
-        baseCategories: [],
-        stock: {
-          products: []
-        }
-      })
+      setProductData(emptyData())
       
       setError(null)
       setLoading(false)
@@ -189,7 +184,7 @@ export const ProductProvider = ({ children }) => {
       // Update the lastUpdate field
       const updatedData = {
         baseCategories: newData.baseCategories,
-        lastUpdate: new Date().toISOString().split('T')[0] // Format: YYYY-MM-DD
+        lastUpdate: new Date().toISOString()
       }
       
       await writeProductCategories(updatedData)

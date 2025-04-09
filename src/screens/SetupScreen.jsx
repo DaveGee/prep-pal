@@ -62,14 +62,11 @@ function SetupScreen() {
   const categoriesCount = productData.baseCategories.length
   const productsCount = productData.stock.products.length
 
-  // Handler for initializing databases
   const handleInitDatabases = async () => {
     await initializeData()
   }
 
-  // Handler for resetting databases
   const handleResetDatabases = async () => {
-    // Only delete the databases, don't initialize
     await resetDatabases()
   }
 

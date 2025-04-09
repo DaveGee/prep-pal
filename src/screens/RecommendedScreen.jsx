@@ -149,8 +149,8 @@ function RecommendedScreen() {
           ) : (
             <>
               {productData.lastCategoriesUpdate && (
-                <Text size="sm" color="dimmed" mb="md">
-                  {translated.lastUpdated} {productData.lastCategoriesUpdate}
+                <Text size="sm" c="dimmed" mb="md">
+                  {translated.lastUpdated} {new Date(productData.lastCategoriesUpdate).toLocaleDateString()}
                 </Text>
               )}
               
