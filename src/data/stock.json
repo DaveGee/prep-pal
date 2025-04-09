@@ -1,44 +1,4 @@
 {
     "products": [
-        {
-            "typeId": 1,
-            "description": "Bouteilles d'Evian",
-            "quantity": 12,
-            "onlineStoreLink": "",
-            "dateAdded": "2025-01-02",
-            "checkedDate": "2025-03-15",
-            "computedExpiry": "2025-04-02",
-            "computedNextCheck": "2025-06-15"
-        },
-        {
-            "typeId": 19,
-            "description": "Farmers",
-            "quantity": 10,
-            "onlineStoreLink": "",
-            "dateAdded": "2025-02-20",
-            "checkedDate": "2025-02-20",
-            "computedExpiry": "2025-03-20",
-            "computedNextCheck": "2025-03-20"
-        },
-        {
-            "typeId": 1,
-            "description": "Bouteilles d'eau gazeuse",
-            "quantity": 6,
-            "onlineStoreLink": "",
-            "dateAdded": "2025-01-02",
-            "checkedDate": "2025-01-02",
-            "computedExpiry": "2025-04-02",
-            "computedNextCheck": "2025-04-02"
-        },
-        {
-            "typeId": 32,
-            "description": "Mini radio blanche",
-            "quantity": 1,
-            "onlineStoreLink": "",
-            "dateAdded": "2023-01-02",
-            "checkedDate": "2023-01-02",
-            "computedExpiry": "2024-01-02",
-            "computedNextCheck": "2025-06-02"
-        }
     ]
 }

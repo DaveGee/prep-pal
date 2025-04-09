@@ -13,6 +13,7 @@ const STOCK_STORAGE_KEY = 'mystock_stock'
 
 /**
  * Check if product categories file exists
+ * * To know if the stock file exists, it checks if the file returns anything, and if it has any keys
  * @returns {Promise<boolean>} True if the file exists
  */
 export const checkProductCategoriesExist = async () => {
@@ -33,6 +34,7 @@ export const checkProductCategoriesExist = async () => {
 
 /**
  * Check if stock file exists
+ * To know if the stock file exists, it checks if the file returns anything, and if it has any keys
  * @returns {Promise<boolean>} True if the file exists
  */
 export const checkStockExists = async () => {

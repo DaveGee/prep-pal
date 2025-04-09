@@ -5,8 +5,6 @@
 - [x] Stock item type model + recommended model
 - [x] Recommended screen from static file
 - [x] Load and save to disk / localstorage
-- [] Empty screen with wizard to setup if no file
-    - [] Instead of creating the recommendation file by default, add a "wizard" type of module to create it (with the calculator)
 - [] Enable category edits (delete, add)
 
 ## Current stock
@@ -20,7 +18,7 @@
     - [] Check expiry date for consumption products that might be expired according to `lastCheck + avg expiry = expired potentially`
     - [] Check date for items without expiry (`lastCheck + avg expiry = recheck!`)
 - [] Check if it works well on tablet (interactions)
-- [] Follow link to buy online
+- [] Follow link to buy online (show links from products usually associated with the category OR links configured in setup)
 
 ## Shopping list
 
@@ -34,7 +32,8 @@
 - [] Generate default files wizard (categories)
     - [] Calculator (simple, or based on confederation) -> generate default category list
     - [] first version is in the language chosen "now" -> categories and product names are not translated afterwards.
-- [] Add possibility to delete the file to restart from scratch
+    - [] For stocks: file existence should be not just about "empty list" as stock will be empty at first (or add another data in the file like the date)
+- [x] Add possibility to delete the file to restart from scratch
 - [] Export + import files (categories + stock)
 
 ## Misc

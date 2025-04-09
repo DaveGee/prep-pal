@@ -45,7 +45,9 @@ export const ProductProvider = ({ children }) => {
   const [productData, setProductData] = useState({
     lastCategoriesUpdate: '',
     baseCategories: [],
-    stock: []
+    stock: {
+      products: []
+    }
   })
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -61,7 +63,6 @@ export const ProductProvider = ({ children }) => {
     checkFilesAndLoadData()
   }, [])
 
-  // Function to check if files exist
   const checkFilesAndLoadData = async () => {
     try {
       setLoading(true)
@@ -70,7 +71,7 @@ export const ProductProvider = ({ children }) => {
       const categoriesExist = await checkProductCategoriesExist()
       const stockExists = await checkStockExists()
       
-      console.log('File existence check:', { categoriesExist, stockExists })
+      console.log('Database files existence check:', { categoriesExist, stockExists })
       
       setFilesExist({
         categories: categoriesExist,
@@ -96,7 +97,7 @@ export const ProductProvider = ({ children }) => {
     try {
       setLoading(true)
       
-      console.log('Loading product data from disk')
+      console.log('Loading product data from databases')
       
       const data = await readProductCategories()
       const stock = await readStock()
@@ -154,20 +155,19 @@ export const ProductProvider = ({ children }) => {
       
       console.log('Deleting databases')
       
-      // Delete all database files
       await deleteDatabases()
       
-      // Update filesExist state
       setFilesExist({
         categories: false,
         stock: false
       })
       
-      // Reset product data
       setProductData({
         lastCategoriesUpdate: '',
         baseCategories: [],
-        stock: []
+        stock: {
+          products: []
+        }
       })
       
       setError(null)

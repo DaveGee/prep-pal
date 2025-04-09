@@ -59,7 +59,6 @@ function SetupScreen() {
     ? new Date(productData.lastCategoriesUpdate).toLocaleDateString() 
     : new Date().toLocaleDateString()
   
-  // Get the actual counts from the context
   const categoriesCount = productData.baseCategories.length
   const productsCount = productData.stock.products.length
 
