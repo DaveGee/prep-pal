@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { Container, NumberInput, Table, Title, Text, Button, Group, Loader, Alert } from '@mantine/core'
 import { useProductContext } from '../context/ProductContext'
 import { useDebouncedCallback } from '@mantine/hooks'
-import classes from './RecommendedScreen.module.css'
 import { setSaveStatus } from '../utils/notificationUtils'
 import { useLittera } from '@assembless/react-littera'
 
@@ -113,18 +112,30 @@ function RecommendedScreen() {
     debouncedSaveChanges(index, value, item)
   }
 
+  const quantity = (item) => {
+    if (item.quantityOverride || item.quantityOverride === 0) {
+      return item.quantityOverride
+    }
+    return item.quantity
+  }
+
+  const overridenQuantity = (item) => {
+    return (item.quantityOverride || item.quantityOverride === 0) && item.quantityOverride !== item.quantity
+  }
+
   const rows = data.map((item, index) => (
     <Table.Tr key={item.productType}>
       <Table.Td>{item.productType}</Table.Td>
       <Table.Td>{item.description}</Table.Td>
-      <Table.Td>{item.quantity}</Table.Td>
-      <Table.Td className={classes.overrideColumn}>
+      <Table.Td style={{ minWidth: '50px', maxWidth: '80px' }}>
         <NumberInput
-          variant="unstyled"
           size="xs"
-          value={item.quantityOverride || ''}
+          value={quantity(item)}
           onChange={(value) => handleQuantityChange(index, value, item)}
         />
+      </Table.Td>
+      <Table.Td c="dimmed">
+        {overridenQuantity(item) ? item.quantity : ""}
       </Table.Td>
     </Table.Tr>
   ))
@@ -154,13 +165,13 @@ function RecommendedScreen() {
                 </Text>
               )}
               
-              <Table>
+              <Table withRowBorders={false} highlightOnHover>
                 <Table.Thead>
                   <Table.Tr>
                     <Table.Th>{translated.productType}</Table.Th>
                     <Table.Th>{translated.description}</Table.Th>
                     <Table.Th>{translated.quantity}</Table.Th>
-                    <Table.Th className={classes.overrideColumn}>{translated.override}</Table.Th>
+                    <Table.Th></Table.Th>
                   </Table.Tr>
                 </Table.Thead>
                 <Table.Tbody>{rows}</Table.Tbody>
