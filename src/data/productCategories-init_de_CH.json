@@ -1,0 +1,329 @@
+{
+    "lastUpdate": "2025-04-09T12:25:15.070Z",
+    "baseCategories": [
+        {
+            "id": 1,
+            "productType": "Mineralwasser",
+            "description": "1,5-Liter-Flaschen, zum Trinken und Kochen!",
+            "quantity": 75,
+            "preferences": [],
+            "usualExpiryCheckDays": 180,
+            "quantityOverride": "",
+            "defaultUnit": "1,5l Flasche"
+        },
+        {
+            "id": 2,
+            "productType": "Andere Getränke",
+            "description": "Obst- und Gemüsesäfte, 1-Liter-Süßgetränke",
+            "quantity": 8,
+            "preferences": [],
+            "usualExpiryCheckDays": 60,
+            "defaultUnit": "1l Flasche"
+        },
+        {
+            "id": 3,
+            "productType": "Tee",
+            "description": "ca. 100 g",
+            "quantity": 4,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": "100 g"
+        },
+        {
+            "id": 4,
+            "productType": "Kaffee",
+            "description": "1 kg",
+            "quantity": 1,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": "1kg"
+        },
+        {
+            "id": 5,
+            "productType": "Milch oder Milchalternative",
+            "description": "1 Liter",
+            "quantity": 8,
+            "preferences": [],
+            "usualExpiryCheckDays": 30,
+            "defaultUnit": "1l"
+        },
+        {
+            "id": 6,
+            "productType": "Gemüse",
+            "description": "Dosengemüse z.B. (Mais, Tomaten, Pilze, Erbsen und Karotten) (ca. 300 g)",
+            "quantity": 34,
+            "preferences": [],
+            "usualExpiryCheckDays": 180,
+            "defaultUnit": "300g Dosen"
+        },
+        {
+            "id": 7,
+            "productType": "Obst",
+            "description": "Apfelmus, Ananas aus der Dose oder Trockenfrüchte, z.B. (ca. 300 g)",
+            "quantity": 27,
+            "preferences": [],
+            "usualExpiryCheckDays": 180,
+            "defaultUnit": "300g Dosen"
+        },
+        {
+            "id": 8,
+            "productType": "Saucen",
+            "description": "Tomatensauce, Pesto, Ketchup, Mayonnaise, Senf, z.B. (ca. 200 g)",
+            "quantity": 12,
+            "preferences": [],
+            "usualExpiryCheckDays": 180,
+            "defaultUnit": "200g Behälter"
+        },
+        {
+            "id": 9,
+            "productType": "Suppen",
+            "description": "Bouillonwürfel, verzehrfertige und gefriergetrocknete Suppen mit Tomaten, Fadennudeln, z.B. (ca. 200 g)",
+            "quantity": 12,
+            "preferences": [],
+            "usualExpiryCheckDays": 180,
+            "defaultUnit": "200g Packungen"
+        },
+        {
+            "id": 10,
+            "productType": "Getreide",
+            "description": "Nudeln, Reis, Reiswaffeln, Müsli, z.B. oder glutenfreie Alternative (ca. 500 g)",
+            "quantity": 15,
+            "preferences": [],
+            "usualExpiryCheckDays": 180,
+            "defaultUnit": "500g Schachteln"
+        },
+        {
+            "id": 11,
+            "productType": "Fertiggerichte",
+            "description": "Verzehrfertiges Risotto, Rösti, z.B. (ca. 250 g)",
+            "quantity": 19,
+            "preferences": [],
+            "usualExpiryCheckDays": 180,
+            "defaultUnit": "250g Packungen"
+        },
+        {
+            "id": 12,
+            "productType": "Hülsenfrüchte",
+            "description": "Kichererbsen, Bohnen in Tomatensauce, Linsen in Dosen oder getrocknet, z.B. (ca. 400 g)",
+            "quantity": 23,
+            "preferences": [],
+            "usualExpiryCheckDays": 180,
+            "defaultUnit": "400g Dosen"
+        },
+        {
+            "id": 13,
+            "productType": "Fleisch",
+            "description": "Trockenfleisch, Rohschinken, Salami, italienischer Käse in Dosen (ca. 100 g)",
+            "quantity": 12,
+            "preferences": [],
+            "usualExpiryCheckDays": 30,
+            "defaultUnit": "100g Packungen"
+        },
+        {
+            "id": 14,
+            "productType": "Fisch",
+            "description": "Sardinen in Dosen, Thunfisch (ca. 100 g)",
+            "quantity": 19,
+            "preferences": [],
+            "usualExpiryCheckDays": 60,
+            "defaultUnit": "100g Dosen"
+        },
+        {
+            "id": 15,
+            "productType": "Milchprodukte",
+            "description": "Hartkäse (ca. 300 g)",
+            "quantity": 4,
+            "preferences": [],
+            "usualExpiryCheckDays": 30,
+            "defaultUnit": "300g Packungen"
+        },
+        {
+            "id": 16,
+            "productType": "Nüsse",
+            "description": "Cashewnüsse, Mandeln, Haselnüsse (ca. 200 g)",
+            "quantity": 4,
+            "preferences": [],
+            "usualExpiryCheckDays": 120,
+            "defaultUnit": "200g Packungen"
+        },
+        {
+            "id": 17,
+            "productType": "Öl",
+            "description": "Olivenöl, Rapsöl (ca. 1 L)",
+            "quantity": 1,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": "1l"
+        },
+        {
+            "id": 18,
+            "productType": "Gewürze",
+            "description": "Salz, Pfeffer, Zucker, Süßstoff",
+            "quantity": 1,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": "Packungen"
+        },
+        {
+            "id": 19,
+            "productType": "Snacks",
+            "description": "Müsliriegel, Süßigkeiten, Schokolade",
+            "quantity": 15,
+            "preferences": [],
+            "usualExpiryCheckDay": 30,
+            "defaultUnit": "Packungen"
+        },
+        {
+            "id": 20,
+            "productType": "Körperpflege",
+            "description": "Seife, Shampoo, Deodorant, Zahnpasta",
+            "quantity": 3,
+            "preferences": [],
+            "usualExpiryCheckDays": 180,
+            "defaultUnit": "Flaschen"
+        },
+        {
+            "id": 21,
+            "productType": "Hygieneprodukte",
+            "description": "Slipeinlagen, Tampons, Damenbinden",
+            "quantity": 3,
+            "preferences": [],
+            "usualExpiryCheckDays": 180,
+            "defaultUnit": "Packungen"
+        },
+        {
+            "id": 22,
+            "productType": "Toilettenpapier",
+            "description": "Packungen",
+            "quantity": 3,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": "Mehrfachrollen-Packungen"
+        },
+        {
+            "id": 23,
+            "productType": "Taschentücher",
+            "description": "Packungen",
+            "quantity": 3,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": "Mehrfach-Packungen"
+        },
+        {
+            "id": 24,
+            "productType": "Reinigungsmittel",
+            "description": "",
+            "quantity": 0,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": "Flaschen"
+        },
+        {
+            "id": 25,
+            "productType": "Masken",
+            "description": "",
+            "quantity": 150,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": "Stück"
+        },
+        {
+            "id": 26,
+            "productType": "Handdesinfektionsmittel",
+            "description": "Ca. 100 ml",
+            "quantity": 6,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": "100ml Flasche"
+        },
+        {
+            "id": 27,
+            "productType": "Müllbeutel",
+            "description": "",
+            "quantity": 3,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": "Packungen"
+        },
+        {
+            "id": 28,
+            "productType": "Kerzen",
+            "description": "",
+            "quantity": 14,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": "Stück"
+        },
+        {
+            "id": 29,
+            "productType": "Taschenlampe",
+            "description": "",
+            "quantity": 1,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": "Stück"
+        },
+        {
+            "id": 30,
+            "productType": "Gaskocher",
+            "description": "",
+            "quantity": 1,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": "Stück"
+        },
+        {
+            "id": 31,
+            "productType": "Ersatzbatterien",
+            "description": "Packungen AA, AAA",
+            "quantity": 2,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": "Packungen"
+        },
+        {
+            "id": 32,
+            "productType": "Batterie- oder Solarradio",
+            "description": "",
+            "quantity": 1,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": "Stück"
+        },
+        {
+            "id": 33,
+            "productType": "Streichhölzer oder Feuerzeuge",
+            "description": "",
+            "quantity": 2,
+            "preferences": [],
+            "usualExpiryCheckDays": 365
+        },
+        {
+            "id": 34,
+            "productType": "Medizinisches Thermometer",
+            "description": "",
+            "quantity": 1,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": "Stück"
+        },
+        {
+            "id": 35,
+            "productType": "Dosenöffner",
+            "description": "",
+            "quantity": 1,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": "Stück"
+        },
+        {
+            "id": 36,
+            "productType": "Taschenmesser",
+            "description": "Schweizer Messer oder ähnliches",
+            "quantity": 2,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": "Stück"
+        }
+    ]
+}

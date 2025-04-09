@@ -1,6 +1,15 @@
-// Import the default data for fallback in web browser environment
-import defaultProductCategories from '../data/productCategories.json'
+// Import the locale-specific data for fallback in web browser environment
+import enUSProductCategories from '../data/productCategories-init_en_US.json'
+import frCHProductCategories from '../data/productCategories-init_fr_CH.json'
+import deCHProductCategories from '../data/productCategories-init_de_CH.json'
 import defaultStock from '../data/stock.json'
+
+// Map of locale to product categories
+const localeProductCategories = {
+  'en_US': enUSProductCategories,
+  'fr_CH': frCHProductCategories,
+  'de_CH': deCHProductCategories
+}
 
 // Check if running in Electron
 const isElectron = () => {
@@ -233,12 +242,16 @@ export const deleteDatabases = async () => {
 }
 
 /**
- * Initialize databases with default data
+ * Initialize databases with locale-specific data
+ * @param {string} locale - The locale to use (e.g., 'en_US', 'fr_CH', 'de_CH')
  * @returns {Promise<boolean>} True if successful
  */
-export const initializeDatabases = async () => {
+export const initializeDatabases = async (locale = 'en_US') => {
   try {
-    await writeProductCategories(defaultProductCategories)
+    // Get the product categories for the specified locale, or fall back to en_US
+    const productCategories = localeProductCategories[locale] || localeProductCategories['en_US']
+    
+    await writeProductCategories(productCategories)
     await writeStock(defaultStock)
     return true
   } catch (error) {

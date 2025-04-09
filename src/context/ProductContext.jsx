@@ -9,7 +9,7 @@ import {
   initializeDatabases,
   deleteDatabases
 } from '../utils/fileUtils'
-import { useLittera } from '@assembless/react-littera'
+import { useLittera, useLitteraMethods } from '@assembless/react-littera'
 
 const translations = {
   failedLoadingData: {
@@ -58,6 +58,7 @@ export const ProductProvider = ({ children }) => {
   })
 
   const translated = useLittera(translations)
+  const methods = useLitteraMethods()
 
   // Check if files exist and load data on component mount
   useEffect(() => {
@@ -120,15 +121,17 @@ export const ProductProvider = ({ children }) => {
     }
   }
 
-  // Function to initialize databases with default data
+  // Function to initialize databases with locale-specific data
   const initializeData = async () => {
     try {
       setLoading(true)
       
-      console.log('Initializing databases with default data')
+      // Get the current locale from Littera methods
+      const currentLocale = methods.locale || 'en_US'
+      console.log(`Initializing databases with ${currentLocale} data`)
       
-      // Initialize databases with default data
-      await initializeDatabases()
+      // Initialize databases with locale-specific data
+      await initializeDatabases(currentLocale)
       
       console.log('Databases initialized, updating state')
       

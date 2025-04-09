@@ -1,0 +1,329 @@
+{
+    "lastUpdate": "2025-04-09T12:25:15.070Z",
+    "baseCategories": [
+        {
+            "id": 1,
+            "productType": "Eau minérale",
+            "description": "Bouteilles de 1,5 litre, pour boire et cuisiner !",
+            "quantity": 75,
+            "preferences": [],
+            "usualExpiryCheckDays": 180,
+            "quantityOverride": "",
+            "defaultUnit": "bouteille de 1,5l"
+        },
+        {
+            "id": 2,
+            "productType": "Autres boissons",
+            "description": "Jus de fruits et légumes, boissons sucrées de 1 litre",
+            "quantity": 8,
+            "preferences": [],
+            "usualExpiryCheckDays": 60,
+            "defaultUnit": "bouteille de 1l"
+        },
+        {
+            "id": 3,
+            "productType": "Thé",
+            "description": "environ 100 g",
+            "quantity": 4,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": "100 g"
+        },
+        {
+            "id": 4,
+            "productType": "Café",
+            "description": "1 kg",
+            "quantity": 1,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": "1kg"
+        },
+        {
+            "id": 5,
+            "productType": "Lait ou alternative au lait",
+            "description": "1 litre",
+            "quantity": 8,
+            "preferences": [],
+            "usualExpiryCheckDays": 30,
+            "defaultUnit": "1l"
+        },
+        {
+            "id": 6,
+            "productType": "Légumes",
+            "description": "Légumes en conserve (maïs, tomates, champignons, petits pois et carottes) (environ 300 g)",
+            "quantity": 34,
+            "preferences": [],
+            "usualExpiryCheckDays": 180,
+            "defaultUnit": "boîtes de 300g"
+        },
+        {
+            "id": 7,
+            "productType": "Fruits",
+            "description": "Compote de pommes, ananas en conserve ou fruits secs (environ 300 g)",
+            "quantity": 27,
+            "preferences": [],
+            "usualExpiryCheckDays": 180,
+            "defaultUnit": "boîtes de 300g"
+        },
+        {
+            "id": 8,
+            "productType": "Sauces",
+            "description": "Sauce tomate, pesto, ketchup, mayonnaise, moutarde (environ 200 g)",
+            "quantity": 12,
+            "preferences": [],
+            "usualExpiryCheckDays": 180,
+            "defaultUnit": "contenants de 200g"
+        },
+        {
+            "id": 9,
+            "productType": "Soupes",
+            "description": "Cubes de bouillon, soupes prêtes à manger et lyophilisées avec tomates, vermicelles (environ 200 g)",
+            "quantity": 12,
+            "preferences": [],
+            "usualExpiryCheckDays": 180,
+            "defaultUnit": "paquets de 200g"
+        },
+        {
+            "id": 10,
+            "productType": "Céréales",
+            "description": "Pâtes, riz, galettes de riz, muesli ou alternative sans gluten (environ 500 g)",
+            "quantity": 15,
+            "preferences": [],
+            "usualExpiryCheckDays": 180,
+            "defaultUnit": "boîtes de 500g"
+        },
+        {
+            "id": 11,
+            "productType": "Plats préparés",
+            "description": "Risotto prêt à manger, rösti (environ 250 g)",
+            "quantity": 19,
+            "preferences": [],
+            "usualExpiryCheckDays": 180,
+            "defaultUnit": "paquets de 250g"
+        },
+        {
+            "id": 12,
+            "productType": "Légumineuses",
+            "description": "Pois chiches, haricots à la sauce tomate, lentilles en conserve ou séchées (environ 400 g)",
+            "quantity": 23,
+            "preferences": [],
+            "usualExpiryCheckDays": 180,
+            "defaultUnit": "boîtes de 400g"
+        },
+        {
+            "id": 13,
+            "productType": "Viande",
+            "description": "Viande séchée, jambon cru, salami, fromage italien en conserve (environ 100 g)",
+            "quantity": 12,
+            "preferences": [],
+            "usualExpiryCheckDays": 30,
+            "defaultUnit": "paquets de 100g"
+        },
+        {
+            "id": 14,
+            "productType": "Poisson",
+            "description": "Sardines en conserve, thon (environ 100 g)",
+            "quantity": 19,
+            "preferences": [],
+            "usualExpiryCheckDays": 60,
+            "defaultUnit": "boîtes de 100g"
+        },
+        {
+            "id": 15,
+            "productType": "Produits laitiers",
+            "description": "Fromages à pâte dure (environ 300 g)",
+            "quantity": 4,
+            "preferences": [],
+            "usualExpiryCheckDays": 30,
+            "defaultUnit": "paquets de 300g"
+        },
+        {
+            "id": 16,
+            "productType": "Noix",
+            "description": "Noix de cajou, amandes, noisettes (environ 200 g)",
+            "quantity": 4,
+            "preferences": [],
+            "usualExpiryCheckDays": 120,
+            "defaultUnit": "paquets de 200g"
+        },
+        {
+            "id": 17,
+            "productType": "Huile",
+            "description": "Huile d'olive, huile de colza (environ 1 L)",
+            "quantity": 1,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": "1l"
+        },
+        {
+            "id": 18,
+            "productType": "Épices",
+            "description": "Sel, poivre, sucre, édulcorant",
+            "quantity": 1,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": "paquets"
+        },
+        {
+            "id": 19,
+            "productType": "Collations",
+            "description": "Barres de céréales, sucreries, chocolat",
+            "quantity": 15,
+            "preferences": [],
+            "usualExpiryCheckDay": 30,
+            "defaultUnit": "paquets"
+        },
+        {
+            "id": 20,
+            "productType": "Soins corporels",
+            "description": "Savon, shampooing, déodorant, dentifrice",
+            "quantity": 3,
+            "preferences": [],
+            "usualExpiryCheckDays": 180,
+            "defaultUnit": "bouteilles"
+        },
+        {
+            "id": 21,
+            "productType": "Produits hygiéniques",
+            "description": "Protège-slips, tampons, serviettes hygiéniques",
+            "quantity": 3,
+            "preferences": [],
+            "usualExpiryCheckDays": 180,
+            "defaultUnit": "paquets"
+        },
+        {
+            "id": 22,
+            "productType": "Papier toilette",
+            "description": "Paquets",
+            "quantity": 3,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": "paquets multi-rouleaux"
+        },
+        {
+            "id": 23,
+            "productType": "Mouchoirs",
+            "description": "Paquets",
+            "quantity": 3,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": "multi-paquets"
+        },
+        {
+            "id": 24,
+            "productType": "Produits de nettoyage",
+            "description": "",
+            "quantity": 0,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": "bouteilles"
+        },
+        {
+            "id": 25,
+            "productType": "Masques",
+            "description": "",
+            "quantity": 150,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": "pièces"
+        },
+        {
+            "id": 26,
+            "productType": "Désinfectant pour les mains",
+            "description": "Environ 100 ml",
+            "quantity": 6,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": "flacon de 100ml"
+        },
+        {
+            "id": 27,
+            "productType": "Sacs poubelle",
+            "description": "",
+            "quantity": 3,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": "paquets"
+        },
+        {
+            "id": 28,
+            "productType": "Bougies",
+            "description": "",
+            "quantity": 14,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": "pièces"
+        },
+        {
+            "id": 29,
+            "productType": "Lampe de poche",
+            "description": "",
+            "quantity": 1,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": "pièces"
+        },
+        {
+            "id": 30,
+            "productType": "Réchaud à gaz",
+            "description": "",
+            "quantity": 1,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": "pièces"
+        },
+        {
+            "id": 31,
+            "productType": "Piles de rechange",
+            "description": "Paquets AA, AAA",
+            "quantity": 2,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": "paquets"
+        },
+        {
+            "id": 32,
+            "productType": "Radio à piles ou solaire",
+            "description": "",
+            "quantity": 1,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": "pièces"
+        },
+        {
+            "id": 33,
+            "productType": "Allumettes ou briquets",
+            "description": "",
+            "quantity": 2,
+            "preferences": [],
+            "usualExpiryCheckDays": 365
+        },
+        {
+            "id": 34,
+            "productType": "Thermomètre médical",
+            "description": "",
+            "quantity": 1,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": "pièces"
+        },
+        {
+            "id": 35,
+            "productType": "Ouvre-boîte",
+            "description": "",
+            "quantity": 1,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": "pièces"
+        },
+        {
+            "id": 36,
+            "productType": "Couteau de poche",
+            "description": "Couteaux suisses ou similaires",
+            "quantity": 2,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": "pièces"
+        }
+    ]
+}
