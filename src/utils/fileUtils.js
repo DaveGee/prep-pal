@@ -1,14 +1,23 @@
-// Import the locale-specific data for fallback in web browser environment
-import enUSProductCategories from '../data/productCategories-init_en_US.json'
-import frCHProductCategories from '../data/productCategories-init_fr_CH.json'
-import deCHProductCategories from '../data/productCategories-init_de_CH.json'
+// Import the template data with all languages for fallback in web browser environment
+import productCategoriesTemplate from '../data/productCategories_template.json'
 import defaultStock from '../data/stock.json'
 
-// Map of locale to product categories
-const localeProductCategories = {
-  'en_US': enUSProductCategories,
-  'fr_CH': frCHProductCategories,
-  'de_CH': deCHProductCategories
+// Function to get product categories for a specific locale
+const getLocalizedProductCategories = (locale = 'en_US') => {
+  // Create a deep copy of the template
+  const localizedData = JSON.parse(JSON.stringify(productCategoriesTemplate))
+  
+  // Transform each category to use the specified locale
+  localizedData.baseCategories = localizedData.baseCategories.map(category => {
+    return {
+      ...category,
+      productType: category.productType[locale] || category.productType['en_US'],
+      description: category.description[locale] || category.description['en_US'],
+      defaultUnit: category.defaultUnit ? (category.defaultUnit[locale] || category.defaultUnit['en_US']) : undefined
+    }
+  })
+  
+  return localizedData
 }
 
 // Check if running in Electron
@@ -248,8 +257,8 @@ export const deleteDatabases = async () => {
  */
 export const initializeDatabases = async (locale = 'en_US') => {
   try {
-    // Get the product categories for the specified locale, or fall back to en_US
-    const productCategories = localeProductCategories[locale] || localeProductCategories['en_US']
+    // Get the product categories for the specified locale
+    const productCategories = getLocalizedProductCategories(locale)
     
     await writeProductCategories(productCategories)
     await writeStock(defaultStock)

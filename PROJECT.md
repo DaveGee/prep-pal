@@ -5,7 +5,7 @@
 - [x] Stock item type model + recommended model
 - [x] Recommended screen from static file
 - [x] Load and save to disk / localstorage
-- [] Enable category edits (delete, add)
+- [] Enable category edits (delete, add, avg expirations)
 
 ## Current stock
 

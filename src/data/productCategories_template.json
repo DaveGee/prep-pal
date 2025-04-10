@@ -1,0 +1,762 @@
+{
+    "lastUpdate": "2025-04-09T12:25:15.070Z",
+    "baseCategories": [
+        {
+            "id": 1,
+            "productType": {
+                "en_US": "Mineral water",
+                "fr_CH": "Eau minérale",
+                "de_CH": "Mineralwasser"
+            },
+            "description": {
+                "en_US": "1.5 liter bottles, for drinking and cooking!",
+                "fr_CH": "Bouteilles de 1,5 litre, pour boire et cuisiner !",
+                "de_CH": "1,5-Liter-Flaschen, zum Trinken und Kochen!"
+            },
+            "quantity": 75,
+            "preferences": [],
+            "usualExpiryCheckDays": 180,
+            "quantityOverride": "",
+            "defaultUnit": {
+                "en_US": "1.5l bottle",
+                "fr_CH": "bouteille de 1,5l",
+                "de_CH": "1,5l Flasche"
+            }
+        },
+        {
+            "id": 2,
+            "productType": {
+                "en_US": "Other drinks",
+                "fr_CH": "Autres boissons",
+                "de_CH": "Andere Getränke"
+            },
+            "description": {
+                "en_US": "Fruit and vegetable juices, 1 liter sweetened drinks",
+                "fr_CH": "Jus de fruits et légumes, boissons sucrées de 1 litre",
+                "de_CH": "Obst- und Gemüsesäfte, 1-Liter-Süßgetränke"
+            },
+            "quantity": 8,
+            "preferences": [],
+            "usualExpiryCheckDays": 60,
+            "defaultUnit": {
+                "en_US": "1l bottle",
+                "fr_CH": "bouteille de 1l",
+                "de_CH": "1l Flasche"
+            }
+        },
+        {
+            "id": 3,
+            "productType": {
+                "en_US": "Tea",
+                "fr_CH": "Thé",
+                "de_CH": "Tee"
+            },
+            "description": {
+                "en_US": "approx. 100 g",
+                "fr_CH": "environ 100 g",
+                "de_CH": "ca. 100 g"
+            },
+            "quantity": 4,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": {
+                "en_US": "100 g",
+                "fr_CH": "100 g",
+                "de_CH": "100 g"
+            }
+        },
+        {
+            "id": 4,
+            "productType": {
+                "en_US": "Coffee",
+                "fr_CH": "Café",
+                "de_CH": "Kaffee"
+            },
+            "description": {
+                "en_US": "1 kg",
+                "fr_CH": "1 kg",
+                "de_CH": "1 kg"
+            },
+            "quantity": 1,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": {
+                "en_US": "1kg",
+                "fr_CH": "1kg",
+                "de_CH": "1kg"
+            }
+        },
+        {
+            "id": 5,
+            "productType": {
+                "en_US": "Milk or milk alternative",
+                "fr_CH": "Lait ou alternative au lait",
+                "de_CH": "Milch oder Milchalternative"
+            },
+            "description": {
+                "en_US": "1 liter",
+                "fr_CH": "1 litre",
+                "de_CH": "1 Liter"
+            },
+            "quantity": 8,
+            "preferences": [],
+            "usualExpiryCheckDays": 30,
+            "defaultUnit": {
+                "en_US": "1l",
+                "fr_CH": "1l",
+                "de_CH": "1l"
+            }
+        },
+        {
+            "id": 6,
+            "productType": {
+                "en_US": "Vegetables",
+                "fr_CH": "Légumes",
+                "de_CH": "Gemüse"
+            },
+            "description": {
+                "en_US": "Canned vegetables e.g. (corn, tomatoes, mushrooms, peas and carrots) (approx. 300 g)",
+                "fr_CH": "Légumes en conserve (maïs, tomates, champignons, petits pois et carottes) (environ 300 g)",
+                "de_CH": "Dosengemüse z.B. (Mais, Tomaten, Pilze, Erbsen und Karotten) (ca. 300 g)"
+            },
+            "quantity": 34,
+            "preferences": [],
+            "usualExpiryCheckDays": 180,
+            "defaultUnit": {
+                "en_US": "300g cans",
+                "fr_CH": "boîtes de 300g",
+                "de_CH": "300g Dosen"
+            }
+        },
+        {
+            "id": 7,
+            "productType": {
+                "en_US": "Fruits",
+                "fr_CH": "Fruits",
+                "de_CH": "Obst"
+            },
+            "description": {
+                "en_US": "Apple sauce, canned pineapple or dried fruit, e.g. (approx. 300 g)",
+                "fr_CH": "Compote de pommes, ananas en conserve ou fruits secs (environ 300 g)",
+                "de_CH": "Apfelmus, Ananas aus der Dose oder Trockenfrüchte, z.B. (ca. 300 g)"
+            },
+            "quantity": 27,
+            "preferences": [],
+            "usualExpiryCheckDays": 180,
+            "defaultUnit": {
+                "en_US": "300g cans",
+                "fr_CH": "boîtes de 300g",
+                "de_CH": "300g Dosen"
+            }
+        },
+        {
+            "id": 8,
+            "productType": {
+                "en_US": "Sauces",
+                "fr_CH": "Sauces",
+                "de_CH": "Saucen"
+            },
+            "description": {
+                "en_US": "Tomato sauce, pesto, ketchup, mayonnaise, mustard, e.g. (approx. 200 g)",
+                "fr_CH": "Sauce tomate, pesto, ketchup, mayonnaise, moutarde (environ 200 g)",
+                "de_CH": "Tomatensauce, Pesto, Ketchup, Mayonnaise, Senf, z.B. (ca. 200 g)"
+            },
+            "quantity": 12,
+            "preferences": [],
+            "usualExpiryCheckDays": 180,
+            "defaultUnit": {
+                "en_US": "200g containers",
+                "fr_CH": "contenants de 200g",
+                "de_CH": "200g Behälter"
+            }
+        },
+        {
+            "id": 9,
+            "productType": {
+                "en_US": "Soups",
+                "fr_CH": "Soupes",
+                "de_CH": "Suppen"
+            },
+            "description": {
+                "en_US": "Bouillon cubes, ready-to-eat and freeze-dried soups with tomatoes, vermicelli, e.g. (approx. 200 g)",
+                "fr_CH": "Cubes de bouillon, soupes prêtes à manger et lyophilisées avec tomates, vermicelles (environ 200 g)",
+                "de_CH": "Bouillonwürfel, verzehrfertige und gefriergetrocknete Suppen mit Tomaten, Fadennudeln, z.B. (ca. 200 g)"
+            },
+            "quantity": 12,
+            "preferences": [],
+            "usualExpiryCheckDays": 180,
+            "defaultUnit": {
+                "en_US": "200g packs",
+                "fr_CH": "paquets de 200g",
+                "de_CH": "200g Packungen"
+            }
+        },
+        {
+            "id": 10,
+            "productType": {
+                "en_US": "Cereals",
+                "fr_CH": "Céréales",
+                "de_CH": "Getreide"
+            },
+            "description": {
+                "en_US": "Pasta, rice, rice cakes, muesli, e.g., or gluten-free alternative (approx. 500 g)",
+                "fr_CH": "Pâtes, riz, galettes de riz, muesli ou alternative sans gluten (environ 500 g)",
+                "de_CH": "Nudeln, Reis, Reiswaffeln, Müsli, z.B. oder glutenfreie Alternative (ca. 500 g)"
+            },
+            "quantity": 15,
+            "preferences": [],
+            "usualExpiryCheckDays": 180,
+            "defaultUnit": {
+                "en_US": "500g boxes",
+                "fr_CH": "boîtes de 500g",
+                "de_CH": "500g Schachteln"
+            }
+        },
+        {
+            "id": 11,
+            "productType": {
+                "en_US": "Ready meals",
+                "fr_CH": "Plats préparés",
+                "de_CH": "Fertiggerichte"
+            },
+            "description": {
+                "en_US": "Ready-to-eat risotto, rösti, e.g. (approx. 250 g)",
+                "fr_CH": "Risotto prêt à manger, rösti (environ 250 g)",
+                "de_CH": "Verzehrfertiges Risotto, Rösti, z.B. (ca. 250 g)"
+            },
+            "quantity": 19,
+            "preferences": [],
+            "usualExpiryCheckDays": 180,
+            "defaultUnit": {
+                "en_US": "250g packs",
+                "fr_CH": "paquets de 250g",
+                "de_CH": "250g Packungen"
+            }
+        },
+        {
+            "id": 12,
+            "productType": {
+                "en_US": "Legumes",
+                "fr_CH": "Légumineuses",
+                "de_CH": "Hülsenfrüchte"
+            },
+            "description": {
+                "en_US": "Chickpeas, beans in tomato sauce, canned or dried lentils, e.g. (approx. 400 g)",
+                "fr_CH": "Pois chiches, haricots à la sauce tomate, lentilles en conserve ou séchées (environ 400 g)",
+                "de_CH": "Kichererbsen, Bohnen in Tomatensauce, Linsen in Dosen oder getrocknet, z.B. (ca. 400 g)"
+            },
+            "quantity": 23,
+            "preferences": [],
+            "usualExpiryCheckDays": 180,
+            "defaultUnit": {
+                "en_US": "400g cans",
+                "fr_CH": "boîtes de 400g",
+                "de_CH": "400g Dosen"
+            }
+        },
+        {
+            "id": 13,
+            "productType": {
+                "en_US": "Meat",
+                "fr_CH": "Viande",
+                "de_CH": "Fleisch"
+            },
+            "description": {
+                "en_US": "Dried meat, cured ham, salami, canned Italian cheese (approx. 100 g)",
+                "fr_CH": "Viande séchée, jambon cru, salami, fromage italien en conserve (environ 100 g)",
+                "de_CH": "Trockenfleisch, Rohschinken, Salami, italienischer Käse in Dosen (ca. 100 g)"
+            },
+            "quantity": 12,
+            "preferences": [],
+            "usualExpiryCheckDays": 30,
+            "defaultUnit": {
+                "en_US": "100g packs",
+                "fr_CH": "paquets de 100g",
+                "de_CH": "100g Packungen"
+            }
+        },
+        {
+            "id": 14,
+            "productType": {
+                "en_US": "Fish",
+                "fr_CH": "Poisson",
+                "de_CH": "Fisch"
+            },
+            "description": {
+                "en_US": "Canned sardines, tuna (approx. 100 g)",
+                "fr_CH": "Sardines en conserve, thon (environ 100 g)",
+                "de_CH": "Sardinen in Dosen, Thunfisch (ca. 100 g)"
+            },
+            "quantity": 19,
+            "preferences": [],
+            "usualExpiryCheckDays": 60,
+            "defaultUnit": {
+                "en_US": "100g cans",
+                "fr_CH": "boîtes de 100g",
+                "de_CH": "100g Dosen"
+            }
+        },
+        {
+            "id": 15,
+            "productType": {
+                "en_US": "Dairy products",
+                "fr_CH": "Produits laitiers",
+                "de_CH": "Milchprodukte"
+            },
+            "description": {
+                "en_US": "Hard cheeses (approx. 300 g)",
+                "fr_CH": "Fromages à pâte dure (environ 300 g)",
+                "de_CH": "Hartkäse (ca. 300 g)"
+            },
+            "quantity": 4,
+            "preferences": [],
+            "usualExpiryCheckDays": 30,
+            "defaultUnit": {
+                "en_US": "300g packs",
+                "fr_CH": "paquets de 300g",
+                "de_CH": "300g Packungen"
+            }
+        },
+        {
+            "id": 16,
+            "productType": {
+                "en_US": "Nuts",
+                "fr_CH": "Noix",
+                "de_CH": "Nüsse"
+            },
+            "description": {
+                "en_US": "Cashews, almonds, hazelnuts (approx. 200 g)",
+                "fr_CH": "Noix de cajou, amandes, noisettes (environ 200 g)",
+                "de_CH": "Cashewnüsse, Mandeln, Haselnüsse (ca. 200 g)"
+            },
+            "quantity": 4,
+            "preferences": [],
+            "usualExpiryCheckDays": 120,
+            "defaultUnit": {
+                "en_US": "200g packs",
+                "fr_CH": "paquets de 200g",
+                "de_CH": "200g Packungen"
+            }
+        },
+        {
+            "id": 17,
+            "productType": {
+                "en_US": "Oil",
+                "fr_CH": "Huile",
+                "de_CH": "Öl"
+            },
+            "description": {
+                "en_US": "Olive oil, rapeseed oil (approx. 1 L)",
+                "fr_CH": "Huile d'olive, huile de colza (environ 1 L)",
+                "de_CH": "Olivenöl, Rapsöl (ca. 1 L)"
+            },
+            "quantity": 1,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": {
+                "en_US": "1l",
+                "fr_CH": "1l",
+                "de_CH": "1l"
+            }
+        },
+        {
+            "id": 18,
+            "productType": {
+                "en_US": "Spices",
+                "fr_CH": "Épices",
+                "de_CH": "Gewürze"
+            },
+            "description": {
+                "en_US": "Salt, pepper, sugar, sweetener",
+                "fr_CH": "Sel, poivre, sucre, édulcorant",
+                "de_CH": "Salz, Pfeffer, Zucker, Süßstoff"
+            },
+            "quantity": 1,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": {
+                "en_US": "packs",
+                "fr_CH": "paquets",
+                "de_CH": "Packungen"
+            }
+        },
+        {
+            "id": 19,
+            "productType": {
+                "en_US": "Snacks",
+                "fr_CH": "Collations",
+                "de_CH": "Snacks"
+            },
+            "description": {
+                "en_US": "Cereal bars, sweet foods, chocolate",
+                "fr_CH": "Barres de céréales, sucreries, chocolat",
+                "de_CH": "Müsliriegel, Süßigkeiten, Schokolade"
+            },
+            "quantity": 15,
+            "preferences": [],
+            "usualExpiryCheckDay": 30,
+            "defaultUnit": {
+                "en_US": "packs",
+                "fr_CH": "paquets",
+                "de_CH": "Packungen"
+            }
+        },
+        {
+            "id": 20,
+            "productType": {
+                "en_US": "Body care",
+                "fr_CH": "Soins corporels",
+                "de_CH": "Körperpflege"
+            },
+            "description": {
+                "en_US": "Soap, shampoo, deodorant, toothpaste",
+                "fr_CH": "Savon, shampooing, déodorant, dentifrice",
+                "de_CH": "Seife, Shampoo, Deodorant, Zahnpasta"
+            },
+            "quantity": 3,
+            "preferences": [],
+            "usualExpiryCheckDays": 180,
+            "defaultUnit": {
+                "en_US": "bottles",
+                "fr_CH": "bouteilles",
+                "de_CH": "Flaschen"
+            }
+        },
+        {
+            "id": 21,
+            "productType": {
+                "en_US": "Sanitary products",
+                "fr_CH": "Produits hygiéniques",
+                "de_CH": "Hygieneprodukte"
+            },
+            "description": {
+                "en_US": "Panty liners, tampons, sanitary pads",
+                "fr_CH": "Protège-slips, tampons, serviettes hygiéniques",
+                "de_CH": "Slipeinlagen, Tampons, Damenbinden"
+            },
+            "quantity": 3,
+            "preferences": [],
+            "usualExpiryCheckDays": 180,
+            "defaultUnit": {
+                "en_US": "packs",
+                "fr_CH": "paquets",
+                "de_CH": "Packungen"
+            }
+        },
+        {
+            "id": 22,
+            "productType": {
+                "en_US": "Toilet paper",
+                "fr_CH": "Papier toilette",
+                "de_CH": "Toilettenpapier"
+            },
+            "description": {
+                "en_US": "Packs",
+                "fr_CH": "Paquets",
+                "de_CH": "Packungen"
+            },
+            "quantity": 3,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": {
+                "en_US": "Multi-roll packs",
+                "fr_CH": "paquets multi-rouleaux",
+                "de_CH": "Mehrfachrollen-Packungen"
+            }
+        },
+        {
+            "id": 23,
+            "productType": {
+                "en_US": "Tissues",
+                "fr_CH": "Mouchoirs",
+                "de_CH": "Taschentücher"
+            },
+            "description": {
+                "en_US": "Packs",
+                "fr_CH": "Paquets",
+                "de_CH": "Packungen"
+            },
+            "quantity": 3,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": {
+                "en_US": "Multi-packs",
+                "fr_CH": "multi-paquets",
+                "de_CH": "Mehrfach-Packungen"
+            }
+        },
+        {
+            "id": 24,
+            "productType": {
+                "en_US": "Cleaning products",
+                "fr_CH": "Produits de nettoyage",
+                "de_CH": "Reinigungsmittel"
+            },
+            "description": {
+                "en_US": "",
+                "fr_CH": "",
+                "de_CH": ""
+            },
+            "quantity": 0,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": {
+                "en_US": "bottles",
+                "fr_CH": "bouteilles",
+                "de_CH": "Flaschen"
+            }
+        },
+        {
+            "id": 25,
+            "productType": {
+                "en_US": "Masks",
+                "fr_CH": "Masques",
+                "de_CH": "Masken"
+            },
+            "description": {
+                "en_US": "",
+                "fr_CH": "",
+                "de_CH": ""
+            },
+            "quantity": 150,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": {
+                "en_US": "pieces",
+                "fr_CH": "pièces",
+                "de_CH": "Stück"
+            }
+        },
+        {
+            "id": 26,
+            "productType": {
+                "en_US": "Hand sanitizer",
+                "fr_CH": "Désinfectant pour les mains",
+                "de_CH": "Handdesinfektionsmittel"
+            },
+            "description": {
+                "en_US": "Approx. 100 ml",
+                "fr_CH": "Environ 100 ml",
+                "de_CH": "Ca. 100 ml"
+            },
+            "quantity": 6,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": {
+                "en_US": "100ml bottle",
+                "fr_CH": "flacon de 100ml",
+                "de_CH": "100ml Flasche"
+            }
+        },
+        {
+            "id": 27,
+            "productType": {
+                "en_US": "Garbage bags",
+                "fr_CH": "Sacs poubelle",
+                "de_CH": "Müllbeutel"
+            },
+            "description": {
+                "en_US": "",
+                "fr_CH": "",
+                "de_CH": ""
+            },
+            "quantity": 3,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": {
+                "en_US": "packs",
+                "fr_CH": "paquets",
+                "de_CH": "Packungen"
+            }
+        },
+        {
+            "id": 28,
+            "productType": {
+                "en_US": "Candles",
+                "fr_CH": "Bougies",
+                "de_CH": "Kerzen"
+            },
+            "description": {
+                "en_US": "",
+                "fr_CH": "",
+                "de_CH": ""
+            },
+            "quantity": 14,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": {
+                "en_US": "pieces",
+                "fr_CH": "pièces",
+                "de_CH": "Stück"
+            }
+        },
+        {
+            "id": 29,
+            "productType": {
+                "en_US": "Flashlight",
+                "fr_CH": "Lampe de poche",
+                "de_CH": "Taschenlampe"
+            },
+            "description": {
+                "en_US": "",
+                "fr_CH": "",
+                "de_CH": ""
+            },
+            "quantity": 1,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": {
+                "en_US": "pieces",
+                "fr_CH": "pièces",
+                "de_CH": "Stück"
+            }
+        },
+        {
+            "id": 30,
+            "productType": {
+                "en_US": "Gas stove",
+                "fr_CH": "Réchaud à gaz",
+                "de_CH": "Gaskocher"
+            },
+            "description": {
+                "en_US": "",
+                "fr_CH": "",
+                "de_CH": ""
+            },
+            "quantity": 1,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": {
+                "en_US": "pieces",
+                "fr_CH": "pièces",
+                "de_CH": "Stück"
+            }
+        },
+        {
+            "id": 31,
+            "productType": {
+                "en_US": "Spare batteries",
+                "fr_CH": "Piles de rechange",
+                "de_CH": "Ersatzbatterien"
+            },
+            "description": {
+                "en_US": "Packs AA, AAA",
+                "fr_CH": "Paquets AA, AAA",
+                "de_CH": "Packungen AA, AAA"
+            },
+            "quantity": 2,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": {
+                "en_US": "packs",
+                "fr_CH": "paquets",
+                "de_CH": "Packungen"
+            }
+        },
+        {
+            "id": 32,
+            "productType": {
+                "en_US": "Battery or solar radio",
+                "fr_CH": "Radio à piles ou solaire",
+                "de_CH": "Batterie- oder Solarradio"
+            },
+            "description": {
+                "en_US": "",
+                "fr_CH": "",
+                "de_CH": ""
+            },
+            "quantity": 1,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": {
+                "en_US": "pieces",
+                "fr_CH": "pièces",
+                "de_CH": "Stück"
+            }
+        },
+        {
+            "id": 33,
+            "productType": {
+                "en_US": "Matches or lighters",
+                "fr_CH": "Allumettes ou briquets",
+                "de_CH": "Streichhölzer oder Feuerzeuge"
+            },
+            "description": {
+                "en_US": "",
+                "fr_CH": "",
+                "de_CH": ""
+            },
+            "quantity": 2,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": {
+                "en_US": "pieces",
+                "fr_CH": "pièces",
+                "de_CH": "Stück"
+            }
+        },
+        {
+            "id": 34,
+            "productType": {
+                "en_US": "Medical thermometer",
+                "fr_CH": "Thermomètre médical",
+                "de_CH": "Medizinisches Thermometer"
+            },
+            "description": {
+                "en_US": "",
+                "fr_CH": "",
+                "de_CH": ""
+            },
+            "quantity": 1,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": {
+                "en_US": "pieces",
+                "fr_CH": "pièces",
+                "de_CH": "Stück"
+            }
+        },
+        {
+            "id": 35,
+            "productType": {
+                "en_US": "Can opener",
+                "fr_CH": "Ouvre-boîte",
+                "de_CH": "Dosenöffner"
+            },
+            "description": {
+                "en_US": "",
+                "fr_CH": "",
+                "de_CH": ""
+            },
+            "quantity": 1,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": {
+                "en_US": "pieces",
+                "fr_CH": "pièces",
+                "de_CH": "Stück"
+            }
+        },
+        {
+            "id": 36,
+            "productType": {
+                "en_US": "Pocket knife",
+                "fr_CH": "Couteau de poche",
+                "de_CH": "Taschenmesser"
+            },
+            "description": {
+                "en_US": "Swiss knifes or similar",
+                "fr_CH": "Couteaux suisses ou similaires",
+                "de_CH": "Schweizer Messer oder ähnliches"
+            },
+            "quantity": 2,
+            "preferences": [],
+            "usualExpiryCheckDays": 365,
+            "defaultUnit": {
+                "en_US": "pieces",
+                "fr_CH": "pièces",
+                "de_CH": "Stück"
+            }
+        }
+    ]
+}
