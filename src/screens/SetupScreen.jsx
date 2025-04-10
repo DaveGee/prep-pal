@@ -1,7 +1,9 @@
 import React from 'react'
 import { useLittera } from '@assembless/react-littera'
-import { Container, Divider, Title, Box, Button, Text } from '@mantine/core'
+import { Container, Divider, Title, Text } from '@mantine/core'
 import { useProductContext } from '../context/ProductContext'
+import InitDatabases from '../components/InitDatabases'
+import ResetDatabases from '../components/ResetDatabases'
 
 const translations = {
   title: {
@@ -13,31 +15,6 @@ const translations = {
     fr_CH: "Fichiers",
     de_CH: "Dateien",
     en_US: "Databases"
-  },
-  categoriesFile: (date, count) => ({
-    fr_CH: `Fichier des catégories (${date}, ${count} catégories)`,
-    de_CH: `Kategorien-Datei (${date}, ${count} Kategorien)`,
-    en_US: `Categories file (${date}, ${count} categories)`
-  }),
-  productsFile: (date, count) => ({
-    fr_CH: `Fichier des produits (${date}, ${count} produits)`,
-    de_CH: `Produktdatei (${date}, ${count} Produkte)`,
-    en_US: `Products file (${date}, ${count} products)`
-  }),
-  reset: {
-    fr_CH: "Supprimer les bases de données",
-    de_CH: "Datenbanken löschen",
-    en_US: "Delete databases"
-  },
-  noFileFound: {
-    fr_CH: "Aucun fichier trouvé",
-    de_CH: "Keine Datei gefunden",
-    en_US: "No file found"
-  },
-  initDatabases: {
-    fr_CH: "Initialiser les bases de données",
-    de_CH: "Datenbanken initialisieren",
-    en_US: "Initialize databases"
   }
 }
 
@@ -46,9 +23,7 @@ function SetupScreen() {
   const { 
     productData, 
     loading, 
-    filesExist, 
-    initializeData, 
-    resetDatabases 
+    filesExist 
   } = useProductContext()
 
   // Both files need to exist for the setup to be considered complete
@@ -61,14 +36,6 @@ function SetupScreen() {
   
   const categoriesCount = productData.baseCategories.length
   const productsCount = productData.stock.products.length
-
-  const handleInitDatabases = async () => {
-    await initializeData()
-  }
-
-  const handleResetDatabases = async () => {
-    await resetDatabases()
-  }
 
   // If still loading, show a loading message
   if (loading) {
@@ -86,20 +53,13 @@ function SetupScreen() {
       <Divider />
       <Title order={3} mt="md">{translated.files}</Title>
       {bothFilesExist ? (
-        <Box>
-          <Text my="xs">{translated.categoriesFile(fileDate, categoriesCount)}</Text>
-          <Text my="xs">{translated.productsFile(fileDate, productsCount)}</Text>
-          <Button my="xs" color="red" onClick={handleResetDatabases}>
-            {translated.reset}
-          </Button>
-        </Box>
+        <ResetDatabases 
+          fileDate={fileDate} 
+          categoriesCount={categoriesCount} 
+          productsCount={productsCount} 
+        />
       ) : (
-        <Box>
-          <Text my="xs">{translated.noFileFound}</Text>
-          <Button my="xs" color="blue" onClick={handleInitDatabases}>
-            {translated.initDatabases}
-          </Button>
-        </Box>
+        <InitDatabases />
       )}
     </Container>
   )

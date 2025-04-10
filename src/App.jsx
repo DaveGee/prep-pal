@@ -1,5 +1,5 @@
 import React from 'react'
-import { AppShell, Burger, Group, Title, Image, NavLink, UnstyledButton, Divider, Code, Stack } from '@mantine/core'
+import { Text, AppShell, Burger, Group, Title, Image, NavLink, UnstyledButton, Divider, Code, Stack } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { HashRouter, useLocation } from 'react-router-dom'
 import AppRoutes from './Routes'
@@ -10,7 +10,7 @@ import RecommendedScreen from './screens/RecommendedScreen'
 import CurrentScreen from './screens/CurrentScreen'
 import ShoppingListScreen from './screens/ShoppingListScreen'
 
-import { Gear, Star, List, ShoppingCart } from '@phosphor-icons/react'
+import { Gear, Package, JarLabel, ShoppingCart } from '@phosphor-icons/react'
 
 import { useLittera, useLitteraMethods } from '@assembless/react-littera'
 
@@ -46,9 +46,8 @@ const translations = {
 }
 
 const routes = [
-  { id: 'setup', icon: Gear, link: '/setup', component: SetupScreen },
-  { id: 'categories', icon: Star, link: '/recommended', component: RecommendedScreen },
-  { id: 'manageStock', icon: List, link: '/current', component: CurrentScreen },
+  { id: 'categories', icon: Package, link: '/recommended', component: RecommendedScreen },
+  { id: 'manageStock', icon: JarLabel, link: '/current', component: CurrentScreen },
   { id: 'shoppingList', icon: ShoppingCart, link: '/shopping-list', component: ShoppingListScreen }
 ]
 
@@ -111,11 +110,9 @@ function AppContent() {
               <UnstyledButton
                 key={button.locale}
                 c={methods.locale === button.locale ? "blue" : "black"}
-                size="xs"
-                fs="xs"
                 onClick={handleLocaleChange(button.locale)}
               >
-                {button.label}
+                <Text size="xs">{button.label}</Text>
               </UnstyledButton>
             ))}
           </Group>

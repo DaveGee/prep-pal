@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Container, Table, Title, Loader, Alert, Text, Button, UnstyledButton, Tooltip } from '@mantine/core'
+import InitDatabases from '../components/InitDatabases'
 import { Square, StackPlus, Tag, Hash, Printer, Eye, EyeClosed } from '@phosphor-icons/react'
 import { useProductContext } from '../context/ProductContext'
 import classes from './ShoppingListScreen.module.css'
@@ -44,7 +45,7 @@ const translations = {
 }
 
 function ShoppingListScreen() {
-  const { productData, loading, error } = useProductContext()
+  const { productData, loading, error, filesExist } = useProductContext()
   const [shoppingListData, setShoppingListData] = useState([])
   const [hiddenItems, setHiddenItems] = useState({})
 
@@ -147,8 +148,10 @@ function ShoppingListScreen() {
         </Alert>
       )}
       
-      {/* Show loading indicator */}
-      {loading ? (
+      {/* Check if databases exist */}
+      {!filesExist.categories ? (
+        <InitDatabases />
+      ) : loading ? (
         <div style={{ display: 'flex', justifyContent: 'center', padding: '2rem' }}>
           <Loader size="xl" />
         </div>

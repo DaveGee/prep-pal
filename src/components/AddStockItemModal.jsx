@@ -6,7 +6,8 @@ import {
   Button, 
   Group, 
   Stack,
-  Text
+  Text, 
+  FocusTrap
 } from '@mantine/core'
 import { useProductContext } from '../context/ProductContext'
 import { getTodayFormatted, addDays } from '../utils/dateUtils'
@@ -23,11 +24,6 @@ const translations = {
     fr_CH: "Nom du produit",
     de_CH: "Produktname",
     en_US: "Product name"
-  },
-  onlineStoreLink: {
-    fr_CH: "Lien vers la boutique en ligne (facultatif)",
-    de_CH: "Link zum Online-Shop (optional)",
-    en_US: "Online store link (optional)"
   },
   quantity: {
     fr_CH: "Quantité",
@@ -83,7 +79,6 @@ const translations = {
 
 function AddStockItemModal({ opened, onClose, categoryId, categoryName }) {
   const [description, setDescription] = useState('')
-  const [onlineStoreLink, setOnlineStoreLink] = useState('')
   const [quantity, setQuantity] = useState(1)
   const { productData, saveStockData } = useProductContext()
   
@@ -107,7 +102,6 @@ function AddStockItemModal({ opened, onClose, categoryId, categoryName }) {
         typeId: categoryId,
         description,
         quantity,
-        onlineStoreLink: onlineStoreLink || '',
         checkedDate: getTodayFormatted(),
         nextCheck: addDays(getTodayFormatted(), checkDays),
         computedNextCheck: addDays(getTodayFormatted(), checkDays),
@@ -135,7 +129,6 @@ function AddStockItemModal({ opened, onClose, categoryId, categoryName }) {
       if (success) {
         // Reset form and close modal
         setDescription('')
-        setOnlineStoreLink('')
         setQuantity(1)
         onClose()
       }
@@ -157,33 +150,39 @@ function AddStockItemModal({ opened, onClose, categoryId, categoryName }) {
       size="md"
     >
       <Stack spacing="md">
-        <Text size="sm" c="dimmed">
-          {translated.addItemToStock(categoryName)}
-        </Text>
-        
-        <TextInput
-          label={translated.productName}
-          placeholder={translated.productNamePlaceholder}
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          required
-        />
-        
-        <TextInput
-          label={translated.onlineStoreLink}
-          placeholder="https://..."
-          value={onlineStoreLink}
-          onChange={(e) => setOnlineStoreLink(e.target.value)}
-        />
-        
-        <NumberInput
-          label={translated.quantity}
-          placeholder={translated.quantityPlaceholder}
-          value={quantity}
-          onChange={setQuantity}
-          min={1}
-          required
-        />
+        <FocusTrap active={true}>
+          <Text size="sm" c="dimmed">
+            {translated.addItemToStock(categoryName)}
+          </Text>
+          
+          <TextInput
+            label={translated.productName}
+            placeholder={translated.productNamePlaceholder}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && description && quantity >= 1) {
+                handleSubmit();
+              }
+            }}
+            required
+            data-autofocus
+          />
+          
+          <NumberInput
+            label={translated.quantity}
+            placeholder={translated.quantityPlaceholder}
+            value={quantity}
+            onChange={setQuantity}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && description && quantity >= 1) {
+                handleSubmit();
+              }
+            }}
+            min={1}
+            required
+          />
+        </FocusTrap>
         
         <Group position="right" mt="md">
           <Button variant="outline" onClick={onClose}>{translated.cancel}</Button>

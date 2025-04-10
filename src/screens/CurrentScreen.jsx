@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react'
-import { Container, Title, Table, Loader, Tooltip, useMantineTheme, ActionIcon, Group, Anchor, Text, NumberInput } from '@mantine/core'
+import { Container, Title, Table, Loader, Tooltip, useMantineTheme, ActionIcon, Group, Text, NumberInput } from '@mantine/core'
+import InitDatabases from '../components/InitDatabases'
 import { useDebouncedCallback } from '@mantine/hooks'
 import { useProductContext } from '../context/ProductContext'
 import { Biohazard, CalendarCheck, Trash, Info, Warning, PlusCircle, WarningDiamond } from '@phosphor-icons/react'
@@ -7,6 +8,7 @@ import { isTodayAfter } from '../utils/dateUtils'
 import AddStockItemModal from '../components/AddStockItemModal'
 import { setSaveStatus } from '../utils/notificationUtils'
 import { useLittera } from '@assembless/react-littera'
+import ResetDatabases from '../components/ResetDatabases'
 
 const translations = {
   title: {
@@ -104,11 +106,6 @@ const translations = {
     de_CH: `Löschen ${itemDescription}`,
     en_US: `Delete ${itemDescription}`,
   }),
-  noProductsMessage: {
-    fr_CH: "Veuillez créer une base de données de stock dans la configuration pour utiliser cette fonctionnalité.",
-    de_CH: "Bitte erstellen Sie eine Bestandsdatenbank in der Konfiguration, um diese Funktion zu nutzen.",
-    en_US: "Create a stock database in Setup to use this feature."
-  },
 }
 
 const LOW_STOCK_THRESHOLD = 65
@@ -301,7 +298,7 @@ function CurrentScreen() {
               )}
             </Group>
           </Table.Td>
-          <Table.Td colSpan={2}>
+          <Table.Td>
             <Group gap="xs">
             <Text fw={700} c="blue.4">{group.category.productType}</Text>
               {group.category.usualExpiryCheckDays && (
@@ -349,13 +346,11 @@ function CurrentScreen() {
                 )}
               </Group>
             </Table.Td>
-            <Table.Td>{item.description}</Table.Td>
             <Table.Td>
-              {item.onlineStoreLink && (
-                <Anchor size="sm" href={item.onlineStoreLink} target="_blank" rel="noopener noreferrer" tabIndex="-1">
-                  {item.onlineStoreLink}
-                </Anchor>
-              )}
+              <Group gap="xs">
+                <Text>{item.description}</Text>
+                <Text size="xs" c="dimmed">(checked: {item.checkedDate})</Text>
+              </Group>
             </Table.Td>
             <Table.Td>
               <NumberInput
@@ -389,7 +384,10 @@ function CurrentScreen() {
 
   return (
     <Container fluid>
-      <Title order={1} mb="md">{translated.title}</Title>
+      <Group gap="xs" mb="md" align="flex-start" justify='space-between'>
+        <Title order={1}>{translated.title}</Title>
+        <ResetDatabases />
+      </Group>
       
       {filesExist.categories ? (
         <>
@@ -403,7 +401,6 @@ function CurrentScreen() {
                 <Table.Tr>
                   <Table.Th></Table.Th>
                   <Table.Th>{translated.product}</Table.Th>
-                  <Table.Th></Table.Th>
                   <Table.Th>{translated.quantity}</Table.Th>
                   <Table.Th></Table.Th>
                 </Table.Tr>
@@ -422,9 +419,7 @@ function CurrentScreen() {
           )}
         </>
       ) : (
-        <Text size="sm" c="red" mb="md">
-          {translated.noProductsMessage}
-        </Text>
+        <InitDatabases />
       )}
     </Container>
   )

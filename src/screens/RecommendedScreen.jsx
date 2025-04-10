@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { Container, NumberInput, Table, Title, Text, Button, Group, Loader, Alert } from '@mantine/core'
+import InitDatabases from '../components/InitDatabases'
 import { useProductContext } from '../context/ProductContext'
 import { useDebouncedCallback } from '@mantine/hooks'
 import { setSaveStatus } from '../utils/notificationUtils'
 import { useLittera } from '@assembless/react-littera'
+import ResetDatabases from '../components/ResetDatabases'
 
 const translations = {
   title: {
@@ -56,11 +58,6 @@ const translations = {
     de_CH: "Überschreiben",
     en_US: "Override"
   },
-  noCategoriesMessage: {
-    fr_CH: "Veuillez créer une base de données de catégories dans l'écran de configuration pour utiliser cette fonctionnalité.",
-    de_CH: "Bitte erstellen Sie eine Datenbank mit Kategorien im Setup-Bildschirm, um diese Funktion zu nutzen.",
-    en_US: "Create a database of categories in Setup screen to use this feature."
-  }
 }
 
 function RecommendedScreen() {
@@ -142,7 +139,10 @@ function RecommendedScreen() {
 
   return (
     <Container fluid>
-      <Title order={1} mb="md">{translated.title}</Title>
+      <Group gap="xs" mb="md" align="flex-start" justify='space-between'>
+        <Title order={1}>{translated.title}</Title>
+        <ResetDatabases />
+      </Group>
       
       {/* Show error message if there's an error */}
       {error && (
@@ -180,9 +180,7 @@ function RecommendedScreen() {
           )}
         </>
       ) : (
-        <Text size="sm" c="red" mb="md">
-          {translated.noCategoriesMessage}
-        </Text>
+        <InitDatabases />
       )}
     </Container>
   )
