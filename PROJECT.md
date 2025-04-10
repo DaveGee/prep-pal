@@ -1,11 +1,27 @@
-# Tasks
+# Tasks for MVP
+
+- [] Online buying: 
+    - [] Move the link attribute to the categories
+    - [] Add the function to the categories (in stock management and categories)
+- [] remove setup page
+    - [] Initialize widget on each page that is empty
+    - [] Reset button in the categories page (top)
+    - [] Database files information in the menu?
+- [] Categories
+    - [] Edit categories: add link, change unit, avg expiry
+    - [] Remove, add categories
+- [] Add a simple calculator based on nb of people in house
+- [] Check if it works well on tablet (interactions)
+- [] Export + import files (categories + stock)
+- [] Landing page
+
+# Previous
 
 ## Recommendation
 
 - [x] Stock item type model + recommended model
 - [x] Recommended screen from static file
 - [x] Load and save to disk / localstorage
-- [] Enable category edits (delete, add, avg expirations)
 
 ## Current stock
 
@@ -17,8 +33,6 @@
 - [] Differentiate products for consumptions (expiry date) and for usage (check date)
     - [] Check expiry date for consumption products that might be expired according to `lastCheck + avg expiry = expired potentially`
     - [] Check date for items without expiry (`lastCheck + avg expiry = recheck!`)
-- [] Check if it works well on tablet (interactions)
-- [] Follow link to buy online (show links from products usually associated with the category OR links configured in setup)
 
 ## Shopping list
 
@@ -28,13 +42,7 @@
 
 ## Setup screen
 
-- [] Shopping setup. Eg default links for categories, to replenish stock buying online
-- [] Generate default files wizard (categories)
-    - [] Calculator (simple, or based on confederation) -> generate default category list
-    - [] first version is in the language chosen "now" -> categories and product names are not translated afterwards.
-    - [] For stocks: file existence should be not just about "empty list" as stock will be empty at first (or add another data in the file like the date)
 - [x] Add possibility to delete the file to restart from scratch
-- [] Export + import files (categories + stock)
 
 ## Misc
 
@@ -42,7 +50,6 @@
 - [] better error display management
 - [] Add a profile ID (prepare for login)
 - [] Complete redesign
-- [] Landing page
 
 ## Later 
 
@@ -52,7 +59,7 @@
 - [] QR Code to get shopping list on Mobile 
 - [] QR code to be able to manage stock on mobile
 
-### Cloud only
+### Cloud only, once identified
 
 - [] Notifications (mobile? SMS? Email?) -> check stock and expiry
 - [] Social recommendation: what other are buying for default categories (require unique ID of categories)
