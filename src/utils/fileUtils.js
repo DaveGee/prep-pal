@@ -1,6 +1,7 @@
 // Import the template data with all languages for fallback in web browser environment
 import productCategoriesTemplate from '../data/productCategories_template.json'
 import defaultStock from '../data/stock.json'
+import { isElectron } from './browserUtils'
 
 // Function to get product categories for a specific locale
 const getLocalizedProductCategories = (locale = 'en_US') => {
@@ -18,11 +19,6 @@ const getLocalizedProductCategories = (locale = 'en_US') => {
   })
   
   return localizedData
-}
-
-// Check if running in Electron
-const isElectron = () => {
-  return window && window.process && window.process.type
 }
 
 // Local storage keys

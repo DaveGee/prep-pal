@@ -3,6 +3,7 @@
     "baseCategories": [
         {
             "id": 1,
+            "onlineShopLink": [],
             "productType": {
                 "en_US": "Mineral water",
                 "fr_CH": "Eau minérale",
@@ -25,6 +26,7 @@
         },
         {
             "id": 2,
+            "onlineShopLink": [],
             "productType": {
                 "en_US": "Other drinks",
                 "fr_CH": "Autres boissons",
@@ -46,6 +48,7 @@
         },
         {
             "id": 3,
+            "onlineShopLink": [],
             "productType": {
                 "en_US": "Tea",
                 "fr_CH": "Thé",
@@ -67,6 +70,7 @@
         },
         {
             "id": 4,
+            "onlineShopLink": [],
             "productType": {
                 "en_US": "Coffee",
                 "fr_CH": "Café",
@@ -88,6 +92,7 @@
         },
         {
             "id": 5,
+            "onlineShopLink": [],
             "productType": {
                 "en_US": "Milk or milk alternative",
                 "fr_CH": "Lait ou alternative au lait",
@@ -109,6 +114,7 @@
         },
         {
             "id": 6,
+            "onlineShopLink": [],
             "productType": {
                 "en_US": "Vegetables",
                 "fr_CH": "Légumes",
@@ -130,6 +136,7 @@
         },
         {
             "id": 7,
+            "onlineShopLink": [],
             "productType": {
                 "en_US": "Fruits",
                 "fr_CH": "Fruits",
@@ -151,6 +158,7 @@
         },
         {
             "id": 8,
+            "onlineShopLink": [],
             "productType": {
                 "en_US": "Sauces",
                 "fr_CH": "Sauces",
@@ -172,6 +180,7 @@
         },
         {
             "id": 9,
+            "onlineShopLink": [],
             "productType": {
                 "en_US": "Soups",
                 "fr_CH": "Soupes",
@@ -193,6 +202,7 @@
         },
         {
             "id": 10,
+            "onlineShopLink": [],
             "productType": {
                 "en_US": "Cereals",
                 "fr_CH": "Céréales",
@@ -214,6 +224,7 @@
         },
         {
             "id": 11,
+            "onlineShopLink": [],
             "productType": {
                 "en_US": "Ready meals",
                 "fr_CH": "Plats préparés",
@@ -235,6 +246,7 @@
         },
         {
             "id": 12,
+            "onlineShopLink": [],
             "productType": {
                 "en_US": "Legumes",
                 "fr_CH": "Légumineuses",
@@ -256,6 +268,7 @@
         },
         {
             "id": 13,
+            "onlineShopLink": [],
             "productType": {
                 "en_US": "Meat",
                 "fr_CH": "Viande",
@@ -277,6 +290,7 @@
         },
         {
             "id": 14,
+            "onlineShopLink": [],
             "productType": {
                 "en_US": "Fish",
                 "fr_CH": "Poisson",
@@ -298,6 +312,7 @@
         },
         {
             "id": 15,
+            "onlineShopLink": [],
             "productType": {
                 "en_US": "Dairy products",
                 "fr_CH": "Produits laitiers",
@@ -319,6 +334,7 @@
         },
         {
             "id": 16,
+            "onlineShopLink": [],
             "productType": {
                 "en_US": "Nuts",
                 "fr_CH": "Noix",
@@ -340,6 +356,7 @@
         },
         {
             "id": 17,
+            "onlineShopLink": [],
             "productType": {
                 "en_US": "Oil",
                 "fr_CH": "Huile",
@@ -361,6 +378,7 @@
         },
         {
             "id": 18,
+            "onlineShopLink": [],
             "productType": {
                 "en_US": "Spices",
                 "fr_CH": "Épices",
@@ -382,6 +400,7 @@
         },
         {
             "id": 19,
+            "onlineShopLink": [],
             "productType": {
                 "en_US": "Snacks",
                 "fr_CH": "Collations",
@@ -403,6 +422,7 @@
         },
         {
             "id": 20,
+            "onlineShopLink": [],
             "productType": {
                 "en_US": "Body care",
                 "fr_CH": "Soins corporels",
@@ -424,6 +444,7 @@
         },
         {
             "id": 21,
+            "onlineShopLink": [],
             "productType": {
                 "en_US": "Sanitary products",
                 "fr_CH": "Produits hygiéniques",
@@ -445,6 +466,7 @@
         },
         {
             "id": 22,
+            "onlineShopLink": [],
             "productType": {
                 "en_US": "Toilet paper",
                 "fr_CH": "Papier toilette",
@@ -466,6 +488,7 @@
         },
         {
             "id": 23,
+            "onlineShopLink": [],
             "productType": {
                 "en_US": "Tissues",
                 "fr_CH": "Mouchoirs",
@@ -487,6 +510,7 @@
         },
         {
             "id": 24,
+            "onlineShopLink": [],
             "productType": {
                 "en_US": "Cleaning products",
                 "fr_CH": "Produits de nettoyage",
@@ -508,6 +532,7 @@
         },
         {
             "id": 25,
+            "onlineShopLink": [],
             "productType": {
                 "en_US": "Masks",
                 "fr_CH": "Masques",
@@ -529,6 +554,7 @@
         },
         {
             "id": 26,
+            "onlineShopLink": [],
             "productType": {
                 "en_US": "Hand sanitizer",
                 "fr_CH": "Désinfectant pour les mains",
@@ -550,6 +576,7 @@
         },
         {
             "id": 27,
+            "onlineShopLink": [],
             "productType": {
                 "en_US": "Garbage bags",
                 "fr_CH": "Sacs poubelle",
@@ -571,6 +598,7 @@
         },
         {
             "id": 28,
+            "onlineShopLink": [],
             "productType": {
                 "en_US": "Candles",
                 "fr_CH": "Bougies",
@@ -592,6 +620,7 @@
         },
         {
             "id": 29,
+            "onlineShopLink": [],
             "productType": {
                 "en_US": "Flashlight",
                 "fr_CH": "Lampe de poche",
@@ -613,6 +642,7 @@
         },
         {
             "id": 30,
+            "onlineShopLink": [],
             "productType": {
                 "en_US": "Gas stove",
                 "fr_CH": "Réchaud à gaz",
@@ -634,6 +664,7 @@
         },
         {
             "id": 31,
+            "onlineShopLink": [],
             "productType": {
                 "en_US": "Spare batteries",
                 "fr_CH": "Piles de rechange",
@@ -655,6 +686,7 @@
         },
         {
             "id": 32,
+            "onlineShopLink": [],
             "productType": {
                 "en_US": "Battery or solar radio",
                 "fr_CH": "Radio à piles ou solaire",
@@ -676,6 +708,7 @@
         },
         {
             "id": 33,
+            "onlineShopLink": [],
             "productType": {
                 "en_US": "Matches or lighters",
                 "fr_CH": "Allumettes ou briquets",
@@ -697,6 +730,7 @@
         },
         {
             "id": 34,
+            "onlineShopLink": [],
             "productType": {
                 "en_US": "Medical thermometer",
                 "fr_CH": "Thermomètre médical",
@@ -718,6 +752,7 @@
         },
         {
             "id": 35,
+            "onlineShopLink": [],
             "productType": {
                 "en_US": "Can opener",
                 "fr_CH": "Ouvre-boîte",
@@ -739,6 +774,7 @@
         },
         {
             "id": 36,
+            "onlineShopLink": [],
             "productType": {
                 "en_US": "Pocket knife",
                 "fr_CH": "Couteau de poche",

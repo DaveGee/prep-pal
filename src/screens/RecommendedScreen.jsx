@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { Container, NumberInput, Table, Title, Text, Button, Group, Loader, Alert } from '@mantine/core'
+import { Container, NumberInput, Table, Title, Text, Group, Loader, Alert, ActionIcon, Tooltip } from '@mantine/core'
+import { Pencil, ShoppingCart } from '@phosphor-icons/react'
+import EditCategoryModal from '../components/EditCategoryModal'
 import InitDatabases from '../components/InitDatabases'
 import { useProductContext } from '../context/ProductContext'
 import { useDebouncedCallback } from '@mantine/hooks'
 import { setSaveStatus } from '../utils/notificationUtils'
+import { openInBrowser } from '../utils/browserUtils'
 import { useLittera } from '@assembless/react-littera'
 import ResetDatabases from '../components/ResetDatabases'
 
@@ -58,11 +61,23 @@ const translations = {
     de_CH: "Überschreiben",
     en_US: "Override"
   },
+  buyOnline: {
+    fr_CH: "Acheter en ligne",
+    de_CH: "Online kaufen",
+    en_US: "Buy online"
+  },
+  edit: {
+    fr_CH: "Modifier",
+    de_CH: "Bearbeiten",
+    en_US: "Edit"
+  }
 }
 
 function RecommendedScreen() {
   const { filesExist, productData, loading, error, updateCategory } = useProductContext()
   const [data, setData] = useState([])
+  const [editModalOpened, setEditModalOpened] = useState(false)
+  const [selectedCategory, setSelectedCategory] = useState(null)
 
   const translated = useLittera(translations)
 
@@ -120,6 +135,7 @@ function RecommendedScreen() {
     return (item.quantityOverride || item.quantityOverride === 0) && item.quantityOverride !== item.quantity
   }
 
+
   const rows = data.map((item, index) => (
     <Table.Tr key={item.productType}>
       <Table.Td>{item.productType}</Table.Td>
@@ -133,6 +149,32 @@ function RecommendedScreen() {
       </Table.Td>
       <Table.Td c="dimmed">
         {overridenQuantity(item) ? item.quantity : ""}
+      </Table.Td>
+      <Table.Td>
+        <Group gap="xs" wrap="nowrap">
+          <Tooltip label={translated.buyOnline}>
+            <ActionIcon 
+              variant="subtle" 
+              color="blue" 
+              onClick={() => item.onlineShopLink && item.onlineShopLink.length > 0 ? openInBrowser(item.onlineShopLink[0]) : null}
+              disabled={!item.onlineShopLink || item.onlineShopLink.length === 0}
+            >
+              <ShoppingCart size={16} />
+            </ActionIcon>
+          </Tooltip>
+          <Tooltip label={translated.edit}>
+            <ActionIcon 
+              variant="subtle" 
+              color="gray"
+              onClick={() => {
+                setSelectedCategory(item)
+                setEditModalOpened(true)
+              }}
+            >
+              <Pencil size={16} />
+            </ActionIcon>
+          </Tooltip>
+        </Group>
       </Table.Td>
     </Table.Tr>
   ))
@@ -172,6 +214,7 @@ function RecommendedScreen() {
                     <Table.Th>{translated.description}</Table.Th>
                     <Table.Th>{translated.quantity}</Table.Th>
                     <Table.Th></Table.Th>
+                    <Table.Th></Table.Th>
                   </Table.Tr>
                 </Table.Thead>
                 <Table.Tbody>{rows}</Table.Tbody>
@@ -181,6 +224,15 @@ function RecommendedScreen() {
         </>
       ) : (
         <InitDatabases />
+      )}
+      
+      {/* Edit Category Modal */}
+      {selectedCategory && (
+        <EditCategoryModal
+          opened={editModalOpened}
+          onClose={() => setEditModalOpened(false)}
+          category={selectedCategory}
+        />
       )}
     </Container>
   )

@@ -1,14 +1,13 @@
 # Tasks for MVP
 
-- [] Online buying: 
-    - [] Move the link attribute to the categories
-    - [] Add the function to the categories (in stock management and categories)
-- [] remove setup page
-    - [] Initialize widget on each page that is empty
-    - [] Reset button in the categories page (top)
-    - [] Database files information in the menu?
-- [] Categories
-    - [] Edit categories: add link, change unit, avg expiry
+- [x] Online buying: 
+    - [x] Move the link attribute to the categories
+    - [x] Add the function to the categories (in stock management and categories)
+- [x] remove setup page
+    - [x] Initialize widget on each page that is empty
+    - [x] Reset button in the categories page (top)
+- [x] Categories
+    - [x] Edit categories: add link, change unit, avg expiry
     - [] Remove, add categories
 - [] Add a simple calculator based on nb of people in house
 - [] Check if it works well on tablet (interactions)
