@@ -258,6 +258,42 @@ export const ProductProvider = ({ children }) => {
     return false
   }
 
+  const deleteCategory = async (categoryId) => {
+    try {
+      // Create a copy of the current data
+      const newData = { ...productData }
+      
+      // Find the index of the category to delete
+      const baseIndex = newData.baseCategories.findIndex(cat => cat.id === categoryId)
+      if (baseIndex === -1) {
+        return false // Category not found
+      }
+      
+      // Remove the category from baseCategories
+      newData.baseCategories.splice(baseIndex, 1)
+      
+      // Remove any stock items linked to this category
+      if (newData.stock && newData.stock.products) {
+        newData.stock.products = newData.stock.products.filter(
+          item => item.typeId !== categoryId
+        )
+      }
+      
+      // Save the updated product categories
+      const categoriesSaved = await saveProductCategoriesData(newData)
+      
+      // Save the updated stock data
+      const stockSaved = await saveStockData(newData.stock)
+      
+      // Return true only if both saves were successful
+      return categoriesSaved && stockSaved
+    } catch (err) {
+      console.error('Failed to delete category:', err)
+      setError(translated.failedSavingData)
+      return false
+    }
+  }
+
   const value = {
     productData,
     loading,
@@ -265,6 +301,7 @@ export const ProductProvider = ({ children }) => {
     filesExist,
     loadProductData,
     updateCategory,
+    deleteCategory,
     saveStockData,
     initializeData,
     resetDatabases,

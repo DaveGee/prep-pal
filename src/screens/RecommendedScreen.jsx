@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Container, NumberInput, Table, Title, Text, Group, Loader, Alert, ActionIcon, Tooltip } from '@mantine/core'
-import { Pencil, ShoppingCart } from '@phosphor-icons/react'
+import { Pencil, ShoppingCart, Trash } from '@phosphor-icons/react'
 import EditCategoryModal from '../components/EditCategoryModal'
 import InitDatabases from '../components/InitDatabases'
 import { useProductContext } from '../context/ProductContext'
@@ -70,11 +70,36 @@ const translations = {
     fr_CH: "Modifier",
     de_CH: "Bearbeiten",
     en_US: "Edit"
-  }
+  },
+  delete: (categoryName) => ({
+    fr_CH: `Supprimer ${categoryName}`,
+    de_CH: `Löschen ${categoryName}`,
+    en_US: `Delete ${categoryName}`
+  }),
+  deletingCategory: (categoryName) => ({
+    fr_CH: `Suppression de la catégorie ${categoryName}...`,
+    de_CH: `Löschen der Kategorie ${categoryName}...`,
+    en_US: `Deleting ${categoryName} category...`
+  }),
+  categoryDeleted: (categoryName) => ({
+    fr_CH: `Catégorie ${categoryName} supprimée avec succès`,
+    de_CH: `Kategorie ${categoryName} erfolgreich gelöscht`,
+    en_US: `${categoryName} category successfully deleted`
+  }),
+  categoryNotDeleted: (categoryName) => ({
+    fr_CH: `Échec de la suppression de la catégorie ${categoryName}`,
+    de_CH: `Fehler beim Löschen der Kategorie ${categoryName}`,
+    en_US: `Failed to delete ${categoryName} category`
+  }),
+  errorDeletingCategory: (errorMessage) => ({
+    fr_CH: `Erreur lors de la suppression de la catégorie : ${errorMessage}`,
+    de_CH: `Fehler beim Löschen der Kategorie: ${errorMessage}`,
+    en_US: `Error deleting category: ${errorMessage}`
+  })
 }
 
 function RecommendedScreen() {
-  const { filesExist, productData, loading, error, updateCategory } = useProductContext()
+  const { filesExist, productData, loading, error, updateCategory, deleteCategory } = useProductContext()
   const [data, setData] = useState([])
   const [editModalOpened, setEditModalOpened] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState(null)
@@ -135,6 +160,35 @@ function RecommendedScreen() {
     return (item.quantityOverride || item.quantityOverride === 0) && item.quantityOverride !== item.quantity
   }
 
+  const handleDeleteCategory = async (category) => {
+    try {
+      setSaveStatus({ 
+        saving: true, 
+        success: null, 
+        message: translated.deletingCategory(category.productType),
+        id: 'save-category'
+      })
+      
+      const success = await deleteCategory(category.id)
+      
+      setSaveStatus({ 
+        saving: false, 
+        success: success, 
+        message: success 
+          ? translated.categoryDeleted(category.productType)
+          : translated.categoryNotDeleted(category.productType),
+        id: 'save-category'
+      })
+    } catch (error) {
+      setSaveStatus({ 
+        saving: false, 
+        success: false, 
+        message: translated.errorDeletingCategory(error.message),
+        id: 'save-category'
+      })
+    }
+  }
+
 
   const rows = data.map((item, index) => (
     <Table.Tr key={item.productType}>
@@ -172,6 +226,15 @@ function RecommendedScreen() {
               }}
             >
               <Pencil size={16} />
+            </ActionIcon>
+          </Tooltip>
+          <Tooltip label={translated.delete(item.productType)}>
+            <ActionIcon 
+              variant="subtle" 
+              color="red"
+              onClick={() => handleDeleteCategory(item)}
+            >
+              <Trash size={16} />
             </ActionIcon>
           </Tooltip>
         </Group>
