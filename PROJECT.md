@@ -49,6 +49,12 @@
 - [] better error display management
 - [] Add a profile ID (prepare for login)
 - [] Complete redesign
+- [] Distribution
+    - [] rename repo
+    - [] use electron-builder to build and publish artefacts on Gitlhub (separate repo for now?)
+    - [] have it as a runner on gihub. Simple process: main goes to netlify, release tags create distributables
+    - [] document process: version inc + deploy
+    - [] later: sign code to have auto-updates?
 
 ## Later 
 

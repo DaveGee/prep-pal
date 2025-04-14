@@ -1,6 +1,8 @@
 # Prep pal
 
-A desktop and web application built with Electron and React.
+A desktop and web application to help you manage your prepper stock
+
+Built with Electron and React.
 
 ## INSTALLATION
 

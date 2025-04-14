@@ -13,19 +13,28 @@
     "electron-is-dev": "^2.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^7.3.0"
+    "react-router-dom": "^7.3.0",
+    "electron-updater": "^6.1.7",
+    "electron-log": "^5.0.3"
   },
   "scripts": {
     "start": "vite",
     "build": "vite build && cp -r landing/* dist/",
     "serve": "vite preview",
     "electron:serve": "concurrently -k \"cross-env BROWSER=none npm start\" \"npm run electron:start\"",
-    "electron:build": "npm run build && npx electron-builder -c.extraMetadata.main=build/electron/main.js",
-    "electron:start": "wait-on tcp:3000 && electron ."
+    "electron:start": "wait-on tcp:3000 && electron .",
+    "electron:build": "npm run build && electron-builder -c.extraMetadata.main=build/electron/main.js --publish never",
+    "electron:build:mac": "npm run build && electron-builder -c.extraMetadata.main=build/electron/main.js --mac --publish never",
+    "electron:build:win": "npm run build && electron-builder -c.extraMetadata.main=build/electron/main.js --win --publish never",
+    "electron:build:linux": "npm run build && electron-builder -c.extraMetadata.main=build/electron/main.js --linux --publish never",
+    "electron:publish": "npm run build && electron-builder -c.extraMetadata.main=build/electron/main.js --publish always",
+    "electron:publish:mac": "npm run build && electron-builder -c.extraMetadata.main=build/electron/main.js --mac --publish always",
+    "electron:publish:win": "npm run build && electron-builder -c.extraMetadata.main=build/electron/main.js --win --publish always"
   },
   "build": {
-    "extends": null,
-    "appId": "com.example.prep-pal",
+    "appId": "io.preppal",
+    "productName": "PrepPal",
+    "copyright": "Copyright © 2025",
     "files": [
       "dist/**/*",
       "build/**/*",
@@ -33,7 +42,59 @@
       "package.json"
     ],
     "directories": {
-      "buildResources": "assets"
+      "buildResources": "assets",
+      "output": "release"
+    },
+    "publish": {
+      "provider": "github",
+      "owner": "DaveGee",
+      "repo": "prep-pal",
+      "releaseType": "release",
+      "publishAutoUpdate": true
+    },
+    "mac": {
+      "category": "public.app-category.productivity",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": ["universal"]
+        },
+        {
+          "target": "zip",
+          "arch": ["universal"]
+        }
+      ]
+    },
+    "dmg": {
+      "contents": [
+        {
+          "x": 130,
+          "y": 220
+        },
+        {
+          "x": 410,
+          "y": 220,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "category": "Utility"
     }
   },
   "browserslist": {
@@ -52,6 +113,8 @@
     "@vitejs/plugin-react": "^4.3.4",
     "concurrently": "^9.1.2",
     "cross-env": "^7.0.3",
+    "electron": "^29.0.0",
+    "electron-builder": "^24.9.1",
     "vite": "^6.2.3",
     "wait-on": "^8.0.3"
   }

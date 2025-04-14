@@ -1,11 +1,18 @@
-const { app, BrowserWindow, ipcMain } = require('electron')
+const { app, BrowserWindow, ipcMain, dialog } = require('electron')
 const path = require('path')
 const fs = require('fs')
 const isDev = require('electron-is-dev')
+const { autoUpdater } = require('electron-updater')
+const log = require('electron-log')
+
+// Configure logger
+log.transports.file.level = 'info'
+autoUpdater.logger = log
+log.info('App starting...')
 
 // Get the app's user data directory (specific to your app)
 const userDataPath = app.getPath('userData')
-console.log('User Data Directory:', userDataPath)
+log.info('User Data Directory:', userDataPath)
 
 // Paths to JSON files
 const productCategoriesPath = path.join(userDataPath, 'productCategories.json')
@@ -116,7 +123,56 @@ function createWindow() {
   }
 }
 
-app.whenReady().then(createWindow)
+// Auto-updater events
+autoUpdater.on('checking-for-update', () => {
+  log.info('Checking for update...')
+})
+
+autoUpdater.on('update-available', (info) => {
+  log.info('Update available:', info)
+  dialog.showMessageBox({
+    type: 'info',
+    title: 'Update Available',
+    message: `A new version (${info.version}) is available and will be downloaded in the background.`,
+    buttons: ['OK']
+  })
+})
+
+autoUpdater.on('update-not-available', (info) => {
+  log.info('Update not available:', info)
+})
+
+autoUpdater.on('error', (err) => {
+  log.error('Error in auto-updater:', err)
+})
+
+autoUpdater.on('download-progress', (progressObj) => {
+  let logMessage = `Download speed: ${progressObj.bytesPerSecond}`
+  logMessage = `${logMessage} - Downloaded ${progressObj.percent}%`
+  logMessage = `${logMessage} (${progressObj.transferred}/${progressObj.total})`
+  log.info(logMessage)
+})
+
+autoUpdater.on('update-downloaded', (info) => {
+  log.info('Update downloaded:', info)
+  dialog.showMessageBox({
+    type: 'info',
+    title: 'Update Ready',
+    message: 'A new version has been downloaded. Restart the application to apply the updates.',
+    buttons: ['Restart', 'Later']
+  }).then((returnValue) => {
+    if (returnValue.response === 0) autoUpdater.quitAndInstall()
+  })
+})
+
+app.whenReady().then(() => {
+  createWindow()
+  
+  // Check for updates after app is ready (but not in dev mode)
+  if (!isDev) {
+    autoUpdater.checkForUpdatesAndNotify()
+  }
+})
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
