@@ -8,13 +8,12 @@
     - [x] Reset button in the categories page (top)
 - [x] Categories
     - [x] Edit categories: add link, change unit, avg expiry
-    - [] Remove, add categories
-- [] Add a simple calculator based on nb of people in house
-- [] Check if it works well on tablet (interactions)
-- [] Export + import files (categories + stock)
-- [] Landing page
-
-# Previous
+    - [x] Remove categories
+    - [ ] Add categories 
+- [ ] Add a simple calculator based on nb of people in house
+- [ ] Check if it works well on tablet (interactions)
+- [ ] Export + import files (categories + stock)
+- [x] Landing page (basic draft)
 
 ## Recommendation
 
@@ -28,10 +27,10 @@
 - [x] Editor for current stock, assignment to categories
     - [x] items can be generic or precise
     - [x] multiple items per category possible
-- [] Add a way to tell when a stock item has been last checked (update the lastCheck + nextCheck fields)
-- [] Differentiate products for consumptions (expiry date) and for usage (check date)
-    - [] Check expiry date for consumption products that might be expired according to `lastCheck + avg expiry = expired potentially`
-    - [] Check date for items without expiry (`lastCheck + avg expiry = recheck!`)
+- [ ] Add a way to tell when a stock item has been last checked (update the lastCheck + nextCheck fields)
+- [ ] Differentiate products for consumptions (expiry date) and for usage (check date)
+    - [ ] Check expiry date for consumption products that might be expired according to `lastCheck + avg expiry = expired potentially`
+    - [ ] Check date for items without expiry (`lastCheck + avg expiry = recheck!`)
 
 ## Shopping list
 
@@ -46,25 +45,34 @@
 ## Misc
 
 - [x] Multi-language (FR, DE, EN)
-- [] better error display management
-- [] Add a profile ID (prepare for login)
-- [] Complete redesign
-- [] Distribution
-    - [] rename repo
-    - [] use electron-builder to build and publish artefacts on Gitlhub (separate repo for now?)
-    - [] have it as a runner on gihub. Simple process: main goes to netlify, release tags create distributables
-    - [] document process: version inc + deploy
-    - [] later: sign code to have auto-updates?
+- [ ] better error display management
+- [ ] Add a profile ID (prepare for login)
+- [ ] Complete redesign
+- [ ] Distribution
+    - [x] rename repo
+    - [x] use electron-builder to build and publish artefacts on Gitlhub (separate repo for now?)
+    - [x] have it as a runner on gihub. Simple process: main goes to netlify, release tags create distributables
+    - [x] document process: version inc + deploy
+    - [ ] Sign code to have auto-updates?
+- [ ] Logo for the app, and better branding
 
 ## Later 
 
+### Misc
+
+- [ ] Country specific calculator?
+- [ ] Blog / news / events / how tos (partnerships?)
+
 ### Mobile app
 
-- [] Very simple mobile app? https://capacitorjs.com/
-- [] QR Code to get shopping list on Mobile 
-- [] QR code to be able to manage stock on mobile
+- [ ] Very simple mobile app? https://capacitorjs.com/
+- [ ] QR Code to get shopping list on Mobile 
+- [ ] QR code to be able to manage stock on mobile
 
 ### Cloud only, once identified
 
-- [] Notifications (mobile? SMS? Email?) -> check stock and expiry
-- [] Social recommendation: what other are buying for default categories (require unique ID of categories)
+- [ ] Notifications
+    - [ ] Notification center in the interface
+    - [ ] Mobile? SMS? Email? -> check stock and expiry and warn
+- [ ] Social recommendation: what other are buying for default categories (require unique ID of categories)
+- [ ] One click supply for specific items? (drop shipping API?)

@@ -23,9 +23,6 @@ npm run electron:build:mac
 
 # Build specifically for Windows
 npm run electron:build:win
-
-# Build specifically for Linux
-npm run electron:build:linux
 ```
 
 The built applications will be available in the `release` directory.
@@ -47,6 +44,8 @@ set GH_TOKEN=your_github_token
 # On Windows (PowerShell)
 $env:GH_TOKEN="your_github_token"
 ```
+
+> Note: the token needs the `repo` permission scope.
 
 3. Run the publish command:
 
@@ -92,6 +91,13 @@ git push origin v1.0.1
 ```
 
 4. The GitHub Actions workflow will automatically build the application for Windows and macOS and publish the releases to GitHub.
+
+### Versioning and publishing notes
+
+- `git tag v1.0.0 && git push --tags` will tag the current commit and push it
+- `git push --delete origin v1.0.0 && git tag --delete v1.0.0` will delete a specific tag
+- `git commit --amend --no-edit` allows to modify a commit
+- `npm version [major|minor|patch] -m "Message"` will increment the version and commit
 
 ## Auto-Updates
 
