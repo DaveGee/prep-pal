@@ -58,7 +58,7 @@
 
 ## Later 
 
-### Misc
+### Misc
 
 - [ ] Country specific calculator?
 - [ ] Blog / news / events / how tos (partnerships?)

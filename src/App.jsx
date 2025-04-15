@@ -5,7 +5,6 @@ import { HashRouter, useLocation } from 'react-router-dom'
 import AppRoutes from './Routes'
 import { ProductProvider } from './context/ProductContext'
 
-import SetupScreen from './screens/SetupScreen'
 import RecommendedScreen from './screens/RecommendedScreen'
 import CurrentScreen from './screens/CurrentScreen'
 import ShoppingListScreen from './screens/ShoppingListScreen'
@@ -14,7 +13,7 @@ import { Gear, Package, JarLabel, ShoppingCart } from '@phosphor-icons/react'
 
 import { useLittera, useLitteraMethods } from '@assembless/react-littera'
 
-import logo from './assets/PrepPal.png'
+import logo from './assets/preppal-logo.png'
 import { version } from '../package.json'
 
 const translations = {

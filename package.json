@@ -39,6 +39,7 @@
       "dist/**/*",
       "build/**/*",
       "node_modules/**/*",
+      "electron/icons/**/*",
       "package.json"
     ],
     "directories": {
@@ -53,6 +54,7 @@
       "publishAutoUpdate": true
     },
     "mac": {
+      "icon": "electron/icons/preppal-logo.icns",
       "category": "public.app-category.productivity",
       "target": [
         {
@@ -80,6 +82,7 @@
       ]
     },
     "win": {
+      "icon": "electron/icons/preppal-logo.ico",
       "target": [
         "nsis",
         "portable"

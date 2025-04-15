@@ -104,6 +104,7 @@ function createWindow() {
   const win = new BrowserWindow({
     width: 1200,
     height: 800,
+    icon: path.join(__dirname, 'icons/preppal-logo.png'), // Use PNG for cross-platform compatibility
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false
