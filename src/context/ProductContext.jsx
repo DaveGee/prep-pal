@@ -294,6 +294,39 @@ export const ProductProvider = ({ children }) => {
     }
   }
 
+  const addCategory = async (newCategory) => {
+    try {
+      // Create a copy of the current data
+      const newData = { ...productData }
+      
+      // Generate a new ID (highest ID + 1)
+      const highestId = newData.baseCategories.reduce(
+        (max, category) => Math.max(max, category.id), 0
+      )
+      const newId = highestId + 1
+      
+      // Create the new category object with the generated ID
+      const categoryToAdd = {
+        id: newId,
+        ...newCategory,
+        preferences: [],
+        onlineShopLink: newCategory.onlineShopLink ? [newCategory.onlineShopLink] : []
+      }
+      
+      // Add the new category to baseCategories
+      newData.baseCategories.push(categoryToAdd)
+      
+      // Save the updated product categories
+      const success = await saveProductCategoriesData(newData)
+      
+      return success ? newId : false
+    } catch (err) {
+      console.error('Failed to add category:', err)
+      setError(translated.failedSavingData)
+      return false
+    }
+  }
+
   const value = {
     productData,
     loading,
@@ -302,6 +335,7 @@ export const ProductProvider = ({ children }) => {
     loadProductData,
     updateCategory,
     deleteCategory,
+    addCategory,
     saveStockData,
     initializeData,
     resetDatabases,

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { Container, NumberInput, Table, Title, Text, Group, Loader, Alert, ActionIcon, Tooltip } from '@mantine/core'
-import { Pencil, ShoppingCart, Trash } from '@phosphor-icons/react'
+import { Container, NumberInput, Table, Title, Text, Group, Loader, Alert, ActionIcon, Tooltip, Button } from '@mantine/core'
+import { Pencil, ShoppingCart, Trash, Plus } from '@phosphor-icons/react'
 import EditCategoryModal from '../components/EditCategoryModal'
+import AddCategoryModal from '../components/AddCategoryModal'
 import InitDatabases from '../components/InitDatabases'
 import { useProductContext } from '../context/ProductContext'
 import { useDebouncedCallback } from '@mantine/hooks'
@@ -15,6 +16,11 @@ const translations = {
     fr_CH: "Catégories recommandées",
     de_CH: "Empfohlene Kategorien",
     en_US: "Recommended categories"
+  },
+  addCategory: {
+    fr_CH: "Ajouter une catégorie",
+    de_CH: "Kategorie hinzufügen",
+    en_US: "Add category"
   },
   saveStatus: {
     fr_CH: "Enregistrement des modifications...",
@@ -102,6 +108,7 @@ function RecommendedScreen() {
   const { filesExist, productData, loading, error, updateCategory, deleteCategory } = useProductContext()
   const [data, setData] = useState([])
   const [editModalOpened, setEditModalOpened] = useState(false)
+  const [addModalOpened, setAddModalOpened] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState(null)
 
   const translated = useLittera(translations)
@@ -246,7 +253,14 @@ function RecommendedScreen() {
     <Container fluid>
       <Group gap="xs" mb="md" align="flex-start" justify='space-between'>
         <Title order={1}>{translated.title}</Title>
-        <ResetDatabases />
+        <Group gap="xs">
+          <Tooltip label={translated.addCategory}>
+            <Button color="blue" variant="filled" onClick={() => setAddModalOpened(true)}>
+              <Plus size={24} />
+            </Button>
+          </Tooltip>
+          <ResetDatabases />
+        </Group>
       </Group>
       
       {/* Show error message if there's an error */}
@@ -297,6 +311,12 @@ function RecommendedScreen() {
           category={selectedCategory}
         />
       )}
+      
+      {/* Add Category Modal */}
+      <AddCategoryModal
+        opened={addModalOpened}
+        onClose={() => setAddModalOpened(false)}
+      />
     </Container>
   )
 }
