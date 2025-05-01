@@ -9,7 +9,7 @@
 - [x] Categories
     - [x] Edit categories: add link, change unit, avg expiry
     - [x] Remove categories
-    - [ ] Add categories 
+    - [x] Add categories 
 - [ ] Add a simple calculator based on nb of people in house
 - [ ] Check if it works well on tablet (interactions)
 - [ ] Export + import files (categories + stock)

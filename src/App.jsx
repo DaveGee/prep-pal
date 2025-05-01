@@ -1,5 +1,18 @@
 import React from 'react'
-import { Text, AppShell, Burger, Group, Title, Image, NavLink, UnstyledButton, Divider, Code, Stack } from '@mantine/core'
+import {
+  Text,
+  AppShell,
+  Burger,
+  Group,
+  Title,
+  Image,
+  NavLink,
+  UnstyledButton, Button,
+  Divider,
+  Code,
+  Stack,
+  Tooltip,
+} from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { HashRouter, useLocation } from 'react-router-dom'
 import AppRoutes from './Routes'
@@ -9,7 +22,7 @@ import RecommendedScreen from './screens/RecommendedScreen'
 import CurrentScreen from './screens/CurrentScreen'
 import ShoppingListScreen from './screens/ShoppingListScreen'
 
-import { Gear, Package, JarLabel, ShoppingCart } from '@phosphor-icons/react'
+import { Package, JarLabel, ShoppingCart, Download, Upload } from '@phosphor-icons/react'
 
 import { useLittera, useLitteraMethods } from '@assembless/react-littera'
 
@@ -41,6 +54,16 @@ const translations = {
     fr_CH: "Liste de courses",
     de_CH: "Einkaufsliste",
     en_US: "Shopping list"
+  },
+  download: {
+    fr_CH: "Exporter les données",
+    de_CH: "Daten exportieren",
+    en_US: "Export data"
+  },
+  upload: {
+    fr_CH: "Importer les données",
+    de_CH: "Daten importieren",
+    en_US: "Import data"
   }
 }
 
@@ -88,20 +111,36 @@ function AppContent() {
         </Group>
       </AppShell.Header>
       <AppShell.Navbar p="md">
-        {
-          routes.map((route) => (
-            <NavLink
-              href={"#" + route.link}
-              key={route.id}
-              label={translated[route.id]}
-              leftSection={<route.icon size={16} stroke={1.5} />}
-              active={location.pathname === route.link}
-            />
-          ))
-        }
+        <Stack gap="xs">
+          {
+            routes.map((route) => (
+              <NavLink
+                href={"#" + route.link}
+                key={route.id}
+                label={translated[route.id]}
+                leftSection={<route.icon size={16} stroke={1.5} />}
+                active={location.pathname === route.link}
+              />
+            ))
+          }
+        
+          <Divider />
+          <Group justify="center">
+            <Tooltip label={translated.download}>
+              <Button size="xs" variant="subtle" color="grey" onClick={() => {}}>
+                <Download size={16} />
+              </Button>
+            </Tooltip>
+            <Tooltip label={translated.upload}>
+              <Button size="xs" variant="subtle" color="grey" onClick={() => {}}>
+                <Upload size={16} />
+              </Button>
+            </Tooltip>
+          </Group>
+        </Stack>
 
         <Stack justify='flex-end' h="100%" gap="xs">
-          
+
           <Divider />
           <Group justify="center"><Code fw={700}>v{version}</Code></Group>
           <Group justify="center">
@@ -115,13 +154,13 @@ function AppContent() {
               </UnstyledButton>
             ))}
           </Group>
-        
+
         </Stack>
       </AppShell.Navbar>
       <AppShell.Main>
         <AppRoutes routes={routes} />
       </AppShell.Main>
-    </AppShell>
+    </AppShell >
   )
 }
 
