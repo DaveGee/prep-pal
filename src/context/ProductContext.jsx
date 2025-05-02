@@ -337,6 +337,7 @@ export const ProductProvider = ({ children }) => {
     deleteCategory,
     addCategory,
     saveStockData,
+    saveProductCategoriesData,
     initializeData,
     resetDatabases,
     checkFilesAndLoadData
