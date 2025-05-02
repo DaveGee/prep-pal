@@ -12,11 +12,24 @@ Built with Electron and React.
 4. Run: `npm install`
 
 ## RUNNING IN DEVELOPMENT
+
+### Electron development
+
 To run the app in development mode with hot reload:
 
 `npm run electron:serve`
 
 This will start both the React development server and Electron app. The app will automatically reload if you make changes to the code.
+
+### Web browser development
+
+To run the app in the browser during development with hot reload:
+
+`npm run start`
+
+### Landing page
+
+`npx serve landing`
 
 ## BUILDING FOR DISTRIBUTION 
 To create installable packages:

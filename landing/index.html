@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PrepPal - Your Emergency Preparedness App</title>
+    <title data-i18n="page_title">PrepPal - Your Emergency Preparedness App</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -75,6 +75,7 @@
         .nav-links {
             display: flex;
             gap: 30px;
+            align-items: center;
         }
         
         .nav-links a {
@@ -86,6 +87,28 @@
         
         .nav-links a:hover {
             color: var(--primary-color);
+        }
+        
+        .language-switcher {
+            display: flex;
+            gap: 10px;
+            margin-left: 20px;
+        }
+        
+        .lang-btn {
+            background: none;
+            border: 1px solid var(--primary-color);
+            color: var(--text-color);
+            border-radius: 4px;
+            padding: 2px 6px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .lang-btn:hover, .lang-btn.active {
+            background-color: var(--primary-color);
+            color: white;
         }
         
         .hero {
@@ -322,9 +345,14 @@
                     <span class="logo-text">PrepPal</span>
                 </div>
                 <div class="nav-links">
-                    <a href="#features">Features</a>
-                    <a href="#download">Download</a>
-                    <a href="#about">About</a>
+                    <a href="#features" data-i18n="nav_features">Features</a>
+                    <a href="#download" data-i18n="nav_download">Download</a>
+                    <a href="#about" data-i18n="nav_about">About</a>
+                    <div class="language-switcher">
+                        <button onclick="changeLanguage('en')" class="lang-btn active">EN</button>
+                        <button onclick="changeLanguage('de')" class="lang-btn">DE</button>
+                        <button onclick="changeLanguage('fr')" class="lang-btn">FR</button>
+                    </div>
                 </div>
             </nav>
         </div>
@@ -334,11 +362,10 @@
         <div class="container">
             <div class="hero-content">
                 <img src="PrepPal.png" alt="PrepPal Logo">
-                <h1>Manage Your Emergency Stock Efficiently</h1>
-                <p>PrepPal helps you prepare for emergencies with smart stock management based on Swiss confederation recommendations.</p>
+                <h1 data-i18n="hero_title">Manage Your Emergency Stock Efficiently</h1>
+                <p data-i18n="hero_description">PrepPal helps you prepare for emergencies with smart stock management based on Swiss confederation recommendations.</p>
                 <div class="btn-group">
-                    
-                    <a href="/app" class="btn btn-secondary">Try Online</a>
+                    <a href="/app" class="btn btn-secondary" data-i18n="hero_button">Try Online</a>
                 </div>
             </div>
         </div>
@@ -347,44 +374,44 @@
     <section id="features" class="features">
         <div class="container">
             <div class="section-title">
-                <h2>Features That Make Preparation Easy</h2>
-                <p>PrepPal comes with everything you need to manage your emergency supplies effectively.</p>
+                <h2 data-i18n="features_title">Features That Make Preparation Easy</h2>
+                <p data-i18n="features_description">PrepPal comes with everything you need to manage your emergency supplies effectively.</p>
             </div>
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-wifi"></i>
                     </div>
-                    <h3>Offline Management</h3>
-                    <p>Manage your stock even without an internet connection. Your data is always available when you need it.</p>
+                    <h3 data-i18n="feature1_title">Offline Management</h3>
+                    <p data-i18n="feature1_description">Manage your stock even without an internet connection. Your data is always available when you need it.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-clipboard-check"></i>
                     </div>
-                    <h3>Swiss Confederation Template</h3>
-                    <p>Built on official recommendations from the Swiss confederation for optimal emergency preparedness.</p>
+                    <h3 data-i18n="feature2_title">Swiss Confederation Template</h3>
+                    <p data-i18n="feature2_description">Built on official recommendations from the Swiss confederation for optimal emergency preparedness.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-sliders-h"></i>
                     </div>
-                    <h3>Full Customization</h3>
-                    <p>Tailor your emergency stock to your specific needs with customizable categories and items.</p>
+                    <h3 data-i18n="feature3_title">Full Customization</h3>
+                    <p data-i18n="feature3_description">Tailor your emergency stock to your specific needs with customizable categories and items.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-shopping-cart"></i>
                     </div>
-                    <h3>Online Shop Shortcuts</h3>
-                    <p>Quickly access online shops to replenish your supplies with integrated shopping shortcuts.</p>
+                    <h3 data-i18n="feature4_title">Online Shop Shortcuts</h3>
+                    <p data-i18n="feature4_description">Quickly access online shops to replenish your supplies with integrated shopping shortcuts.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-print"></i>
                     </div>
-                    <h3>Shopping List Impression</h3>
-                    <p>Generate and print shopping lists to easily track what you need to buy for your emergency stock.</p>
+                    <h3 data-i18n="feature5_title">Shopping List Impression</h3>
+                    <p data-i18n="feature5_description">Generate and print shopping lists to easily track what you need to buy for your emergency stock.</p>
                 </div>
             </div>
         </div>
@@ -395,31 +422,162 @@
             <div class="footer-content">
                 <div class="footer-logo">
                     <img src="preppal-logo.png" alt="PrepPal Logo">
-                    <p>PrepPal is your companion for emergency preparedness, helping you stay ready for any situation.</p>
+                    <p data-i18n="footer_description">PrepPal is your companion for emergency preparedness, helping you stay ready for any situation.</p>
                 </div>
                 <div class="footer-links">
-                    <h4>Quick Links</h4>
+                    <h4 data-i18n="footer_quicklinks">Quick Links</h4>
                     <ul>
-                        <li><a href="#features">Features</a></li>
-                        <li><a href="#download">Download</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#features" data-i18n="nav_features">Features</a></li>
+                        <li><a href="#download" data-i18n="nav_download">Download</a></li>
+                        <li><a href="#about" data-i18n="nav_about">About</a></li>
+                        <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
                     </ul>
                 </div>
                 <div class="footer-links">
-                    <h4>Resources</h4>
+                    <h4 data-i18n="footer_resources">Resources</h4>
                     <ul>
-                        <li><a href="#help">Help Center</a></li>
-                        <li><a href="#faq">FAQ</a></li>
-                        <li><a href="#privacy">Privacy Policy</a></li>
-                        <li><a href="#terms">Terms of Service</a></li>
+                        <li><a href="#help" data-i18n="footer_help">Help Center</a></li>
+                        <li><a href="#faq" data-i18n="footer_faq">FAQ</a></li>
+                        <li><a href="#privacy" data-i18n="footer_privacy">Privacy Policy</a></li>
+                        <li><a href="#terms" data-i18n="footer_terms">Terms of Service</a></li>
                     </ul>
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2025 PrepPal. All rights reserved.</p>
+                <p data-i18n="footer_copyright">&copy; 2025 PrepPal. All rights reserved.</p>
             </div>
         </div>
     </footer>
+
+    <script>
+        // Translations JSON
+        const translations = {
+            en: {
+                page_title: "PrepPal - Your Emergency Preparedness App",
+                nav_features: "Features",
+                nav_download: "Download",
+                nav_about: "About",
+                nav_contact: "Contact",
+                hero_title: "Manage Your Emergency Stock Efficiently",
+                hero_description: "PrepPal helps you prepare for emergencies with smart stock management based on Swiss confederation recommendations.",
+                hero_button: "Try Online",
+                features_title: "Features That Make Preparation Easy",
+                features_description: "PrepPal comes with everything you need to manage your emergency supplies effectively.",
+                feature1_title: "Offline Management",
+                feature1_description: "Manage your stock even without an internet connection. Your data is always available when you need it.",
+                feature2_title: "Swiss Confederation Template",
+                feature2_description: "Built on official recommendations from the Swiss confederation for optimal emergency preparedness.",
+                feature3_title: "Full Customization",
+                feature3_description: "Tailor your emergency stock to your specific needs with customizable categories and items.",
+                feature4_title: "Online Shop Shortcuts",
+                feature4_description: "Quickly access online shops to replenish your supplies with integrated shopping shortcuts.",
+                feature5_title: "Shopping List Impression",
+                feature5_description: "Generate and print shopping lists to easily track what you need to buy for your emergency stock.",
+                footer_description: "PrepPal is your companion for emergency preparedness, helping you stay ready for any situation.",
+                footer_quicklinks: "Quick Links",
+                footer_resources: "Resources",
+                footer_help: "Help Center",
+                footer_faq: "FAQ",
+                footer_privacy: "Privacy Policy",
+                footer_terms: "Terms of Service",
+                footer_copyright: "© 2025 PrepPal. All rights reserved."
+            },
+            de: {
+                page_title: "PrepPal - Ihre Notfall-Vorsorge-App",
+                nav_features: "Funktionen",
+                nav_download: "Herunterladen",
+                nav_about: "Über uns",
+                nav_contact: "Kontakt",
+                hero_title: "Verwalten Sie Ihren Notvorrat effizient",
+                hero_description: "PrepPal hilft Ihnen, sich mit intelligentem Bestandsmanagement auf Notfälle vorzubereiten, basierend auf Empfehlungen der Schweizerischen Eidgenossenschaft.",
+                hero_button: "Online ausprobieren",
+                features_title: "Funktionen, die die Vorbereitung erleichtern",
+                features_description: "PrepPal bietet alles, was Sie für die effektive Verwaltung Ihrer Notvorräte benötigen.",
+                feature1_title: "Offline-Verwaltung",
+                feature1_description: "Verwalten Sie Ihren Bestand auch ohne Internetverbindung. Ihre Daten sind immer verfügbar, wenn Sie sie brauchen.",
+                feature2_title: "Vorlage der Schweizerischen Eidgenossenschaft",
+                feature2_description: "Basierend auf offiziellen Empfehlungen der Schweizerischen Eidgenossenschaft für optimale Notfallvorsorge.",
+                feature3_title: "Vollständige Anpassung",
+                feature3_description: "Passen Sie Ihren Notvorrat mit anpassbaren Kategorien und Artikeln an Ihre spezifischen Bedürfnisse an.",
+                feature4_title: "Online-Shop-Verknüpfungen",
+                feature4_description: "Greifen Sie schnell auf Online-Shops zu, um Ihre Vorräte mit integrierten Einkaufsverknüpfungen aufzufüllen.",
+                feature5_title: "Einkaufslisten-Druck",
+                feature5_description: "Erstellen und drucken Sie Einkaufslisten, um einfach zu verfolgen, was Sie für Ihren Notvorrat kaufen müssen.",
+                footer_description: "PrepPal ist Ihr Begleiter für die Notfallvorsorge und hilft Ihnen, für jede Situation bereit zu sein.",
+                footer_quicklinks: "Schnelllinks",
+                footer_resources: "Ressourcen",
+                footer_help: "Hilfezentrum",
+                footer_faq: "Häufig gestellte Fragen",
+                footer_privacy: "Datenschutzrichtlinie",
+                footer_terms: "Nutzungsbedingungen",
+                footer_copyright: "© 2025 PrepPal. Alle Rechte vorbehalten."
+            },
+            fr: {
+                page_title: "PrepPal - Votre application de préparation aux urgences",
+                nav_features: "Fonctionnalités",
+                nav_download: "Télécharger",
+                nav_about: "À propos",
+                nav_contact: "Contact",
+                hero_title: "Gérez efficacement votre stock d'urgence",
+                hero_description: "PrepPal vous aide à vous préparer aux situations d'urgence grâce à une gestion intelligente des stocks basée sur les recommandations de la Confédération suisse.",
+                hero_button: "Essayer en ligne",
+                features_title: "Des fonctionnalités qui facilitent la préparation",
+                features_description: "PrepPal est doté de tout ce dont vous avez besoin pour gérer efficacement vos fournitures d'urgence.",
+                feature1_title: "Gestion hors ligne",
+                feature1_description: "Gérez votre stock même sans connexion Internet. Vos données sont toujours disponibles quand vous en avez besoin.",
+                feature2_title: "Modèle de la Confédération suisse",
+                feature2_description: "Basé sur les recommandations officielles de la Confédération suisse pour une préparation optimale aux situations d'urgence.",
+                feature3_title: "Personnalisation complète",
+                feature3_description: "Adaptez votre stock d'urgence à vos besoins spécifiques avec des catégories et des articles personnalisables.",
+                feature4_title: "Raccourcis vers les boutiques en ligne",
+                feature4_description: "Accédez rapidement aux boutiques en ligne pour reconstituer vos fournitures grâce aux raccourcis d'achat intégrés.",
+                feature5_title: "Impression de liste d'achats",
+                feature5_description: "Générez et imprimez des listes d'achats pour suivre facilement ce que vous devez acheter pour votre stock d'urgence.",
+                footer_description: "PrepPal est votre compagnon pour la préparation aux situations d'urgence, vous aidant à rester prêt pour toute situation.",
+                footer_quicklinks: "Liens rapides",
+                footer_resources: "Ressources",
+                footer_help: "Centre d'aide",
+                footer_faq: "FAQ",
+                footer_privacy: "Politique de confidentialité",
+                footer_terms: "Conditions d'utilisation",
+                footer_copyright: "© 2025 PrepPal. Tous droits réservés."
+            }
+        }
+
+        // Function to change language
+        function changeLanguage(lang) {
+            // Update active button styling
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active')
+            })
+            document.querySelector(`.lang-btn:nth-child(${lang === 'en' ? 1 : lang === 'de' ? 2 : 3})`).classList.add('active')
+            
+            // Update all elements with data-i18n attribute
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n')
+                if (translations[lang] && translations[lang][key]) {
+                    if (element.tagName === 'TITLE') {
+                        element.textContent = translations[lang][key]
+                    } else {
+                        element.innerHTML = translations[lang][key]
+                    }
+                }
+            })
+            
+            // Save language preference
+            localStorage.setItem('preppal-language', lang)
+        }
+
+        // Initialize language on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set default language to English or use saved preference
+            const savedLang = localStorage.getItem('preppal-language')
+            if (savedLang && ['en', 'de', 'fr'].includes(savedLang)) {
+                changeLanguage(savedLang)
+            } else {
+                changeLanguage('en') // Default to English
+            }
+        })
+    </script>
 </body>
 </html>
