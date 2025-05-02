@@ -1,4 +1,6 @@
-# Tasks for MVP
+# Roadmap and features
+
+## MVP
 
 - [x] Online buying: 
     - [x] Move the link attribute to the categories
@@ -10,16 +12,17 @@
     - [x] Edit categories: add link, change unit, avg expiry
     - [x] Remove categories
     - [x] Add categories 
-- [ ] Add a simple calculator based on nb of people in house
 - [ ] Check if it works well on tablet (interactions)
-- [ ] Export + import files (categories + stock)
+- [x] Export + import files (categories + stock)
 - [x] Landing page (basic draft)
+- [x] Landing page in the 3 languages at least
 
-## Recommendation
+## Recommendations
 
 - [x] Stock item type model + recommended model
 - [x] Recommended screen from static file
 - [x] Load and save to disk / localstorage
+- [ ] Add a simple calculator based on nb of people in house
 
 ## Current stock
 
@@ -38,7 +41,7 @@
 - [x] Make it printable
 - [x] Add default units to each item
 
-## Setup screen
+## Admin
 
 - [x] Add possibility to delete the file to restart from scratch
 
@@ -47,7 +50,7 @@
 - [x] Multi-language (FR, DE, EN)
 - [ ] better error display management
 - [ ] Add a profile ID (prepare for login)
-- [ ] Complete redesign
+- [ ] Redesign
 - [ ] Distribution
     - [x] rename repo
     - [x] use electron-builder to build and publish artefacts on Gitlhub (separate repo for now?)
@@ -61,6 +64,7 @@
 ### Misc
 
 - [ ] Country specific calculator?
+- [ ] Recommendations for basic readyness
 - [ ] Blog / news / events / how tos (partnerships?)
 
 ### Mobile app
@@ -73,6 +77,6 @@
 
 - [ ] Notifications
     - [ ] Notification center in the interface
-    - [ ] Mobile? SMS? Email? -> check stock and expiry and warn
+    - [ ] Mobile? SMS? Email? -> Stock expiry and warnings
 - [ ] Social recommendation: what other are buying for default categories (require unique ID of categories)
-- [ ] One click supply for specific items? (drop shipping API?)
+- [ ] One click supply for specific items? (drop shipping API? Partnership? -> Swiss usual shops)
