@@ -3,7 +3,7 @@ import { Container, Title, Table, Loader, Tooltip, useMantineTheme, ActionIcon, 
 import InitDatabases from '../components/InitDatabases'
 import { useDebouncedCallback } from '@mantine/hooks'
 import { useProductContext } from '../context/ProductContext'
-import { Biohazard, CalendarCheck, Trash, Info, Warning, PlusCircle, WarningDiamond } from '@phosphor-icons/react'
+import { CalendarCheck, Trash, Info, PlusCircle, WarningDiamond, FalloutShelter } from '@phosphor-icons/react'
 import { isTodayAfter } from '../utils/dateUtils'
 import AddStockItemModal from '../components/AddStockItemModal'
 import { setSaveStatus } from '../utils/notificationUtils'
@@ -76,20 +76,15 @@ const translations = {
     de_CH: `Artikel zu ${productType} hinzufügen`,
     en_US: `Add item to ${productType}`
   }),
-  checkExpiration: (computedExpiry) => ({
-    fr_CH: `Vérifier l'expiration (${computedExpiry})`,
-    de_CH: `Ablaufdatum überprüfen (${computedExpiry})`,
-    en_US: `Check expiration (${computedExpiry})`,
+  checkStock: (nextCheckDate) => ({
+    fr_CH: `Vérifier le stock (${nextCheckDate})`,
+    de_CH: `Bestand überprüfen (${nextCheckDate})`,
+    en_US: `Check stock (${nextCheckDate})`
   }),
-  checkStock: (computedNextCheck) => ({
-    fr_CH: `Vérifier le stock (${computedNextCheck})`,
-    de_CH: `Bestand überprüfen (${computedNextCheck})`,
-    en_US: `Check stock (${computedNextCheck})`
-  }),
-  nextCheck: (computedNextCheck) => ({
-    fr_CH: `Prochain contrôle recommandé (${computedNextCheck})`,
-    de_CH: `Nächste empfohlene Überprüfung (${computedNextCheck})`,
-    en_US: `Next recommened check (${computedNextCheck})`
+  nextCheck: (nextCheckDate) => ({
+    fr_CH: `Prochain contrôle recommandé (${nextCheckDate})`,
+    de_CH: `Nächste empfohlene Überprüfung (${nextCheckDate})`,
+    en_US: `Next recommended check (${nextCheckDate})`
   }),
   product: {
     fr_CH: "Produit",
@@ -106,6 +101,11 @@ const translations = {
     de_CH: `Löschen ${itemDescription}`,
     en_US: `Delete ${itemDescription}`,
   }),
+  itemsExpired: {
+    fr_CH: "Articles potentiellement périmés dans cette catégorie",
+    de_CH: "Artikel in dieser Kategorie möglicherweise abgelaufen",
+    en_US: "Items potentially expired in this category",
+  },
 }
 
 const LOW_STOCK_THRESHOLD = 65
@@ -217,6 +217,9 @@ function CurrentScreen() {
       group.stockPercentage = categoryQuantity > 0 
         ? Math.round((group.totalQuantity / categoryQuantity) * 100) 
         : 100
+
+      // add a property telling whether the category has stock expired
+      group.hasExpired = group.items.some(item => isTodayAfter(item.nextCheck))
     })
     
     // Convert to array and sort by category id
@@ -280,19 +283,35 @@ function CurrentScreen() {
     groupedStockItems.forEach(group => {
       const categoryQuantity = group.category.quantityOverride || group.category.quantity
       const hasLowStock = group.stockPercentage < LOW_STOCK_THRESHOLD
-      const stockLevelColor = group.stockPercentage > LOW_STOCK_THRESHOLD ? 
+      let stockLevelColor = group.stockPercentage > LOW_STOCK_THRESHOLD ? 
         theme.colors.green[6] : 
         group.stockPercentage < CRITICAL_STOCK_THRESHOLD_ ?
           theme.colors.red[6] :
           theme.colors.yellow[6]
+
+      const warningLabel = []
+      if (hasLowStock) {
+        warningLabel.push(translated.stockLevel(group.stockPercentage, group.totalQuantity, categoryQuantity))
+      }
+
+      // if the category has expired items, and the stock level is not critical, show a yellow warning at least
+      if (group.hasExpired) {
+        warningLabel.push(`${translated.itemsExpired}`)
+        
+        if (!hasLowStock) {
+          stockLevelColor = theme.colors.yellow[6]
+        }
+      }
+      
+
 
       // Add category row
       tableRows.push(
         <Table.Tr key={`category-${group.category.id}`} style={{ borderTop: `1px solid var(--mantine-color-blue-1)` }}>
           <Table.Td>
             <Group gap="xs" wrap='nowrap'>
-              {hasLowStock && (
-                <Tooltip label={translated.stockLevel(group.stockPercentage, group.totalQuantity, categoryQuantity)}>
+              {(hasLowStock || group.hasExpired) && (
+                <Tooltip multiline label={warningLabel.join(' | ')}>
                   <WarningDiamond size={24} color={stockLevelColor} weight="fill" />
                 </Tooltip>
               )}
@@ -330,17 +349,12 @@ function CurrentScreen() {
           <Table.Tr key={`item-${group.category.id}-${index}`}>
             <Table.Td>
               <Group gap="xs" wrap='nowrap'>
-                {isTodayAfter(item.computedExpiry) && (
-                  <Tooltip label={translated.checkExpiration(item.computedExpiry)}>
-                    <Biohazard size={24} color={theme.colors.orange[9]} />
-                  </Tooltip>
-                )}
-                {isTodayAfter(item.computedNextCheck) ? (
-                  <Tooltip label={translated.checkStock(item.computedNextCheck)}>
-                    <Warning size={24} color={theme.colors.yellow[7]} />
+                {isTodayAfter(item.nextCheck) ? (
+                  <Tooltip label={translated.checkStock(item.nextCheck)}>
+                    <FalloutShelter size={24} color={theme.colors.yellow[7]} />
                   </Tooltip>
                   ) : (
-                  <Tooltip label={translated.nextCheck(item.computedNextCheck)}>
+                  <Tooltip label={translated.nextCheck(item.nextCheck)}>
                     <CalendarCheck size={24} color={theme.colors.teal[9]} />
                   </Tooltip>
                 )}

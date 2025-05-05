@@ -102,10 +102,9 @@ function AddStockItemModal({ opened, onClose, categoryId, categoryName }) {
         typeId: categoryId,
         description,
         quantity,
+        addedDate: getTodayFormatted(),
         checkedDate: getTodayFormatted(),
-        nextCheck: addDays(getTodayFormatted(), checkDays),
-        computedNextCheck: addDays(getTodayFormatted(), checkDays),
-        computedExpiry: addDays(getTodayFormatted(), checkDays * 2) // Simple expiry calculation
+        nextCheck: addDays(getTodayFormatted(), checkDays)
       }
       
       // Add the new item to the stock
