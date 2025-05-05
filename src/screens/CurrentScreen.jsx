@@ -3,8 +3,9 @@ import { Container, Title, Table, Loader, Tooltip, useMantineTheme, ActionIcon, 
 import InitDatabases from '../components/InitDatabases'
 import { useDebouncedCallback } from '@mantine/hooks'
 import { useProductContext } from '../context/ProductContext'
-import { CalendarCheck, Trash, Info, PlusCircle, WarningDiamond, FalloutShelter, UserCheck, CalendarStar } from '@phosphor-icons/react'
-import { isTodayAfter, isDateToday, getToday, addDays } from '../utils/dateUtils'
+import { Trash, Info, PlusCircle, WarningDiamond } from '@phosphor-icons/react'
+import { isTodayAfter } from '../utils/dateUtils'
+import ItemDateChecker from '../components/ItemDateChecker'
 import AddStockItemModal from '../components/AddStockItemModal'
 import { setSaveStatus } from '../utils/notificationUtils'
 import { useLittera } from '@assembless/react-littera'
@@ -15,19 +16,11 @@ import translations from './CurrentScreen.translations'
 const LOW_STOCK_THRESHOLD = 65
 const CRITICAL_STOCK_THRESHOLD_ = 35
 
-// Constants for item action states
-const ACTION_STATE = {
-  DEFAULT: 'default',
-  USER_CHECK: 'userCheck',
-  CALENDAR_STAR: 'calendarStar'
-}
-
 function CurrentScreen() {
   const theme = useMantineTheme()
   const { filesExist, productData, loading, saveStockData } = useProductContext()
   const [modalOpen, setModalOpen] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState(null)
-  const [itemActionStates, setItemActionStates] = useState({})
 
   const translated = useLittera(translations)
   
@@ -182,135 +175,9 @@ function CurrentScreen() {
       setSaveStatus({ 
         saving: false, 
         success: false, 
-        message: translated.errorDeleting(error.message),//`Error deleting item: ${error.message}`,
+        message: translated.errorDeleting(error.message),
         id: 'save-stock-item'
       })
-    }
-  }
-
-  // Generate a unique key for each item to use in the itemActionStates
-  const getItemKey = (item) => {
-    return `${item.typeId}-${item.description}-${item.checkedDate}`
-  }
-
-  // Handle the click on the check icon
-  const handleCheckIconClick = (item) => {
-    const itemKey = getItemKey(item)
-    const currentState = itemActionStates[itemKey] || ACTION_STATE.DEFAULT
-    
-    // Get today's date in the same format as the existing dates
-    const today = getToday()
-    const isCheckedDateToday = isDateToday(item.checkedDate)
-    
-    // If the current state is default, check if the checkedDate is today
-    if (currentState === ACTION_STATE.DEFAULT) {
-      // If checkedDate is today, show calendarStar state
-      if (isCheckedDateToday) {
-        setItemActionStates({
-          ...itemActionStates,
-          [itemKey]: ACTION_STATE.CALENDAR_STAR
-        })
-      } 
-      // If checkedDate is not today, show userCheck state
-      else {
-        setItemActionStates({
-          ...itemActionStates,
-          [itemKey]: ACTION_STATE.USER_CHECK
-        })
-      }
-      
-      // Set a timeout to revert back to default state if not clicked again
-      setTimeout(() => {
-        setItemActionStates(prevStates => {
-          // Only revert if still in the same state
-          if (prevStates[itemKey]) {
-            const newStates = { ...prevStates }
-            delete newStates[itemKey]
-            return newStates
-          }
-          return prevStates
-        })
-      }, 3000) 
-    } 
-    // If the current state is userCheck, update the checkedDate to today
-    else if (currentState === ACTION_STATE.USER_CHECK) {
-      try {
-        setSaveStatus({ 
-          saving: true, 
-          success: null, 
-          message: translated.updatingCheckedDate(item.description),
-          id: 'save-stock-item'
-        })
-        
-        // Find the category to get the usualExpiryCheckDays
-        const category = productData.baseCategories.find(cat => cat.id === item.typeId)
-        
-        // Calculate the next check date (today + usualExpiryCheckDays)
-        const nextCheckDate = category && category.usualExpiryCheckDays 
-          ? addDays(today, category.usualExpiryCheckDays)
-          : item.nextCheck // Keep the existing nextCheck if no usualExpiryCheckDays is defined
-        
-        // Update the item in the products array
-        const updatedProducts = productData.stock.products.map(stockItem => {
-          if (
-            stockItem.typeId === item.typeId && 
-            stockItem.description === item.description &&
-            stockItem.checkedDate === item.checkedDate
-          ) {
-            return { 
-              ...stockItem, 
-              checkedDate: today,
-              nextCheck: nextCheckDate
-            }
-          }
-          return stockItem
-        })
-        
-        // Create updated stock object
-        const updatedStock = {
-          ...productData.stock,
-          products: updatedProducts
-        }
-        
-        // Save the updated stock
-        saveStockData(updatedStock).then(success => {
-          setSaveStatus({ 
-            saving: false, 
-            success: success, 
-            message: success 
-              ? translated.checkedDateUpdated(item.description)
-              : translated.checkedDateNotUpdated(item.description),
-            id: 'save-stock-item'
-          })
-          
-          if (success) {
-            // Revert to default state after successful update
-            const newStates = { ...itemActionStates }
-            delete newStates[itemKey]
-            setItemActionStates(newStates)
-          }
-        })
-      } catch (error) {
-        setSaveStatus({ 
-          saving: false, 
-          success: false, 
-          message: translated.errorUpdatingCheckedDate(error.message),
-          id: 'save-stock-item'
-        })
-        
-        // Revert to default state on error
-        const newStates = { ...itemActionStates }
-        delete newStates[itemKey]
-        setItemActionStates(newStates)
-      }
-    }
-    // If the current state is calendarStar, this is where we would implement the next check date setup
-    // For now, we'll just revert to default as specified in the requirements
-    else if (currentState === ACTION_STATE.CALENDAR_STAR) {
-      // For now, just revert to default state
-      const newStates = { ...itemActionStates }
-      delete newStates[itemKey]
-      setItemActionStates(newStates)
     }
   }
   
@@ -341,8 +208,6 @@ function CurrentScreen() {
         }
       }
       
-
-
       // Add category row
       tableRows.push(
         <Table.Tr key={`category-${group.category.id}`} style={{ borderTop: `1px solid var(--mantine-color-blue-1)` }}>
@@ -383,48 +248,16 @@ function CurrentScreen() {
       
       // Add item rows
       group.items.forEach((item, index) => {
-        const itemKey = getItemKey(item)
-        const actionState = itemActionStates[itemKey] || ACTION_STATE.DEFAULT
-        
         tableRows.push(
           <Table.Tr key={`item-${group.category.id}-${index}`}>
             <Table.Td>
               <Group gap="xs" wrap='nowrap'>
-                {actionState === ACTION_STATE.USER_CHECK ? (
-                  <Tooltip label={translated.resetCheckedDate}>
-                    <ActionIcon
-                      variant="transparent"
-                      onClick={() => handleCheckIconClick(item)}
-                      tabIndex="-1"
-                    >
-                      <UserCheck size={24} color={theme.colors.blue[6]} />
-                    </ActionIcon>
-                  </Tooltip>
-                ) : actionState === ACTION_STATE.CALENDAR_STAR ? (
-                  <Tooltip label={translated.setupNextCheckDate}>
-                    <ActionIcon
-                      variant="transparent"
-                      onClick={() => handleCheckIconClick(item)}
-                      tabIndex="-1"
-                    >
-                      <CalendarStar size={24} color={theme.colors.blue[6]} />
-                    </ActionIcon>
-                  </Tooltip>
-                ) : isTodayAfter(item.nextCheck) ? (
-                  <Tooltip label={translated.checkStock(item.nextCheck)}>
-                    <ActionIcon
-                      variant="transparent"
-                      onClick={() => handleCheckIconClick(item)}
-                      tabIndex="-1"
-                    >
-                      <FalloutShelter size={24} color={theme.colors.yellow[7]} />
-                    </ActionIcon>
-                  </Tooltip>
-                ) : (
-                  <Tooltip label={translated.nextCheck(item.nextCheck)}>
-                    <CalendarCheck size={24} color={theme.colors.teal[9]} />
-                  </Tooltip>
-                )}
+                <ItemDateChecker 
+                  item={item}
+                  category={group.category}
+                  productData={productData}
+                  saveStockData={saveStockData}
+                />
               </Group>
             </Table.Td>
             <Table.Td>

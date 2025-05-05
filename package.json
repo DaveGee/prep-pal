@@ -6,16 +6,17 @@
   "dependencies": {
     "@assembless/react-littera": "^2.4.0",
     "@electron/remote": "^2.0.1",
-    "@mantine/core": "^7.17.2",
-    "@mantine/hooks": "^7.17.2",
-    "@mantine/notifications": "^7.17.2",
+    "@mantine/core": "^8.0.0",
+    "@mantine/dates": "^8.0.0",
+    "@mantine/hooks": "^8.0.0",
+    "@mantine/notifications": "^8.0.0",
     "@phosphor-icons/react": "^2.1.7",
     "electron-is-dev": "^2.0.0",
+    "electron-log": "^5.0.3",
+    "electron-updater": "^6.1.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^7.3.0",
-    "electron-updater": "^6.1.7",
-    "electron-log": "^5.0.3"
+    "react-router-dom": "^7.3.0"
   },
   "scripts": {
     "start": "vite",
@@ -59,11 +60,15 @@
       "target": [
         {
           "target": "dmg",
-          "arch": ["universal"]
+          "arch": [
+            "universal"
+          ]
         },
         {
           "target": "zip",
-          "arch": ["universal"]
+          "arch": [
+            "universal"
+          ]
         }
       ]
     },

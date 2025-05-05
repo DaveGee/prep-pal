@@ -7,6 +7,7 @@ import '@mantine/notifications/styles.css'
 import App from './App'
 import { LitteraProvider } from '@assembless/react-littera'
 import ErrorFallbackUI from './components/ErrorFallbackUI'
+import '@mantine/dates/styles.css'
 
 const root = createRoot(document.getElementById('root'))
 
