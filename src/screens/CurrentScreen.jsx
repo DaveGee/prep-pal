@@ -3,119 +3,31 @@ import { Container, Title, Table, Loader, Tooltip, useMantineTheme, ActionIcon, 
 import InitDatabases from '../components/InitDatabases'
 import { useDebouncedCallback } from '@mantine/hooks'
 import { useProductContext } from '../context/ProductContext'
-import { CalendarCheck, Trash, Info, PlusCircle, WarningDiamond, FalloutShelter } from '@phosphor-icons/react'
-import { isTodayAfter } from '../utils/dateUtils'
+import { CalendarCheck, Trash, Info, PlusCircle, WarningDiamond, FalloutShelter, UserCheck, CalendarStar } from '@phosphor-icons/react'
+import { isTodayAfter, isDateToday, getToday, addDays } from '../utils/dateUtils'
 import AddStockItemModal from '../components/AddStockItemModal'
 import { setSaveStatus } from '../utils/notificationUtils'
 import { useLittera } from '@assembless/react-littera'
 import ResetDatabases from '../components/ResetDatabases'
 
-const translations = {
-  title: {
-    fr_CH: "Stock actuel",
-    de_CH: "Aktueller Bestand",
-    en_US: "Current stock"
-  },
-  updatingQuantity: (itemDescription) => ({
-    fr_CH: `Mise à jour de la quantité pour ${itemDescription}...`,
-    de_CH: `Aktualisierung der Menge für ${itemDescription}...`,
-    en_US: `Updating quantity for ${itemDescription}...`,
-  }),
-  quantityUpdated: (itemDescription) => ({
-    fr_CH: `Quantité pour ${itemDescription} mise à jour avec succès`,
-    de_CH: `Menge für ${itemDescription} erfolgreich aktualisiert`,
-    en_US: `Quantity for ${itemDescription} updated successfully`,
-  }),
-  quantityNotUpdated: (itemDescription) => ({
-    fr_CH: `Échec de la mise à jour de la quantité pour ${itemDescription}`,
-    de_CH: `Fehler beim Aktualisieren der Menge für ${itemDescription}`,
-    en_US: `Failed to update quantity for ${itemDescription}`,
-  }),
-  errorUpdatingQuantity: (errorMessage) => ({
-    fr_CH: `Erreur lors de la mise à jour de la quantité : ${errorMessage}`,
-    de_CH: `Fehler beim Aktualisieren der Menge: ${errorMessage}`,
-    en_US: `Error updating quantity: ${errorMessage}`,
-  }),
-  unknownCategory: {
-    fr_CH: "Catégorie inconnue",
-    de_CH: "Unbekannte Kategorie",
-    en_US: "Unknown category"
-  },
-  deletingItem: (itemDescription, categoryName) => ({
-    fr_CH: `Suppression de ${itemDescription} de ${categoryName}...`,
-    de_CH: `Löschen von ${itemDescription} aus ${categoryName}...`,
-    en_US: `Deleting ${itemDescription} from ${categoryName}...`,
-  }),
-  itemDeleted: (itemDescription, categoryName) => ({
-    fr_CH: `${itemDescription} supprimé de ${categoryName} avec succès`,
-    de_CH: `${itemDescription} erfolgreich aus ${categoryName} gelöscht`,
-    en_US: `${itemDescription} deleted from ${categoryName} successfully`,
-  }),
-  itemNotDeleted: (itemDescription, categoryName) => ({
-    fr_CH: `Échec de la suppression de ${itemDescription} de ${categoryName}`,
-    de_CH: `Fehler beim Löschen von ${itemDescription} aus ${categoryName}`,
-    en_US: `Failed to delete ${itemDescription} from ${categoryName}`,
-  }),
-  errorDeleting: (errorMessage) => ({
-    fr_CH: `Erreur lors de la suppression de l'élément : ${errorMessage}`,
-    de_CH: `Fehler beim Löschen des Elements: ${errorMessage}`,
-    en_US: `Error deleting item: ${errorMessage}`,
-  }),
-  stockLevel: (stockPercentage, totalQuantity, categoryQuantity) => ({
-    fr_CH: `Niveau de stock : ${stockPercentage}% (${totalQuantity}/${categoryQuantity})`,
-    de_CH: `Bestandsniveau: ${stockPercentage}% (${totalQuantity}/${categoryQuantity})`,
-    en_US: `Stock level: ${stockPercentage}% (${totalQuantity}/${categoryQuantity})`,
-  }),
-  averageExpiration: (days) => ({
-    fr_CH: "Moyenne des jours avant expiration : " + (days || 'Non défini'),
-    de_CH: "Durchschnittliche Tage bis zum Ablauf: " + (days || 'Nicht festgelegt'),
-    en_US: "Average days to expire: " + (days || 'Not set'),
-  }),
-  addItem: (productType) => ({
-    fr_CH: `Ajouter un article à ${productType}`,
-    de_CH: `Artikel zu ${productType} hinzufügen`,
-    en_US: `Add item to ${productType}`
-  }),
-  checkStock: (nextCheckDate) => ({
-    fr_CH: `Vérifier le stock (${nextCheckDate})`,
-    de_CH: `Bestand überprüfen (${nextCheckDate})`,
-    en_US: `Check stock (${nextCheckDate})`
-  }),
-  nextCheck: (nextCheckDate) => ({
-    fr_CH: `Prochain contrôle recommandé (${nextCheckDate})`,
-    de_CH: `Nächste empfohlene Überprüfung (${nextCheckDate})`,
-    en_US: `Next recommended check (${nextCheckDate})`
-  }),
-  product: {
-    fr_CH: "Produit",
-    de_CH: "Produkt",
-    en_US: "Product"
-  },
-  quantity: {
-    fr_CH: "Quantité",
-    de_CH: "Menge",
-    en_US: "Quantity"
-  },
-  delete: (itemDescription) => ({
-    fr_CH: `Supprimer ${itemDescription}`,
-    de_CH: `Löschen ${itemDescription}`,
-    en_US: `Delete ${itemDescription}`,
-  }),
-  itemsExpired: {
-    fr_CH: "Articles potentiellement périmés dans cette catégorie",
-    de_CH: "Artikel in dieser Kategorie möglicherweise abgelaufen",
-    en_US: "Items potentially expired in this category",
-  },
-}
+import translations from './CurrentScreen.translations'
 
 const LOW_STOCK_THRESHOLD = 65
 const CRITICAL_STOCK_THRESHOLD_ = 35
+
+// Constants for item action states
+const ACTION_STATE = {
+  DEFAULT: 'default',
+  USER_CHECK: 'userCheck',
+  CALENDAR_STAR: 'calendarStar'
+}
 
 function CurrentScreen() {
   const theme = useMantineTheme()
   const { filesExist, productData, loading, saveStockData } = useProductContext()
   const [modalOpen, setModalOpen] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState(null)
+  const [itemActionStates, setItemActionStates] = useState({})
 
   const translated = useLittera(translations)
   
@@ -275,6 +187,132 @@ function CurrentScreen() {
       })
     }
   }
+
+  // Generate a unique key for each item to use in the itemActionStates
+  const getItemKey = (item) => {
+    return `${item.typeId}-${item.description}-${item.checkedDate}`
+  }
+
+  // Handle the click on the check icon
+  const handleCheckIconClick = (item) => {
+    const itemKey = getItemKey(item)
+    const currentState = itemActionStates[itemKey] || ACTION_STATE.DEFAULT
+    
+    // Get today's date in the same format as the existing dates
+    const today = getToday()
+    const isCheckedDateToday = isDateToday(item.checkedDate)
+    
+    // If the current state is default, check if the checkedDate is today
+    if (currentState === ACTION_STATE.DEFAULT) {
+      // If checkedDate is today, show calendarStar state
+      if (isCheckedDateToday) {
+        setItemActionStates({
+          ...itemActionStates,
+          [itemKey]: ACTION_STATE.CALENDAR_STAR
+        })
+      } 
+      // If checkedDate is not today, show userCheck state
+      else {
+        setItemActionStates({
+          ...itemActionStates,
+          [itemKey]: ACTION_STATE.USER_CHECK
+        })
+      }
+      
+      // Set a timeout to revert back to default state if not clicked again
+      setTimeout(() => {
+        setItemActionStates(prevStates => {
+          // Only revert if still in the same state
+          if (prevStates[itemKey]) {
+            const newStates = { ...prevStates }
+            delete newStates[itemKey]
+            return newStates
+          }
+          return prevStates
+        })
+      }, 3000) 
+    } 
+    // If the current state is userCheck, update the checkedDate to today
+    else if (currentState === ACTION_STATE.USER_CHECK) {
+      try {
+        setSaveStatus({ 
+          saving: true, 
+          success: null, 
+          message: translated.updatingCheckedDate(item.description),
+          id: 'save-stock-item'
+        })
+        
+        // Find the category to get the usualExpiryCheckDays
+        const category = productData.baseCategories.find(cat => cat.id === item.typeId)
+        
+        // Calculate the next check date (today + usualExpiryCheckDays)
+        const nextCheckDate = category && category.usualExpiryCheckDays 
+          ? addDays(today, category.usualExpiryCheckDays)
+          : item.nextCheck // Keep the existing nextCheck if no usualExpiryCheckDays is defined
+        
+        // Update the item in the products array
+        const updatedProducts = productData.stock.products.map(stockItem => {
+          if (
+            stockItem.typeId === item.typeId && 
+            stockItem.description === item.description &&
+            stockItem.checkedDate === item.checkedDate
+          ) {
+            return { 
+              ...stockItem, 
+              checkedDate: today,
+              nextCheck: nextCheckDate
+            }
+          }
+          return stockItem
+        })
+        
+        // Create updated stock object
+        const updatedStock = {
+          ...productData.stock,
+          products: updatedProducts
+        }
+        
+        // Save the updated stock
+        saveStockData(updatedStock).then(success => {
+          setSaveStatus({ 
+            saving: false, 
+            success: success, 
+            message: success 
+              ? translated.checkedDateUpdated(item.description)
+              : translated.checkedDateNotUpdated(item.description),
+            id: 'save-stock-item'
+          })
+          
+          if (success) {
+            // Revert to default state after successful update
+            const newStates = { ...itemActionStates }
+            delete newStates[itemKey]
+            setItemActionStates(newStates)
+          }
+        })
+      } catch (error) {
+        setSaveStatus({ 
+          saving: false, 
+          success: false, 
+          message: translated.errorUpdatingCheckedDate(error.message),
+          id: 'save-stock-item'
+        })
+        
+        // Revert to default state on error
+        const newStates = { ...itemActionStates }
+        delete newStates[itemKey]
+        setItemActionStates(newStates)
+      }
+    }
+    // If the current state is calendarStar, this is where we would implement the next check date setup
+    // For now, we'll just revert to default as specified in the requirements
+    else if (currentState === ACTION_STATE.CALENDAR_STAR) {
+      // For now, just revert to default state
+      const newStates = { ...itemActionStates }
+      delete newStates[itemKey]
+      setItemActionStates(newStates)
+    }
+  }
   
   // Generate table rows
   const rows = useMemo(() => {
@@ -345,15 +383,44 @@ function CurrentScreen() {
       
       // Add item rows
       group.items.forEach((item, index) => {
+        const itemKey = getItemKey(item)
+        const actionState = itemActionStates[itemKey] || ACTION_STATE.DEFAULT
+        
         tableRows.push(
           <Table.Tr key={`item-${group.category.id}-${index}`}>
             <Table.Td>
               <Group gap="xs" wrap='nowrap'>
-                {isTodayAfter(item.nextCheck) ? (
-                  <Tooltip label={translated.checkStock(item.nextCheck)}>
-                    <FalloutShelter size={24} color={theme.colors.yellow[7]} />
+                {actionState === ACTION_STATE.USER_CHECK ? (
+                  <Tooltip label={translated.resetCheckedDate}>
+                    <ActionIcon
+                      variant="transparent"
+                      onClick={() => handleCheckIconClick(item)}
+                      tabIndex="-1"
+                    >
+                      <UserCheck size={24} color={theme.colors.blue[6]} />
+                    </ActionIcon>
                   </Tooltip>
-                  ) : (
+                ) : actionState === ACTION_STATE.CALENDAR_STAR ? (
+                  <Tooltip label={translated.setupNextCheckDate}>
+                    <ActionIcon
+                      variant="transparent"
+                      onClick={() => handleCheckIconClick(item)}
+                      tabIndex="-1"
+                    >
+                      <CalendarStar size={24} color={theme.colors.blue[6]} />
+                    </ActionIcon>
+                  </Tooltip>
+                ) : isTodayAfter(item.nextCheck) ? (
+                  <Tooltip label={translated.checkStock(item.nextCheck)}>
+                    <ActionIcon
+                      variant="transparent"
+                      onClick={() => handleCheckIconClick(item)}
+                      tabIndex="-1"
+                    >
+                      <FalloutShelter size={24} color={theme.colors.yellow[7]} />
+                    </ActionIcon>
+                  </Tooltip>
+                ) : (
                   <Tooltip label={translated.nextCheck(item.nextCheck)}>
                     <CalendarCheck size={24} color={theme.colors.teal[9]} />
                   </Tooltip>

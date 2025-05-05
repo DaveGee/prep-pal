@@ -43,6 +43,15 @@ export const getTodayFormatted = () => {
 }
 
 /**
+ * Get today's date as a yyyy-mm-dd string using ISO string format
+ * This is an alternative to getTodayFormatted that uses the ISO string method
+ * @returns {string} Today's date in yyyy-mm-dd format
+ */
+export const getToday = () => {
+  return new Date().toISOString().split('T')[0]
+}
+
+/**
  * Check if today is after a specified date
  * @param {string} dateString - Date string in yyyy-mm-dd format
  * @returns {boolean} True if today is after the specified date, false otherwise
@@ -58,6 +67,27 @@ export const isTodayAfter = (dateString) => {
   if (!compareDate) return false
   
   return today > compareDate
+}
+
+/**
+ * Check if a date is today
+ * @param {string} dateString - Date string in yyyy-mm-dd format
+ * @returns {boolean} True if the date is today, false otherwise
+ */
+export const isDateToday = (dateString) => {
+  if (!dateString) return false
+  
+  const today = new Date()
+  // Reset time to midnight for accurate date comparison
+  today.setHours(0, 0, 0, 0)
+  
+  const compareDate = parseDate(dateString)
+  if (!compareDate) return false
+  
+  // Compare year, month, and day
+  return today.getFullYear() === compareDate.getFullYear() &&
+         today.getMonth() === compareDate.getMonth() &&
+         today.getDate() === compareDate.getDate()
 }
 
 /**
