@@ -16,6 +16,8 @@
 - [x] Export + import files (categories + stock)
 - [x] Landing page (basic draft)
 - [x] Landing page in the 3 languages at least
+- [ ] Put the downloadable artefacts on a public repository
+- [ ] Adapt the landing page for public release (link to feature/roadmap, FAQ, About, Contact, Help)
 
 ## Recommendations
 
@@ -80,3 +82,7 @@
     - [ ] Mobile? SMS? Email? -> Stock expiry and warnings
 - [ ] Social recommendation: what other are buying for default categories (require unique ID of categories)
 - [ ] One click supply for specific items? (drop shipping API? Partnership? -> Swiss usual shops)
+
+# Known bugs
+
+- [ ] Fix: electron language detection
