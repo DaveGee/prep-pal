@@ -10,7 +10,7 @@
 - Smart searching/filtering in tables
 
 
-## `v1.0.0`
+## `v0.9.0`
 
 - Offline database for both web and desktop apps (local storage and json disk storage)
 - Import or export databases to the local drive

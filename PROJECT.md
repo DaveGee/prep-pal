@@ -12,12 +12,13 @@
     - [x] Edit categories: add link, change unit, avg expiry
     - [x] Remove categories
     - [x] Add categories 
-- [ ] Check if it works well on tablet (interactions)
 - [x] Export + import files (categories + stock)
 - [x] Landing page (basic draft)
 - [x] Landing page in the 3 languages at least
 - [ ] Put the downloadable artefacts on a public repository
 - [ ] Adapt the landing page for public release (link to feature/roadmap, FAQ, About, Contact, Help)
+- [ ] Logo and app title is still "Electron"
+- [ ] Tests: on iPad + on Windows for installation
 
 ## Recommendations
 

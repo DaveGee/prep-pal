@@ -94,10 +94,10 @@ git push origin v1.0.1
 
 ### Versioning and publishing notes
 
+- `npm version [major|minor|patch] -m "Message"` will increment the version and commit
 - `git tag v1.0.0 && git push --tags` will tag the current commit and push it
 - `git push --delete origin v1.0.0 && git tag --delete v1.0.0` will delete a specific tag
 - `git commit --amend --no-edit` allows to modify a commit
-- `npm version [major|minor|patch] -m "Message"` will increment the version and commit
 
 ## Auto-Updates
 
