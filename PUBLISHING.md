@@ -112,3 +112,13 @@ The application is configured to check for updates automatically when it starts.
 - For production use, it's recommended to set up code signing for both Windows and macOS.
 - Mac builds are configured as Universal binaries, which means they will run natively on both Intel Macs (x64) and Apple Silicon Macs (arm64).
 - The publishing configuration is set to only upload the executable files (DMG for Mac, NSIS/portable for Windows) and not the source code.
+
+### Configuring GH repo for publishing
+
+The app is using electron-builder to publish through GH actions. https://www.electron.build/publish.html
+
+To configure the target repository for the build publishing:
+
+> GitHub personal access token is required. You can generate by going to https://github.com/settings/tokens/new. The access token should have the repo scope/permission. Define GH_TOKEN environment variable.
+
+Then add it as an action secret (`GH_TOKEN`)
