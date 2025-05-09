@@ -19,6 +19,8 @@
 - [x] Adapt the landing page for public release (link to feature/roadmap, FAQ, About, Contact, Help)
 - [ ] Logo and app title is still "Electron"
 - [ ] Tests: on iPad + on Windows for installation
+- [ ] Language: store the selected language preference
+- [ ] Minimum, privacy focused analytics
 
 ## Recommendations
 
