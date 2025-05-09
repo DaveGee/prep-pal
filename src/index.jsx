@@ -45,4 +45,4 @@ root.render(
       </LitteraProvider>
     </MantineProvider>
   </React.StrictMode>
-);
+)

@@ -24,6 +24,7 @@ const getLocalizedProductCategories = (locale = 'en_US') => {
 // Local storage keys
 const PRODUCT_CATEGORIES_STORAGE_KEY = 'mystock_product_categories'
 const STOCK_STORAGE_KEY = 'mystock_stock'
+const USER_PROFILE_STORAGE_KEY = 'mystock_user_profile'
 
 /**
  * Check if product categories file exists
@@ -261,6 +262,69 @@ export const initializeDatabases = async (locale = 'en_US') => {
     return true
   } catch (error) {
     console.error('Error initializing databases:', error)
+    throw error
+  }
+}
+
+/**
+ * Read user profile from disk using Electron IPC or localStorage in browser
+ * @returns {Promise<Object>} The user profile data
+ * @throws {Error} If the file doesn't exist or can't be read
+ */
+export const readUserProfile = async () => {
+  try {
+    // If running in Electron, use IPC to read from disk
+    if (isElectron()) {
+      const { ipcRenderer } = window.require('electron')
+      try {
+        const data = await ipcRenderer.invoke('read-user-profile')
+        
+        // Check if data exists and is valid
+        if (!data || Object.keys(data).length === 0) {
+          throw new Error('No user profile data found')
+        }
+        
+        return data
+      } catch (ipcError) {
+        console.error('Error with Electron IPC:', ipcError)
+        throw new Error('Failed to read user profile file')
+      }
+    } else {
+      // In browser, try to get from localStorage
+      const storedData = localStorage.getItem(USER_PROFILE_STORAGE_KEY)
+      
+      if (storedData) {
+        console.log('Reading user profile from localStorage')
+        return JSON.parse(storedData)
+      } else {
+        throw new Error('No user profile found in localStorage')
+      }
+    }
+  } catch (error) {
+    console.error('Error reading user profile:', error)
+    throw error
+  }
+}
+
+/**
+ * Write user profile to disk using Electron IPC or localStorage in browser
+ * @param {Object} data - The user profile data to write
+ * @returns {Promise<boolean>} True if successful
+ */
+export const writeUserProfile = async (data) => {
+  try {
+    // If running in Electron, use IPC to write to disk
+    if (isElectron()) {
+      const { ipcRenderer } = window.require('electron')
+      return await ipcRenderer.invoke('write-user-profile', data)
+    } else {
+      // In browser, save to localStorage
+      console.log('Saving user profile to localStorage')
+      localStorage.setItem(USER_PROFILE_STORAGE_KEY, JSON.stringify(data))
+      return true
+    }
+  } catch (error) {
+    console.error('Error writing user profile:', error)
     throw error
   }
 }

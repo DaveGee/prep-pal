@@ -17,6 +17,7 @@ import { useDisclosure } from '@mantine/hooks'
 import { HashRouter, useLocation } from 'react-router-dom'
 import AppRoutes from './Routes'
 import { ProductProvider } from './context/ProductContext'
+import { UserProvider } from './context/UserContext'
 
 import RecommendedScreen from './screens/RecommendedScreen'
 import CurrentScreen from './screens/CurrentScreen'
@@ -29,6 +30,7 @@ import { useLittera, useLitteraMethods } from '@assembless/react-littera'
 import logo from './assets/preppal-logo.png'
 import { version } from '../package.json'
 import { useProductContext } from './context/ProductContext'
+import { useUserContext } from './context/UserContext'
 
 const translations = {
   myStock: {
@@ -90,21 +92,32 @@ function AppContent() {
     checkFilesAndLoadData,
     filesExist
   } = useProductContext()
+  
+  const { userProfile, updateUserProfile } = useUserContext()
 
   // Check if databases are empty or reset
   const isDatabasesEmpty = !filesExist.categories || !filesExist.stock
   const fileInputRef = React.useRef(null)
 
+  const translated = useLittera(translations)
+  const methods = useLitteraMethods()
+
   // Close the burger menu when the location changes
   React.useEffect(() => {
     close()
   }, [location, close])
-
-  const translated = useLittera(translations)
-  const methods = useLitteraMethods()
+  
+  // Set the language based on user profile when it loads
+  React.useEffect(() => {
+    if (userProfile && userProfile.preferredLanguage) {
+      methods.setLocale(userProfile.preferredLanguage)
+    }
+  }, [userProfile, methods])
 
   const handleLocaleChange = locale => () => {
     methods.setLocale(locale)
+    // Update user profile with the new preferred language
+    updateUserProfile({ preferredLanguage: locale })
   }
 
   const handleExportData = () => {
@@ -287,11 +300,13 @@ function AppContent() {
 
 function App() {
   return (
-    <ProductProvider>
-      <HashRouter>
-        <AppContent />
-      </HashRouter>
-    </ProductProvider>
+    <UserProvider>
+      <ProductProvider>
+        <HashRouter>
+          <AppContent />
+        </HashRouter>
+      </ProductProvider>
+    </UserProvider>
   )
 }
 

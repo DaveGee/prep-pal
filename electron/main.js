@@ -17,6 +17,7 @@ log.info('User Data Directory:', userDataPath)
 // Paths to JSON files
 const productCategoriesPath = path.join(userDataPath, 'productCategories.json')
 const stockPath = path.join(userDataPath, 'stock.json')
+const userProfilePath = path.join(userDataPath, 'userProfile.json')
 
 // IPC handler for reading product categories
 ipcMain.handle('read-product-categories', async () => {
@@ -96,6 +97,29 @@ ipcMain.handle('delete-stock', async () => {
     return true
   } catch (error) {
     console.error('Error deleting stock:', error)
+    throw error
+  }
+})
+
+// IPC handler for reading user profile
+ipcMain.handle('read-user-profile', async () => {
+  try {
+    const data = await fs.promises.readFile(userProfilePath, 'utf8')
+    return JSON.parse(data)
+  } catch (error) {
+    console.error('Error reading user profile:', error)
+    throw error
+  }
+})
+
+// IPC handler for writing user profile
+ipcMain.handle('write-user-profile', async (event, data) => {
+  try {
+    const jsonData = JSON.stringify(data, null, 4)
+    await fs.promises.writeFile(userProfilePath, jsonData, 'utf8')
+    return true
+  } catch (error) {
+    console.error('Error writing user profile:', error)
     throw error
   }
 })
