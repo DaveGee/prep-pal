@@ -1,17 +1,25 @@
-# Prep pal
+# Prep-Pal
 
-A desktop and web application to help you manage your prepper stock
+https://preppal.io/
 
-Built with Electron and React.
+Prep-Pal is a companion application to manage your emergency stock, based on standard recommendations.
 
-## INSTALLATION
+It helps you track your items, get alerts about expiration and check dates, and buy what's missing. 
+
+### Download
+
+Head to the distribution section of this repository to download the latest build, or use the online version at https://preppal.io/app/
+
+https://github.com/DaveGee/prep-pal/releases
+
+# How-to use this code
 
 1. Install Node.js and npm if you haven't already
 2. Clone this repository
 3. Open terminal in the project folder
 4. Run: `npm install`
 
-## RUNNING IN DEVELOPMENT
+## Running locally
 
 ### Electron development
 
@@ -31,7 +39,8 @@ To run the app in the browser during development with hot reload:
 
 `npx serve landing`
 
-## BUILDING FOR DISTRIBUTION 
+## Build & Distribution
+
 To create installable packages:
 
 `npm run electron:build`
@@ -41,7 +50,10 @@ This will create distribution files in the dist folder:
 - MacOS: Look for .dmg installer in dist/
 - Linux: Look for .AppImage in dist/
 
-## TROUBLESHOOTING
+Further reading: [PUBLISHING.md](./PUBLISHING.md)
+
+## Troubleshooting
+
 If you get errors about missing modules:
 1. Delete the node_modules folder
 2. Run: `npm install`
@@ -52,3 +64,7 @@ If the app won't start:
 2. Try running `npm run electron:serve` again
 
 For any other issues, check the console output for error messages.
+
+# License
+
+[LICENSE](./LICENSE)

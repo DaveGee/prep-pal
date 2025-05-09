@@ -50,7 +50,7 @@
     "publish": {
       "provider": "github",
       "owner": "DaveGee",
-      "repo": "prep-pal-dist",
+      "repo": "prep-pal",
       "releaseType": "release",
       "publishAutoUpdate": true
     },
