@@ -17,17 +17,16 @@
 - [x] Landing page in the 3 languages at least
 - [x] Put the downloadable artefacts on a public repository
 - [x] Adapt the landing page for public release (link to feature/roadmap, FAQ, About, Contact, Help)
-- [ ] Logo and app title is still "Electron"
 - [ ] Tests: on iPad + on Windows for installation
-- [ ] Language: store the selected language preference
-- [ ] Minimum, privacy focused analytics
+- [x] Language: store the selected language preference
+- [x] Minimum, privacy focused analytics
 
 ## Recommendations
 
 - [x] Stock item type model + recommended model
 - [x] Recommended screen from static file
 - [x] Load and save to disk / localstorage
-- [ ] Add a simple calculator based on nb of people in house
+- [ ] Add a simple calculator based on nb of people in house + nb of days - based on CH recommendations
 
 ## Current stock
 
@@ -88,4 +87,4 @@
 
 # Known bugs
 
-- [ ] Fix: electron language detection
+- [x] Fix: electron language detection
