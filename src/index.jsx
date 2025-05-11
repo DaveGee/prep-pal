@@ -11,7 +11,6 @@ import '@mantine/dates/styles.css'
 
 const root = createRoot(document.getElementById('root'))
 
-// Render error UI
 const renderErrorUI = (error) => {
   root.render(
     <React.StrictMode>

@@ -521,7 +521,7 @@
                 "fr_CH": "",
                 "de_CH": ""
             },
-            "quantity": 0,
+            "quantity": 1,
             "preferences": [],
             "usualExpiryCheckDays": 365,
             "defaultUnit": {
@@ -675,13 +675,13 @@
                 "fr_CH": "Paquets AA, AAA",
                 "de_CH": "Packungen AA, AAA"
             },
-            "quantity": 2,
+            "quantity": 20,
             "preferences": [],
             "usualExpiryCheckDays": 365,
             "defaultUnit": {
-                "en_US": "packs",
-                "fr_CH": "paquets",
-                "de_CH": "Packungen"
+                "en_US": "pieces",
+                "fr_CH": "pièces",
+                "de_CH": "Stück"
             }
         },
         {
@@ -723,9 +723,9 @@
             "preferences": [],
             "usualExpiryCheckDays": 365,
             "defaultUnit": {
-                "en_US": "pieces",
-                "fr_CH": "pièces",
-                "de_CH": "Stück"
+                "en_US": "pieces or packs",
+                "fr_CH": "pièces ou paquets",
+                "de_CH": "Stück oder Packungen"
             }
         },
         {
@@ -785,7 +785,7 @@
                 "fr_CH": "Couteaux suisses ou similaires",
                 "de_CH": "Schweizer Messer oder ähnliches"
             },
-            "quantity": 2,
+            "quantity": 1,
             "preferences": [],
             "usualExpiryCheckDays": 365,
             "defaultUnit": {

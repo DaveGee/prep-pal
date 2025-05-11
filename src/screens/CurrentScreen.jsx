@@ -24,7 +24,6 @@ function CurrentScreen() {
 
   const translated = useLittera(translations)
   
-  // Handle quantity change with debounce
   const handleQuantityChange = (item, newQuantity) => {
     try {
       setSaveStatus({ 
