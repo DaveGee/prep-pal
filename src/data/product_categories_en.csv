@@ -1,0 +1,37 @@
+productType,description,defaultUnit,recommendedQtyDayAdult,multiplier
+Mineral water,"1.5 liter bottles, for drinking and cooking!",1.5l bottle, 3
+Other drinks,"Fruit and vegetable juices, 1 liter sweetened drinks",1l bottle, 0.25
+Tea,approx. 100 g,100 g, 10
+Coffee,1 kg,1000g, 0.03
+Milk or milk alternative,1 liter,1l, 0.5
+Vegetables,"Canned vegetables e.g. (corn, tomatoes, mushrooms, peas and carrots) (approx. 300 g)",300g cans,400
+Fruits,"Apple sauce, canned pineapple or dried fruit, e.g. (approx. 300 g)",300g cans, 300
+Sauces,"Tomato sauce, pesto, ketchup, mayonnaise, mustard, e.g. (approx. 200 g)",200g containers, 50
+Soups,"Bouillon cubes, ready-to-eat and freeze-dried soups with tomatoes, vermicelli, e.g. (approx. 200 g)",200g packs, 200
+Cereals,"Pasta, rice, rice cakes, muesli, e.g., or gluten-free alternative (approx. 500 g)",500g boxes,220
+Ready meals,"Ready-to-eat risotto, rösti, e.g. (approx. 250 g)",250g packs,50
+Legumes,"Chickpeas, beans in tomato sauce, canned or dried lentils, e.g. (approx. 400 g)",400g cans,150
+Meat,"Dried meat, cured ham, salami, canned Italian cheese (approx. 100 g)",100g packs, 30
+Fish,"Canned sardines, tuna (approx. 100 g)",100g cans,30
+Dairy products,Hard cheeses (approx. 300 g),300g packs,120
+Nuts,"Cashews, almonds, hazelnuts (approx. 200 g)",200g packs,30,
+Oil,"Olive oil, rapeseed oil (approx. 1 L)",1l,0.04
+Spices,"Salt, pepper, sugar, sweetener",packs,1
+Snacks,"Cereal bars, sweet foods, chocolate (limit to 200-400kcal per day)",packs,400
+Body care,"Soap, shampoo, deodorant, toothpaste",bottles,0
+Sanitary products,"Panty liners, tampons, sanitary pads",packs,0
+Toilet paper,Packs,Multi-roll packs,0
+Tissues,Packs,Multi-packs,0
+Cleaning products,,bottles,0
+Masks,,pieces,0
+Hand sanitizer,Approx. 100 ml,100ml bottle,0
+Garbage bags,,packs,0
+Candles,,pieces,0
+Flashlight,,pieces,0
+Gas stove,,pieces,0
+Spare batteries,"Packs AA, AAA",pieces,0
+Battery or solar radio,,pieces,0
+Matches or lighters,,pieces or packs,0
+Medical thermometer,,pieces,0
+Can opener,,pieces,0
+Pocket knife,Swiss knifes or similar,pieces,0
