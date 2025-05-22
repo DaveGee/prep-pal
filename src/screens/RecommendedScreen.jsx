@@ -255,7 +255,7 @@ function RecommendedScreen() {
         <Title order={1}>{translated.title}</Title>
         <Group gap="xs">
           <Tooltip label={translated.addCategory}>
-            <Button color="blue" variant="filled" onClick={() => setAddModalOpened(true)}>
+            <Button disabled={!filesExist.categories} color="blue" variant="filled" onClick={() => setAddModalOpened(true)}>
               <Plus size={24} />
             </Button>
           </Tooltip>

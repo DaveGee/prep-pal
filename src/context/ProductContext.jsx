@@ -122,7 +122,7 @@ export const ProductProvider = ({ children }) => {
   }
 
   // Function to initialize databases with locale-specific data
-  const initializeData = async () => {
+  const initializeData = async (nbPeople = 1, nbDays = 30) => {
     try {
       setLoading(true)
       
@@ -131,7 +131,7 @@ export const ProductProvider = ({ children }) => {
       console.log(`Initializing databases with ${currentLocale} data`)
       
       // Initialize databases with locale-specific data
-      await initializeDatabases(currentLocale)
+      await initializeDatabases(currentLocale, nbPeople, nbDays)
       
       console.log('Databases initialized, updating state')
       

@@ -261,7 +261,7 @@ export const deleteDatabases = async () => {
  * @param {string} locale - The locale to use (e.g., 'en_US', 'fr_CH', 'de_CH')
  * @returns {Promise<boolean>} True if successful
  */
-export const initializeDatabases = async (locale = 'en_US') => {
+export const initializeDatabases = async (locale = 'en_US', nbPeople = 1, nbDays = 30) => {
   try {
 
     const quantityFunction = (category, forPeople, forDays) => {
@@ -271,7 +271,7 @@ export const initializeDatabases = async (locale = 'en_US') => {
       return Math.ceil(people * days * category.quantityMultiplier || 0)
     }
 
-    const quantityCalculator = category => quantityFunction(category, 1, 14)
+    const quantityCalculator = category => quantityFunction(category, nbPeople, nbDays)
 
     // Get the product categories for the specified locale
     const productCategories = getLocalizedProductCategories(locale, quantityCalculator)
