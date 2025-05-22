@@ -22,7 +22,11 @@
                 "en_US": "1.5l bottle",
                 "fr_CH": "bouteille de 1,5l",
                 "de_CH": "1,5l Flasche"
-            }
+            },
+            "functionOfPeople": "yes",
+            "functionOfDays": "yes",
+            "recommendedQtyDayAdult": 3,
+            "quantityMultiplier": 2
         },
         {
             "id": 2,
@@ -44,7 +48,11 @@
                 "en_US": "1l bottle",
                 "fr_CH": "bouteille de 1l",
                 "de_CH": "1l Flasche"
-            }
+            },
+            "functionOfPeople": "yes",
+            "functionOfDays": "yes",
+            "recommendedQtyDayAdult": 0.25,
+            "quantityMultiplier": 0.25
         },
         {
             "id": 3,
@@ -66,7 +74,11 @@
                 "en_US": "100 g",
                 "fr_CH": "100 g",
                 "de_CH": "100 g"
-            }
+            },
+            "functionOfPeople": "yes",
+            "functionOfDays": "yes",
+            "recommendedQtyDayAdult": 10,
+            "quantityMultiplier": 0.1
         },
         {
             "id": 4,
@@ -88,7 +100,11 @@
                 "en_US": "1kg",
                 "fr_CH": "1kg",
                 "de_CH": "1kg"
-            }
+            },
+            "functionOfPeople": "yes",
+            "functionOfDays": "yes",
+            "recommendedQtyDayAdult": 0.03,
+            "quantityMultiplier": 0.00003
         },
         {
             "id": 5,
@@ -110,7 +126,11 @@
                 "en_US": "1l",
                 "fr_CH": "1l",
                 "de_CH": "1l"
-            }
+            },
+            "functionOfPeople": "yes",
+            "functionOfDays": "yes",
+            "recommendedQtyDayAdult": 0.3,
+            "quantityMultiplier": 0.3
         },
         {
             "id": 6,
@@ -132,7 +152,11 @@
                 "en_US": "300g cans",
                 "fr_CH": "boîtes de 300g",
                 "de_CH": "300g Dosen"
-            }
+            },
+            "functionOfPeople": "yes",
+            "functionOfDays": "yes",
+            "recommendedQtyDayAdult": 400,
+            "quantityMultiplier": 1.33
         },
         {
             "id": 7,
@@ -154,7 +178,11 @@
                 "en_US": "300g cans",
                 "fr_CH": "boîtes de 300g",
                 "de_CH": "300g Dosen"
-            }
+            },
+            "functionOfPeople": "yes",
+            "functionOfDays": "yes",
+            "recommendedQtyDayAdult": 300,
+            "quantityMultiplier": 1
         },
         {
             "id": 8,
@@ -176,7 +204,11 @@
                 "en_US": "200g containers",
                 "fr_CH": "contenants de 200g",
                 "de_CH": "200g Behälter"
-            }
+            },
+            "functionOfPeople": "yes",
+            "functionOfDays": "yes",
+            "recommendedQtyDayAdult": 50,
+            "quantityMultiplier": 0.25
         },
         {
             "id": 9,
@@ -198,7 +230,11 @@
                 "en_US": "200g packs",
                 "fr_CH": "paquets de 200g",
                 "de_CH": "200g Packungen"
-            }
+            },
+            "functionOfPeople": "yes",
+            "functionOfDays": "yes",
+            "recommendedQtyDayAdult": 200,
+            "quantityMultiplier": 0.4
         },
         {
             "id": 10,
@@ -220,7 +256,11 @@
                 "en_US": "500g boxes",
                 "fr_CH": "boîtes de 500g",
                 "de_CH": "500g Schachteln"
-            }
+            },
+            "functionOfPeople": "yes",
+            "functionOfDays": "yes",
+            "recommendedQtyDayAdult": 220,
+            "quantityMultiplier": 0.44
         },
         {
             "id": 11,
@@ -242,7 +282,11 @@
                 "en_US": "250g packs",
                 "fr_CH": "paquets de 250g",
                 "de_CH": "250g Packungen"
-            }
+            },
+            "functionOfPeople": "yes",
+            "functionOfDays": "yes",
+            "recommendedQtyDayAdult": 50,
+            "quantityMultiplier": 0.2
         },
         {
             "id": 12,
@@ -264,7 +308,11 @@
                 "en_US": "400g cans",
                 "fr_CH": "boîtes de 400g",
                 "de_CH": "400g Dosen"
-            }
+            },
+            "functionOfPeople": "yes",
+            "functionOfDays": "yes",
+            "recommendedQtyDayAdult": 150,
+            "quantityMultiplier": 0.7
         },
         {
             "id": 13,
@@ -286,7 +334,11 @@
                 "en_US": "100g packs",
                 "fr_CH": "paquets de 100g",
                 "de_CH": "100g Packungen"
-            }
+            },
+            "functionOfPeople": "yes",
+            "functionOfDays": "yes",
+            "recommendedQtyDayAdult": 30,
+            "quantityMultiplier": 0.3
         },
         {
             "id": 14,
@@ -308,7 +360,11 @@
                 "en_US": "100g cans",
                 "fr_CH": "boîtes de 100g",
                 "de_CH": "100g Dosen"
-            }
+            },
+            "functionOfPeople": "yes",
+            "functionOfDays": "yes",
+            "recommendedQtyDayAdult": 30,
+            "quantityMultiplier": 0.4
         },
         {
             "id": 15,
@@ -330,7 +386,11 @@
                 "en_US": "300g packs",
                 "fr_CH": "paquets de 300g",
                 "de_CH": "300g Packungen"
-            }
+            },
+            "functionOfPeople": "yes",
+            "functionOfDays": "yes",
+            "recommendedQtyDayAdult": 120,
+            "quantityMultiplier": 0.2
         },
         {
             "id": 16,
@@ -352,7 +412,11 @@
                 "en_US": "200g packs",
                 "fr_CH": "paquets de 200g",
                 "de_CH": "200g Packungen"
-            }
+            },
+            "functionOfPeople": "yes",
+            "functionOfDays": "yes",
+            "recommendedQtyDayAdult": 30,
+            "quantityMultiplier": 0.15
         },
         {
             "id": 17,
@@ -374,7 +438,11 @@
                 "en_US": "1l",
                 "fr_CH": "1l",
                 "de_CH": "1l"
-            }
+            },
+            "functionOfPeople": "yes",
+            "functionOfDays": "yes",
+            "recommendedQtyDayAdult": 0.04,
+            "quantityMultiplier": 0.0002
         },
         {
             "id": 18,
@@ -396,7 +464,11 @@
                 "en_US": "packs",
                 "fr_CH": "paquets",
                 "de_CH": "Packungen"
-            }
+            },
+            "functionOfPeople": "no",
+            "functionOfDays": "yes",
+            "recommendedQtyDayAdult": 1,
+            "quantityMultiplier": 0.033
         },
         {
             "id": 19,
@@ -407,9 +479,9 @@
                 "de_CH": "Snacks"
             },
             "description": {
-                "en_US": "Cereal bars, sweet foods, chocolate",
-                "fr_CH": "Barres de céréales, sucreries, chocolat",
-                "de_CH": "Müsliriegel, Süßigkeiten, Schokolade"
+                "en_US": "Cereal bars, sweet foods, chocolate, dried fruits",
+                "fr_CH": "Barres de céréales, sucreries, chocolat, fruits secs",
+                "de_CH": "Müsliriegel, Süßigkeiten, Schokolade, Trockenfrüchte"
             },
             "quantity": 15,
             "preferences": [],
@@ -418,7 +490,11 @@
                 "en_US": "packs",
                 "fr_CH": "paquets",
                 "de_CH": "Packungen"
-            }
+            },
+            "functionOfPeople": "yes",
+            "functionOfDays": "yes",
+            "recommendedQtyDayAdult": 40,
+            "quantityMultiplier": 1
         },
         {
             "id": 20,
@@ -440,7 +516,11 @@
                 "en_US": "bottles",
                 "fr_CH": "bouteilles",
                 "de_CH": "Flaschen"
-            }
+            },
+            "functionOfPeople": "yes",
+            "functionOfDays": "yes",
+            "recommendedQtyDayAdult": 0.05,
+            "quantityMultiplier": 0.05
         },
         {
             "id": 21,
@@ -462,7 +542,11 @@
                 "en_US": "packs",
                 "fr_CH": "paquets",
                 "de_CH": "Packungen"
-            }
+            },
+            "functionOfPeople": "yes",
+            "functionOfDays": "yes",
+            "recommendedQtyDayAdult": 0.05,
+            "quantityMultiplier": 0.05
         },
         {
             "id": 22,
@@ -484,7 +568,11 @@
                 "en_US": "Multi-roll packs",
                 "fr_CH": "paquets multi-rouleaux",
                 "de_CH": "Mehrfachrollen-Packungen"
-            }
+            },
+            "functionOfPeople": "yes",
+            "functionOfDays": "yes",
+            "recommendedQtyDayAdult": 0.05,
+            "quantityMultiplier": 0.05
         },
         {
             "id": 23,
@@ -506,7 +594,11 @@
                 "en_US": "Multi-packs",
                 "fr_CH": "multi-paquets",
                 "de_CH": "Mehrfach-Packungen"
-            }
+            },
+            "functionOfPeople": "yes",
+            "functionOfDays": "yes",
+            "recommendedQtyDayAdult": 0.05,
+            "quantityMultiplier": 0.05
         },
         {
             "id": 24,
@@ -528,7 +620,11 @@
                 "en_US": "bottles",
                 "fr_CH": "bouteilles",
                 "de_CH": "Flaschen"
-            }
+            },
+            "functionOfPeople": "yes",
+            "functionOfDays": "yes",
+            "recommendedQtyDayAdult": 0.05,
+            "quantityMultiplier": 0.05
         },
         {
             "id": 25,
@@ -550,7 +646,11 @@
                 "en_US": "pieces",
                 "fr_CH": "pièces",
                 "de_CH": "Stück"
-            }
+            },
+            "functionOfPeople": "yes",
+            "functionOfDays": "yes",
+            "recommendedQtyDayAdult": 3,
+            "quantityMultiplier": 3
         },
         {
             "id": 26,
@@ -572,7 +672,11 @@
                 "en_US": "100ml bottle",
                 "fr_CH": "flacon de 100ml",
                 "de_CH": "100ml Flasche"
-            }
+            },
+            "functionOfPeople": "yes",
+            "functionOfDays": "yes",
+            "recommendedQtyDayAdult": 0.05,
+            "quantityMultiplier": 0.05
         },
         {
             "id": 27,
@@ -594,7 +698,11 @@
                 "en_US": "packs",
                 "fr_CH": "paquets",
                 "de_CH": "Packungen"
-            }
+            },
+            "functionOfPeople": "no",
+            "functionOfDays": "yes",
+            "recommendedQtyDayAdult": 0.1,
+            "quantityMultiplier": 0.1
         },
         {
             "id": 28,
@@ -616,7 +724,11 @@
                 "en_US": "pieces",
                 "fr_CH": "pièces",
                 "de_CH": "Stück"
-            }
+            },
+            "functionOfPeople": "no",
+            "functionOfDays": "yes",
+            "recommendedQtyDayAdult": 0.5,
+            "quantityMultiplier": 0.5
         },
         {
             "id": 29,
@@ -638,7 +750,11 @@
                 "en_US": "pieces",
                 "fr_CH": "pièces",
                 "de_CH": "Stück"
-            }
+            },
+            "functionOfPeople": "no",
+            "functionOfDays": "no",
+            "recommendedQtyDayAdult": 1,
+            "quantityMultiplier": 1
         },
         {
             "id": 30,
@@ -660,7 +776,11 @@
                 "en_US": "pieces",
                 "fr_CH": "pièces",
                 "de_CH": "Stück"
-            }
+            },
+            "functionOfPeople": "no",
+            "functionOfDays": "no",
+            "recommendedQtyDayAdult": 1,
+            "quantityMultiplier": 1
         },
         {
             "id": 31,
@@ -682,7 +802,11 @@
                 "en_US": "pieces",
                 "fr_CH": "pièces",
                 "de_CH": "Stück"
-            }
+            },
+            "functionOfPeople": "no",
+            "functionOfDays": "yes",
+            "recommendedQtyDayAdult": 2,
+            "quantityMultiplier": 2
         },
         {
             "id": 32,
@@ -704,7 +828,11 @@
                 "en_US": "pieces",
                 "fr_CH": "pièces",
                 "de_CH": "Stück"
-            }
+            },
+            "functionOfPeople": "no",
+            "functionOfDays": "no",
+            "recommendedQtyDayAdult": 1,
+            "quantityMultiplier": 1
         },
         {
             "id": 33,
@@ -726,7 +854,11 @@
                 "en_US": "pieces or packs",
                 "fr_CH": "pièces ou paquets",
                 "de_CH": "Stück oder Packungen"
-            }
+            },
+            "functionOfPeople": "no",
+            "functionOfDays": "yes",
+            "recommendedQtyDayAdult": 0.25,
+            "quantityMultiplier": 0.25
         },
         {
             "id": 34,
@@ -748,7 +880,11 @@
                 "en_US": "pieces",
                 "fr_CH": "pièces",
                 "de_CH": "Stück"
-            }
+            },
+            "functionOfPeople": "no",
+            "functionOfDays": "no",
+            "recommendedQtyDayAdult": 1,
+            "quantityMultiplier": 1
         },
         {
             "id": 35,
@@ -770,7 +906,11 @@
                 "en_US": "pieces",
                 "fr_CH": "pièces",
                 "de_CH": "Stück"
-            }
+            },
+            "functionOfPeople": "no",
+            "functionOfDays": "no",
+            "recommendedQtyDayAdult": 1,
+            "quantityMultiplier": 1
         },
         {
             "id": 36,
@@ -792,7 +932,11 @@
                 "en_US": "pieces",
                 "fr_CH": "pièces",
                 "de_CH": "Stück"
-            }
+            },
+            "functionOfPeople": "no",
+            "functionOfDays": "no",
+            "recommendedQtyDayAdult": 1,
+            "quantityMultiplier": 1
         }
     ]
 }

@@ -4,17 +4,26 @@ import defaultStock from '../data/stock.json'
 import { isElectron } from './browserUtils'
 
 // Function to get product categories for a specific locale
-const getLocalizedProductCategories = (locale = 'en_US') => {
+// computeQuantityFunc should be a function accepting: the recommended daily qty for an adult, the number of people, and the number of days.
+const getLocalizedProductCategories = (locale = 'en_US', computeQuantityFunc = () => 1) => {
   // Create a deep copy of the template
   const localizedData = JSON.parse(JSON.stringify(productCategoriesTemplate))
   
-  // Transform each category to use the specified locale
+  // Transform each category to use the specified locale and compute the recommended quantity
   localizedData.baseCategories = localizedData.baseCategories.map(category => {
     return {
-      ...category,
+      //...category,
+      id: category.id,
+      onlineShopLink: category.onlineShopLink,
+      usualExpiryCheckDate: category.usualExpiryCheckDate,
+      quantityOverride: "",
+      recommendedQtyDayAdult: category.recommendedQtyDayAdult,
+
       productType: category.productType[locale] || category.productType['en_US'],
       description: category.description[locale] || category.description['en_US'],
-      defaultUnit: category.defaultUnit ? (category.defaultUnit[locale] || category.defaultUnit['en_US']) : undefined
+      defaultUnit: category.defaultUnit ? (category.defaultUnit[locale] || category.defaultUnit['en_US']) : undefined,
+      // that's where we could compute the final quantity
+      quantity: computeQuantityFunc(category)
     }
   })
   
@@ -254,8 +263,18 @@ export const deleteDatabases = async () => {
  */
 export const initializeDatabases = async (locale = 'en_US') => {
   try {
+
+    const quantityFunction = (category, forPeople, forDays) => {
+      const people = category.functionOfPeople === "yes" ? forPeople : 1
+      const days = category.functionOfDays === "yes" ? forDays : 1
+      
+      return Math.ceil(people * days * category.quantityMultiplier || 0)
+    }
+
+    const quantityCalculator = category => quantityFunction(category, 1, 14)
+
     // Get the product categories for the specified locale
-    const productCategories = getLocalizedProductCategories(locale)
+    const productCategories = getLocalizedProductCategories(locale, quantityCalculator)
     
     await writeProductCategories(productCategories)
     await writeStock(defaultStock)
