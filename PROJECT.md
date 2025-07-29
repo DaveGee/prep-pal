@@ -26,7 +26,7 @@
 - [x] Stock item type model + recommended model
 - [x] Recommended screen from static file
 - [x] Load and save to disk / localstorage
-- [ ] Add a simple calculator based on nb of people in house + nb of days - based on CH recommendations
+- [x] Add a simple calculator based on nb of people in house + nb of days - based on CH recommendations
 
 ## Current stock
 
@@ -34,10 +34,15 @@
 - [x] Editor for current stock, assignment to categories
     - [x] items can be generic or precise
     - [x] multiple items per category possible
-- [ ] Add a way to tell when a stock item has been last checked (update the lastCheck + nextCheck fields)
+- [x] Add a way to tell when a stock item has been last checked (update the lastCheck + nextCheck fields)
 - [ ] Differentiate products for consumptions (expiry date) and for usage (check date)
     - [ ] Check expiry date for consumption products that might be expired according to `lastCheck + avg expiry = expired potentially`
     - [ ] Check date for items without expiry (`lastCheck + avg expiry = recheck!`)
+- [ ] Add a way to say "I got it", without having to specify a number on the category
+- [ ] Add "default units" to the current stock, next to the number setting.
+- [ ] Add a "place" field (to know where the item is supposed to be). 
+- [ ] Possibility to edit stock items
+
 
 ## Shopping list
 
@@ -52,7 +57,8 @@
 ## Misc
 
 - [x] Multi-language (FR, DE, EN)
-- [ ] better error display management
+- [ ] better error display management - remove the popovers
+- [ ] better scroll control - stay on the same scroll level when closing/opening popovers (put popovers on the right?)
 - [ ] Add a profile ID (prepare for login)
 - [ ] Redesign
 - [ ] Distribution
